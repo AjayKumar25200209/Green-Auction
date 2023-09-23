@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Auction</title>
+    <link rel="icon" href="/static/images/sprout.png" type="icon">
+    <link rel="stylesheet" href="/static/css/mystyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+    <script src="/static/javascript/myscript.js"></script>
+
+</head>
+
+<style>
+    
+</style>
+<body>
+
+    <div class="blur" id="blur"></div>
+    <div class="biddingc" id="bidding">
+
+        <h3 style="margin-top: 50px;">Auction No : 55555 </h3>
+        <p>Enter the Bidding Ammount in rupees</p>
+            <input type="text"  class="ausearch" placeholder="Eg: 1000rs ">
+            <button class="bidbutton2" type="submit">Bid</button>
+    </div>
+
+    <div class="nav">
+        <h2 class="green"><span style="color: rgb(35, 180, 35);">Green</span>  Auction</h2>
+
+        <nav>
+            <ul >
+                <a href="{{ url_for('dashboard') }}"><li>Dashboard</li></a>
+                <a href="{{ url_for('myauction') }}"><li>My Auctions</li></a>
+                <a href=""><li>My Biddings</li></a>
+
+                <a href=""><li>Profile</li></a>
+                <a href=""><li>About</li></a>
+                <a href="{{ url_for('logout') }}"><li>Logout</li></a>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="search">
+        <form id="search">
+            <p class="sl"> <span style="color: rgb(35, 180, 35);">Search</span> Auction</p>
+            <input type="text" class="ausearch">
+            <button type="submit" class="sbut">Search</button>
+        </form>
+        <button class="filter">Filter</button> <!-- type="text" name="" id=""  list="listitem" class="filter" -->
+        <datalist id="listitem">
+            <option value="Tomato"></option>
+            <option value="Potato"></option>
+            <option value="Onion"></option>
+            <option value="Carrot"></option>
+            <option value="Banana"></option>
+
+        </datalist>
+        <button class="addauc">Create Auction</button>
+    </div>
+
+    <div class="content">
+        {% for i in range(12) %}
+        <div class="product"  data-id="ajay1">
+                    <h3>Auction No:54561</h3><br>
+                    <img src="/static/images/tomato.jpg" alt="tomoto image" class="pimage"><br>
+                    <p>Product Name: Tomato</p>
+                    <p>Quantity:</p>
+                    <p>Current Price:</p>
+                    <p>Starting Price:</p><br>
+                    <button id="bidbutton" data-id={{i}} class="bidbutton">Bid Now</button>
+
+        </div>
+        {% endfor %}
+
+
+    </div>
+
+
+    
+</body>
+
+</html>

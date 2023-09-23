@@ -1,0 +1,380 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.image1{
+    position: absolute;
+    border: 1px solid rgb(255, 255, 255) ;
+    top: 10%;
+    padding: 20px;
+    width: 50%;
+    right: 0;
+
+
+    
+    
+    
+    
+}
+
+img{
+    
+    border: 1px solid rgb(255, 255, 255);
+    height: 500px;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.container1{
+    flex-direction: column;
+    display: flex;
+    margin-top: 30vh;
+    
+    position: absolute;
+    left: 5%;
+    border: 0px solid black;
+    width: 50%;
+    height: auto;
+   
+
+}
+
+
+.register{
+    border: 0px solid black;
+    height: 40px;
+    margin-left: 30%;
+    width: 120px;
+    color: aliceblue;
+    background-color:rgb(94,93,240);
+    font-family: 'Poppins', sans-serif;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+
+
+}
+
+.register1{
+    border-radius: 15px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    
+    left:50%;
+    right:50%;
+    transform: translate(-50%);
+    position: absolute;
+    top: 100px;
+    display: none;
+    align-items: center;
+    border: 1px solid rgb(255, 255, 255);
+    min-width: 30%;
+    max-width: 30%;
+    width:25% ;
+    margin: auto;
+    min-height: 450px;
+    height: auto;
+    background-color: rgb(255, 255, 255);
+    z-index: 2;
+    min-width: 300px;
+    overflow:auto;
+    padding: 10px;
+    padding-bottom: 20px;
+    
+    
+    
+
+}
+
+.register2{
+    
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    
+    width: 100%;
+    
+    height: 100%;
+    background-color: rgba(179, 179, 179, 0.421);
+    z-index: 2;
+
+}
+
+
+.login{
+    border-radius: 15px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 10px;
+    left:50%;
+    right:50%;
+    transform: translate(-50%);
+    position: absolute;
+    top: 100px;
+    display: none;
+    align-items: center;
+    border: 1px solid rgb(255, 255, 255);
+    width: 25%;
+    margin: auto;
+    height: 450px;
+    background-color: rgb(255, 255, 255);
+    z-index: 3;
+    min-width: 300px;
+    overflow:auto
+    
+    
+
+}
+
+.loading{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 0px;
+    border-radius: 10px;
+
+    display: none;
+    max-width: 400px;
+    width: 40%;
+    height: auto;
+    z-index: 5;
+}
+
+.load{
+    border: 0px;
+    border-radius: 10px;
+}
+
+nav{
+    height: auto;
+    border: 2px solid rgb(255, 255, 255);
+    width: 100%;
+    margin-top: -29px;
+    
+
+}
+
+
+
+ul {
+    
+    flex-wrap: wrap;
+    float: right;
+    height: 50%;
+    width: auto;
+    display: flex;
+    gap: 50px;
+    border: 2px solid rgb(255, 255, 255);
+    list-style: none;
+    text-decoration: none;
+    margin-right: 30px;
+
+
+}
+ul a{
+    font-size: 17px;
+    color: black;
+    font-weight: 500;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+
+.green{
+    justify-content: flex-start;
+    margin-top: 25px;
+    margin-left: 20px;
+    
+}
+
+
+.search{
+    
+    position: relative;
+    margin-top: 70px;
+    border: 0px solid rgb(255, 255, 255);
+    width: auto;
+    min-height: 100px;
+}
+.ausearch{
+    text-align: center;
+    margin-left: 20px;
+    margin-top: 5px;
+    min-width: 50px;
+    width: 250px;
+    height: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+
+
+}
+
+.sl{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+
+    margin-left: 20px;
+    margin-top: 10px;
+
+}
+
+.addauc{
+    top: 23px;
+    right: 20px;
+    position: absolute;
+    border: 0px;
+    height: 40px;
+    color: aliceblue;
+    background-color:rgb(94,93,240);
+    font-family: 'Poppins', sans-serif;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    width: 150px;
+    text-align: center;
+
+}
+
+.sbut{
+    height: 40px;
+    border: 0;
+    color: aliceblue;
+    background-color:rgb(94,93,240);
+    font-family: 'Poppins', sans-serif;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    width: 150px;
+    text-align: center;
+}
+
+.filter1{
+    position: absolute;
+    top: 30px;
+    right: 200px;
+    text-align: center;
+    min-width: 50px;
+    width: 250px;
+    height: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+
+}
+
+.filter{
+    position: absolute;
+    top: 23px;
+    right: 200px;
+    text-align: center;
+    min-width: 50px;
+    width: 150px;
+    height: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    border: 0;
+    color: aliceblue;
+    background-color:rgb(94,93,240);
+    font-family: 'Poppins', sans-serif;
+    border-radius: 20px;
+
+}
+
+.product{
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    margin-top: 20px;
+    border: 1px solid black;
+    min-width: 300px;
+    width: 20%;
+    height: auto;
+    padding: 10px;
+    border-radius: 10px;
+    
+}
+.content{
+    padding: 20px;
+    justify-content: center;
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    border: 1px solid black;
+    width: 100%;
+    min-height: auto;
+    margin-bottom: 20px;
+}
+
+.pimage{
+    width: 80%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.bidbutton{
+    height: 40px;
+    border: 0;
+    color: aliceblue;
+    background-color:rgb(94,93,240);
+    font-family: 'Poppins', sans-serif;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    width: 100px;
+    text-align: center;
+
+}
+
+.bidbutton2{
+    height: 40px;
+    border: 0;
+    color: aliceblue;
+    background-color:rgb(94,93,240);
+    font-family: 'Poppins', sans-serif;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 80px;
+    text-align: center;
+
+}
+
+.blur{
+    display: none;
+    position: fixed;
+    border: 1px solid red;
+    background-color: rgba(179, 179, 179, 0.421);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 5;
+}
+
+.biddingc{
+    gap: 10px;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display:flex;
+    border: 1px solid black;
+    width: 25%;
+    height:40%;
+    z-index: 6;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+

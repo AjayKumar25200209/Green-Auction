@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Auction</title>
+    <link rel="icon" href="/static/images/sprout.png" type="icon">
+    <link rel="stylesheet" href="/static/css/mystyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+    <script src="/static/javascript/myscript.js"></script>
+
+</head>
+<body>
+    <div class="nav">
+        <h2 class="green"><span style="color: rgb(35, 180, 35);">Green</span>  Auction</h2>
+
+        <nav>
+            <ul >
+                <a href="{{ url_for('dashboard') }}"><li>Dashboard</li></a>
+                <a href="{{ url_for('myauction') }}"><li>My Auctions</li></a>
+                <a href=""><li>My Biddings</li></a>
+
+                <a href=""><li>Profile</li></a>
+                <a href=""><li>About</li></a>
+                <a href="{{ url_for('logout') }}"><li>Logout</li></a>
+            </ul>
+        </nav>
+    </div>
+
+
+    
+</body>
+
+</html>

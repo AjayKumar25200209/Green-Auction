@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Auction</title>
+    <link rel="icon" href="/static/images/sprout.png" type="icon">
+    <link rel="stylesheet" href="/static/css/mystyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+    <script src="/static/javascript/myscript.js"></script>
+</head>
+
+<style>
+    p{
+        font-family: 'Poppins', sans-serif;
+    }
+
+    @media screen and (max-width: 1000px) {
+        .image1{
+        
+            position: absolute;
+            right: 0;
+            margin-top: 5%;
+            height: auto;
+            width:50%;
+            
+        }
+    }
+
+    @media screen and (max-width: 850px) {
+        .image1{
+        
+            position: absolute;
+            right: 0;
+            margin-top: 12%;
+            height: auto;
+            width:50%;
+            
+        }
+    }
+
+    @media screen and (max-width: 800px)and (min-width: 768px){
+        .image1{
+        
+            position: absolute;
+            right: 0;
+            margin-top: 15%;
+            height: auto;
+            width:50%;
+            
+        } 
+    }
+    .input1{
+        
+        font-family:'Poppins', sans-serif;
+        text-align: center;
+        font-size: 17px;
+        width: 60%;
+        min-width: 200px;
+        height: 35px;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        margin-top: 10px;
+        
+    }
+
+    .input2{
+        font-family:'Poppins', sans-serif;
+        text-align: center;
+        font-size: 17px;
+        width: 60%;
+        min-width: 200px;
+        height: 35px;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        margin-top: 20px;
+       
+
+    }
+    .input3{
+        font-family:'Poppins', sans-serif;
+        text-align: center;
+        font-size: 17px;
+        width: 60%;
+        min-width: 200px;
+        height: 35px;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        margin-top: 20px;
+       
+        
+    }
+    .input4{
+        font-family:'Poppins', sans-serif;
+        text-align: center;
+        font-size: 17px;
+        width: 60%;
+        min-width: 200px;
+        height: 35px;
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        margin-top: 20px;
+       
+        
+    }
+    .sub{
+        
+
+        border: 0px solid black;
+        height: 40px;
+        
+        width: 120px;
+        color: aliceblue;
+        background-color:rgb(94,93,240);
+        font-family: 'Poppins', sans-serif;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 17px;
+
+
+
+
+        margin-top: 30px;
+        cursor:pointer;
+        
+    }
+
+
+    form  p{
+        margin-top: 30px;
+    }
+
+    form h2{
+        font-family: 'Poppins', sans-serif;
+        font-weight:bolder;
+
+
+        margin-top: 20px;
+    }
+    .close{
+        position: absolute;
+        right: 4%;
+        top: 1.8%;
+        cursor: pointer;
+    }
+
+    #login1{
+        cursor: pointer;
+        color: rgb(7, 7, 158);
+
+    }
+
+    #login1:hover{
+        text-decoration:underline;
+    }
+
+   
+
+    
+    
+    
+    
+</style>
+
+<body>
+                 <!--index page for sign up-->
+
+
+                 <!-- blur the background -->
+
+    <div class="register2" id="back">
+        
+        
+    </div> 
+
+    <div class="loading"  id="loading">
+        <img src="/static/images/loading.gif"  class="load"   alt="">
+    </div>
+    
+
+                 <!-- sign up form -->
+    
+    <div class="register1" id="reg">
+            <form id="signform" >
+                <center>
+                    <span class="material-symbols-outlined close" onclick="myfun2()" >close</span>
+                    <h2>Sign Up</h2>
+                    <p>Enter your details to register Make sure your Details are correct </p>
+                    <input type="text" name="uname"  class="input1" id="name" placeholder="Name"><br>
+                    <input type="email" name="uemail" class="input2" id="email" placeholder="Email"><br>
+                    <input type="tel" name="unumber"class="input3" id="number" placeholder="Phone Number"><br>
+                    <input type="password" name="upass" class="input4" id="password" placeholder="Password"><br>
+                    <button type="submit" class="sub">Submit</button>
+                    <p id="signmsg"></p>
+                </center>
+            </form>
+    
+    </div>
+                        <!-- login form for website -->
+    <div class="login" id="reg2" >
+        <form  id="login" >
+            <center>
+                <span class="material-symbols-outlined close" onclick="myfun3()" >close</span>
+                <h2>   Login    </h2>
+                <p>Enter your details to Login Make sure your Details are correct </p>
+                <input type="email" name="lemail" class="input2"  style="margin-top: 30px;"   id="lemail" placeholder="Email"><br>
+                <input type="password" name="lpass" class="input4" id="lpassword" placeholder="Password"><br>
+                <button type="submit" class="sub">Submit</button>
+                <P id="msg"></P>
+
+            </center>
+        </form>
+
+    </div>
+
+        
+    
+    <div >
+        <div class="image1">
+            <img  src="/static/images/img1.jpg" alt="index img" >
+
+        </div>
+        <div class="container1">
+            <H1>Welcome To <span style="color: rgb(35, 180, 35);">Green</span> Auction</H1><br>
+            <p>In this website, you can start Auction, and you can also bid for any Auction. 
+                <br>Register now to get start. <br> <span onclick="login2()" id="login1">if you already have an account ?</span>
+            </p><br>
+            <button class="register"  onclick="myfun()" >Register</button>
+        </div>
+    </div>
+    
+    
+</body>
+
+</html>

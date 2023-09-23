@@ -297,6 +297,21 @@ ul a{
     padding: 10px;
     border-radius: 10px;
     
+    
+}
+
+.product1{
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    border: 0px solid black;
+    min-width: 300px;
+    width: 20%;
+    height: auto;
+    border-radius: 10px;
+    gap: 7px;
+    
+    
 }
 .content{
     padding: 20px;
@@ -359,6 +374,7 @@ ul a{
 }
 
 .biddingc{
+    border: 0px solid white;
     gap: 10px;
     padding: 10px;
     background-color: rgb(255, 255, 255);
@@ -368,7 +384,6 @@ ul a{
     left: 50%;
     transform: translate(-50%,-50%);
     display:flex;
-    border: 1px solid black;
     width: 25%;
     height:40%;
     z-index: 6;

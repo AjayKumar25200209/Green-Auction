@@ -5,7 +5,8 @@ app = Flask(__name__)
 
 days=3
 app.secret_key="ajaykumar"
-app.permanent_session_lifetime=days*24*60*60
+app.permanent_session_lifetime = 3*24*60*60
+print(app.permanent_session_lifetime )
 
                         # connecting to mysql database
 mydb = mysql.connector.connect(
@@ -40,6 +41,8 @@ def dashboard():
 def sessioncheck():
     #session['uemail'] = None
     #session.pop('uemail',None)
+    print(app.permanent_session_lifetime )
+
     if request.method=="GET":
         if session.get('uemail') is not None:
             return redirect("/dashboard")

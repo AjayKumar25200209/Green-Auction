@@ -18,16 +18,21 @@
     
 </style>
 <body>
-
+            <!-- blur the background -->
     <div class="blur" id="blur"></div>
+
+            <!-- getting the bidding ammount  -->
     <div class="biddingc" id="bidding">
 
         <h3 style="margin-top: 50px;">Auction No : 55555 </h3>
+        <p>Current price:</p>
+        <p>Starting Price:</p>
         <p>Enter the Bidding Ammount in rupees</p>
-            <input type="text"  class="ausearch" placeholder="Eg: 1000rs ">
+            <input type="text"  class="ausearch" placeholder="Example: 1000Rs ">
             <button class="bidbutton2" type="submit">Bid</button>
     </div>
 
+            <!-- nav bar  -->
     <div class="nav">
         <h2 class="green"><span style="color: rgb(35, 180, 35);">Green</span>  Auction</h2>
 
@@ -43,7 +48,7 @@
             </ul>
         </nav>
     </div>
-
+            <!-- auction search section -->
     <div class="search">
         <form id="search">
             <p class="sl"> <span style="color: rgb(35, 180, 35);">Search</span> Auction</p>
@@ -67,11 +72,17 @@
         <div class="product"  data-id="ajay1">
                     <h3>Auction No:54561</h3><br>
                     <img src="/static/images/tomato.jpg" alt="tomoto image" class="pimage"><br>
-                    <p>Product Name: Tomato</p>
-                    <p>Quantity:</p>
-                    <p>Current Price:</p>
-                    <p>Starting Price:</p><br>
-                    <button id="bidbutton" data-id={{i}} class="bidbutton">Bid Now</button>
+
+                    <div class="product1">
+                        <p>Product Name: Tomato</p>
+                        <p>Quantity:</p>
+                        <p>Current Price:</p>
+                        <p>Starting Price:</p>
+                        <a href="#">More Details</a>
+                        <button id="bidbutton" data-id={{i}} class="bidbutton">Bid Now</button>
+
+                    </div>
+                    
 
         </div>
         {% endfor %}

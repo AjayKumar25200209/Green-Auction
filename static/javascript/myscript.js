@@ -287,3 +287,32 @@ function back5(){
             bidding.style.display="none";
 
 }
+
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    document.getElementById("getbid").addEventListener("click" , function() {
+
+        fetch("/bid",{
+                method:"POST",
+                body:'{"ammount":25}'
+        })
+        .then(res=>{
+            if (!res.ok){
+                throw "Error Acuquired"
+            }
+            else{
+                return res.text()
+            }
+    
+        })
+    
+        .then(data=>{
+            console.log(data)
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    
+    })
+})

@@ -169,7 +169,18 @@ def login():
     else:
         return redirect(url_for("sessioncheck"))
         
-    
+@app.route( '/bid', methods=["GET",  "POST"] )
+def bid():
+    if request.method=="POST":
+        data = request.data.decode("utf-8")
+        
+        data2=json.loads(data)
+        print(type(data2))
+        print(data2["ammount"])
+
+        return "succes"
+    else:
+        return "error"
 
 
 if __name__ == '__main__':

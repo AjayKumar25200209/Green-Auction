@@ -258,6 +258,7 @@ function myfetch() {
     window.location.href= "/"
 };
 
+        // event listener for bid now button in dashboard
 document.addEventListener("DOMContentLoaded", function() {
 
     classs=document.querySelectorAll(".bidbutton")
@@ -269,7 +270,6 @@ document.addEventListener("DOMContentLoaded", function() {
             blur.style.display="flex";
             bidding = document.getElementById("bidding")
             bidding.style.display="flex";
-            alert(dataid)
         
     });
             
@@ -279,3 +279,11 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
 })
+
+function back5(){
+            blur = document.getElementById("blur")
+            blur.style.display="none";
+            bidding = document.getElementById("bidding")
+            bidding.style.display="none";
+
+}

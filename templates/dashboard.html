@@ -23,6 +23,7 @@
 
             <!-- getting the bidding ammount  -->
     <div class="biddingc" id="bidding">
+        <span class="material-symbols-outlined close2" onclick="back5()" >close</span>
 
         <h3 style="margin-top: 50px;">Auction No : 55555 </h3>
         <p>Current price:</p>
@@ -67,6 +68,8 @@
         <button class="addauc">Create Auction</button>
     </div>
 
+
+            <!-- display of each auction -->
     <div class="content">
         {% for i in range(12) %}
         <div class="product"  data-id="ajay1">
@@ -78,11 +81,11 @@
                         <p>Quantity:</p>
                         <p>Current Price:</p>
                         <p>Starting Price:</p>
-                        <a href="#">More Details</a>
+                        
                         <button id="bidbutton" data-id={{i}} class="bidbutton">Bid Now</button>
-
-                    </div>
-                    
+                        
+                    </div><br>
+                    <p class="more">For More Details</p>                    
 
         </div>
         {% endfor %}

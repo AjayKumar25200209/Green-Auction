@@ -1,6 +1,7 @@
 from flask import Flask,request,url_for,render_template,session,redirect
 import mysql.connector
 import json
+import random
 app = Flask(__name__)
 
 days=3

@@ -365,7 +365,7 @@ ul a{
 .blur{
     display: none;
     position: fixed;
-    border: 1px solid red;
+    border: 0px solid red;
     background-color: rgba(179, 179, 179, 0.258);
     width: 100%;
     height: 100%;
@@ -416,7 +416,7 @@ ul a{
      padding-bottom: 20px;
      background-color: rgb(255, 255, 255);
      border-radius: 10px;
-     position: absolute;
+     position:absolute;
      top: 50%;
      left: 50%;
      transform: translate(-50%,-50%);
@@ -425,6 +425,7 @@ ul a{
      z-index: 6;
      flex-direction: column;
      align-items: center;
+     margin-top: 100px;
     
     
 

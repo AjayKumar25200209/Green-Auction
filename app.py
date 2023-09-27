@@ -5,6 +5,8 @@ app = Flask(__name__)
 
 days=3
 app.secret_key="ajaykumar"
+app.permanent_session_lifetime =  3*24*60*60
+
 
 print(app.permanent_session_lifetime )
 
@@ -41,7 +43,6 @@ def dashboard():
 def sessioncheck():
     #session['uemail'] = None
     #session.pop('uemail',None)
-    print(app.permanent_session_lifetime )
 
     if request.method=="GET":
         if session.get('uemail') is not None:
@@ -157,8 +158,6 @@ def login():
                 if dpassword==userpassword:
                     session["uemail"] = useremail
                     session['password'] = userpassword
-                    app.permanent_session_lifetime =  3*24*60*60
-                    print(app.permanent_session_lifetime)
                     return "ok"
                 else:
                     return "You Entered a incorrect Password"

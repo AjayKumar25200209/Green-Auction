@@ -366,7 +366,7 @@ ul a{
     display: none;
     position: fixed;
     border: 1px solid red;
-    background-color: rgba(179, 179, 179, 0.421);
+    background-color: rgba(179, 179, 179, 0.258);
     width: 100%;
     height: 100%;
     top: 0;
@@ -380,7 +380,7 @@ ul a{
     padding: 10px;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
@@ -409,17 +409,19 @@ ul a{
 
 .createauction{
 
-     border: 1px solid rgb(0, 0, 0);
+     border: 0px solid rgb(0, 0, 0);
      gap: 10px;
-     padding: 10px;
+     padding-left: 30px;
+     padding-right: 30px;
+     padding-bottom: 20px;
      background-color: rgb(255, 255, 255);
      border-radius: 10px;
      position: absolute;
      top: 50%;
      left: 50%;
      transform: translate(-50%,-50%);
-     display:flex;
-     width: 25%;
+     display:none;
+     min-width: 25%;
      z-index: 6;
      flex-direction: column;
      align-items: center;
@@ -427,13 +429,36 @@ ul a{
     
 
 }
+::placeholder{
+    font-family: 'Poppins', sans-serif;
+
+
+}
 
 .cform{
-    border: 1px solid red;
+    font-family: 'Poppins', sans-serif;
+
+    border: 0px solid red;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
+    gap: 10px;
+}
+
+.type1{
+    text-align: center;
+    border: 1px solid rgb(0, 0, 0);
+    width: 309px;
+    height: 40px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+
+textarea{
+    border: 1px solid rgb(0, 0, 0);
+
+
 }
 
 

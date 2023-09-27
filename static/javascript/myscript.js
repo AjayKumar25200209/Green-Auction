@@ -270,8 +270,11 @@ document.addEventListener("DOMContentLoaded", function() {
             blur.style.display="flex";
             bidding = document.getElementById("bidding")
             bidding.style.display="flex";
+            demo = document.getElementById("demo2")
+            demo.innerHTML="Auction No : "+dataid+"";
+
         
-    });
+        })
             
 
 
@@ -288,7 +291,25 @@ function back5(){
 
 }
 
+function back8(){
+            blur = document.getElementById("blur")
+            blur.style.display="none";
+            bidd = document.getElementById("cauc")
+            bidd.style.display="none";
 
+}
+
+function create(){
+            blur = document.getElementById("blur")
+            blur.style.display="flex";
+            bidd = document.getElementById("cauc")
+            bidd.style.display="flex";
+
+
+    
+}
+
+        // getting the bidding amount
 document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("getbid").addEventListener("click" , function() {
@@ -315,4 +336,19 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     
     })
+})
+
+        // creating new auction
+
+document.addEventListener("DOMContentLoaded" ,function(){
+    document.getElementById("createform").addEventListener("submit" , function(event){
+        console.log("success")
+        event.preventDefault()
+        data= new FormData(this)
+        console.log(data)
+
+
+
+    })
+
 })

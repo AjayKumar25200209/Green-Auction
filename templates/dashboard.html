@@ -10,11 +10,36 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200&family=Poppins:ital,wght@0,300;1,100;1,300&display=swap" rel="stylesheet">
     <script src="/static/javascript/myscript.js"></script>
 
 </head>
 
 <style>
+    .ddiv{
+        margin: auto;
+        border: 0px solid rgb(255, 255, 255);
+    }
+
+    .submit2{
+        margin: auto;
+        height: 40px;
+        border: 0;
+        color: aliceblue;
+        background-color:rgb(94,93,240);
+        font-family: 'Poppins', sans-serif;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 15px;
+        width: 150px;
+        text-align: center;
+    }
+
+    .head2{
+        font-size: 22px;
+        margin-top: 25px;
+    }
     
 </style>
 <body>
@@ -25,7 +50,7 @@
     <div class="biddingc" id="bidding">
         <span class="material-symbols-outlined close2" onclick="back5()" >close</span>
 
-        <h3 style="margin-top: 50px;">Auction No : 55555 </h3>
+        <h3 style="margin-top: 50px;" id="demo2">Auction No : {{dataid}}</h3>
         <p>Current price:</p>
         <p>Starting Price:</p>
         <p>Enter the Bidding Ammount in rupees</p>
@@ -65,15 +90,15 @@
             <option value="Banana"></option>
 
         </datalist>
-        <button class="addauc">Create Auction</button>
+        <button class="addauc" onclick="create()">Create Auction</button>
     </div>
 
 
             <!-- display of each auction -->
     <div class="content">
-        {% for i in range(12) %}
+        {% for i in range(100,120) %}
         <div class="product"  data-id="ajay1">
-                    <h3>Auction No:54561</h3><br>
+                    <h3>Auction No:{{i}}</h3><br>
                     <img src="/static/images/tomato.jpg" alt="tomoto image" class="pimage"><br>
 
                     <div class="product1">
@@ -94,19 +119,40 @@
     </div>
             <!-- creating auction  -->
     <div class="createauction" id="cauc">
-        <h3>Create your Own Auction</h3>
+        <span class="material-symbols-outlined close2" onclick="back8()" >close</span>
+
+        <h3 class="head2">Create your <span style="color: rgb(35, 180, 35);">Own</span> Auction</h3>
         <form id="createform" class="cform">
-            <p>Enter the Product Name</p>
-            <input type="text" name="" id="" placeholder="Eg : Potato">
-            <p>Quantity in Kg</p>
-            <input type="number" name="" id="" placeholder="Eg : 100">
-            <p>Loction of the Agricultural Farm</p>
-            <input type="text" name="" id="" placeholder="Eg : Eral,Thoothudi">
-            <p>Starting Price Per Kg</p>
-            <input type="number" name="" id="" placeholder="Eg : 50000">
-            <p>Describe About Your Product</p>
-            <textarea name="" id="" cols="40" rows="10"></textarea>
-            <button type="submit">Create</button>
+
+            <div>
+                <p>Enter the Product Name</p>
+                <input type="text" name="" id="" class="type1" placeholder="Eg : Potato">
+            </div>
+            <div>
+                <p>Quantity in Kg</p>
+                <input type="number" class="type1" name="" id="" placeholder="Eg : 100">
+            </div>
+            <div>
+                <p>Loction of the Agricultural Farm</p>
+                <input type="text" name="" class="type1" id="" placeholder="Eg : Eral,Thoothudi">
+            </div>
+            <div>
+                <p>Starting Price Per Kg</p>
+                <input type="number" name="" class="type1" id="" placeholder="Eg : 50000">
+            </div>
+            <div>
+                <p>Describe About Your Product</p>
+                <textarea name="" id="" cols="40" rows="10"></textarea>
+            </div>
+            <div class="ddiv">
+                <button  class="submit2" id="createauc" type="submit">Create</button>
+            </div>
+            
+            
+            
+            
+            
+            
 
         </form>
 

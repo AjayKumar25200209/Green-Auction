@@ -12,11 +12,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200&family=Poppins:ital,wght@0,300;1,100;1,300&display=swap" rel="stylesheet">
-    <script src="/static/javascript/myscript.js"></script>
+    
+
 
 </head>
 
+
+
+<script src="/static/javascript/myscript.js"></script>
+
 <style>
+
+    .hh{
+        font-size: 22px;
+    }
     .ddiv{
         margin: auto;
         border: 0px solid rgb(255, 255, 255);
@@ -40,11 +49,75 @@
         font-size: 22px;
         margin-top: 25px;
     }
+
+    .pp{
+        font-family:'Poppins', sans-serif ;
+        font-size: 15px;
+
+    }
+
+    .col{
+        float: left;
+        border: 0px solid red;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 50%;
+
+    }
+    .col2{
+       
+        float: right;
+        border: 0px solid rgb(13, 255, 0);
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 50%;
+
+    }
     
 </style>
 <body>
             <!-- blur the background -->
+    
     <div class="blur" id="blur">
+
+    </div>
+            <!-- displaying the full detail of the auction -->
+    <div class="detail" id="details">
+        <span class="material-symbols-outlined close2" onclick="back7()" >close</span>
+
+        <br>
+        <div>
+            <h2>Auction No : </h2>
+        </div><br>
+        <div class="full">
+            <div class="col">
+                <p>Auction Owner : Sample </p>
+                <p>Starting Price : Sample </p>
+                <p>current Highest Bidder</p>
+                <p>Farm Location : Sample ejdh ewuih efuhjwe ijqwe</p>
+                <p>District : Sample</p>
+                <p>Auction Starting Time : Sample</p>
+                <p>date : Sample</p>
+                
+            </div>
+            <div class="col2">
+                <p>Product : Sample</p>
+                <p>Current Price : Sample</p>
+                <p>Quantity : Sample</p>
+                <p>Time Duration : Sample</p>
+                <p>Status : Sample</p>
+                <p>Auction Ending Time: Sample</p>
+                <a href="/static/images/img1.jpg" download >Download Sample Photos</a>
+
+            </div>
+
+        </div>
+        <button id="bidbutton2" id="biddd" class="bidbutton3 special" onclick="myfun10()">Bid Now</button>
+
 
     </div>
 
@@ -52,12 +125,23 @@
     <div class="biddingc" id="bidding">
         <span class="material-symbols-outlined close2" onclick="back5()" >close</span>
 
-        <h3 style="margin-top: 50px;" id="demo2">Auction No : {{dataid}}</h3>
-        <p>Current price:</p>
-        <p>Starting Price:</p>
-        <p>Enter the Bidding Ammount in rupees</p>
-            <input type="text"  class="ausearch" placeholder="Example: 1000Rs ">
-            <button class="bidbutton2" id="getbid" type="submit">Bid</button>
+        <h2 style="margin-top: 30px;" id="demo2" ></h2>
+        <p id="cprice" class="pp"></p>
+        <p id="sprice" class="pp"></p>
+        <center><p class="pp">Enter the Bidding Ammount in rupees per kg</p></center>
+        <input type="text"  class="ausearch2" id="getbidammount" placeholder="Example: 100">
+        <button class="bidbutton2" data-ano="" id="getbid" type="submit">Bid</button>
+    </div>
+        <!-- getting bidding ammount from full details -->
+    <div class="biddingc" id="biddingg">
+        <span class="material-symbols-outlined close2" onclick="back9()" >close</span>
+
+        <h2 style="margin-top: 30px;" id="demo2" ></h2>
+        <p id="cprice" class="pp"></p>
+        <p id="sprice" class="pp"></p>
+        <center><p class="pp">Enter the Bidding Ammount in rupees per kg</p></center>
+        <input type="text"  class="ausearch2" id="getbidammount" placeholder="Example: 100">
+        <button class="bidbutton2" data-ano="" id="getbid2" type="submit">Bid</button>
     </div>
 
             <!-- nav bar  -->
@@ -98,29 +182,32 @@
 
             <!-- display of each auction -->
     <div class="content">
-        {% for i in range(100,120) %}
-        <div class="product"  data-id="ajay1">
-                    <h3>Auction No:{{i}}</h3><br>
-                    <img src="/static/images/tomato.jpg" alt="tomoto image" class="pimage"><br>
+        {% if result %}
+            {% for x in result %}
+            <div class="product"  data-id="ajay1">
+                        <h2 class="hh"><span style="color: rgb(35, 180, 35);">Auction</span> No : {{x["ano"]}}</h2><br>
+                        <img src="/static/images/tomato.jpg" alt="tomoto image" class="pimage"><br>
 
-                    <div class="product1">
-                        <p>Product Name: Tomato</p>
-                        <p>Quantity:</p>
-                        <p>Current Price:</p>
-                        <p>Starting Price:</p>
-                        
-                        <button id="bidbutton" data-id={{i}} class="bidbutton">Bid Now</button>
-                        
-                    </div><br>
-                    <p class="more">For More Details</p>                    
+                        <div class="product1">
+                            <p class="pp">Product Name   : {{x["pname"]}} </p>
+                            <p class="pp">Quantity       : {{x["quantity"]}}</p>
+                            <p class="pp">Current Price  : {{x["cprice"]}}</p>
+                            <p class="pp">Starting Price : {{x["sprice"]}} </p>
+                            
+                            <button id="bidbutton" data-id= {{x.ano}} data-sprice={{x.sprice}} data-cprice={{x.cprice}} class="bidbutton">Bid Now</button>
+                            
+                        </div><br>
+                         <p class="more"  data-ano= {{x.ano}}  id="detail" >For More Details</p>                    
 
-        </div>
-        {% endfor %}
+            </div>
+            {% endfor %}
+        {% endif %}
 
 
     </div>
             <!-- creating auction  -->
     <div class="createauction" id="cauc">
+        
         <span class="material-symbols-outlined close2" onclick="back8()" >close</span>
 
         <h3 class="head2">Create your <span style="color: rgb(35, 180, 35);">Own</span> Auction</h3>
@@ -128,23 +215,23 @@
 
             <div>
                 <p>Enter the Product Name</p>
-                <input type="text" name="" id="" class="type1" placeholder="Eg : Potato">
+                <input type="text" name="productname" id="" class="type1" placeholder="Eg : Potato">
             </div>
             <div>
                 <p>Quantity in Kg</p>
-                <input type="number" class="type1" name="" id="" placeholder="Eg : 100">
+                <input type="number" class="type1" name="quantity" id="" placeholder="Eg : 100">
             </div>
             <div>
                 <p>Loction of the Agricultural Farm</p>
-                <input type="text" name="" class="type1" id="" placeholder="Eg : Eral,Thoothudi">
+                <input type="text" name="place" class="type1" id="" placeholder="Eg : Eral,Thoothukudi">
             </div>
             <div>
                 <p>Starting Price Per Kg</p>
-                <input type="number" name="" class="type1" id="" placeholder="Eg : 50000">
+                <input type="number" name="price" class="type1" id="" placeholder="Eg : 25">
             </div>
             <div>
                 <p>Time Duration</p>
-                <select name="" id="time"  class="type1">
+                <select name="time" id="time"  class="type1">
                     <option value="">Select Duration</option>
                     <option value="1">1 Hour</option>
                     <option value="2">2 Hour</option>
@@ -170,12 +257,11 @@
                     <option value="22">22 Hour</option>
                     <option value="23">23 Hour</option>
                     <option value="24">24 Hour</option>
-Hour
                 </select>
             </div>
             <div>
                 <p>Select District</p>
-                <select name="" id="district" class="type1">
+                <select name="district" id="district" class="type1">
                     <option value="not selected">Select District</option>
                     <option value="Ariyalur">Ariyalur</option>
                     <option value="Chengalpattu">Chengalpattu</option>
@@ -218,15 +304,16 @@ Hour
                     <option value="Viluppuram">Viluppuram</option>
                 </select>
             </div>
+            <div>
+                <p>Upload a sample image</p>
+                <input type="file" src="" alt="">
+            </div>
 
             <div>
                 <p>Describe About Your Product</p>
-                <textarea name="" id="" cols="40" rows="10"></textarea>
+                <textarea name="description" id="" cols="40" rows="10"></textarea>
             </div>
             
-            
-
-
             <div class="ddiv">
                 <button  class="submit2" id="createauc" type="submit">Create</button>
             </div>
@@ -234,9 +321,6 @@ Hour
             
             
             
-            
-            
-
         </form>
 
 
@@ -246,5 +330,6 @@ Hour
 
     
 </body>
+
 
 </html>

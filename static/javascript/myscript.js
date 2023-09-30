@@ -7,6 +7,8 @@ function myfun(){
     register.style.display = "flex";
     
 }
+
+
 function login2() {
     
 
@@ -191,8 +193,8 @@ document.getElementById("login").addEventListener("submit", function(event){
 
         // sending login form data to server and handiling the response 
     fetch("/login", {
-        method: "POST",
-        body: new FormData(form)
+          method: "POST",
+          body: new FormData(form)
     })
 
     .then(res=>{
@@ -241,22 +243,22 @@ document.getElementById("login").addEventListener("submit", function(event){
 
 
 
-function myfetch() {
-    fetch("/register")
-        .then(res =>{
-            console.log(res)
-            return res.text();
-        })
+// function myfetch() {
+//     fetch("/register")
+//         .then(res =>{
+//             console.log(res)
+//             return res.text();
+//         })
 
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error('Fetch error:', error)
-        });
+//         .then(data => {
+//             console.log(data);
+//         })
+//         .catch(error => {
+//             console.error('Fetch error:', error)
+//         });
 
-    window.location.href= "/"
-};
+//     window.location.href= "/"
+// };
 
         // event listener for bid now button in dashboard
 document.addEventListener("DOMContentLoaded", function() {
@@ -265,13 +267,21 @@ document.addEventListener("DOMContentLoaded", function() {
     classs.forEach(element => {
         element.addEventListener("click",function(event){
             var element =event.target
-            var dataid = element.getAttribute("data-id")
+            let dataid = element.getAttribute("data-id")
+            let cprice= element.getAttribute("data-cprice")
+            let sprice=element.getAttribute("data-sprice")
             blur = document.getElementById("blur")
             blur.style.display="flex";
             bidding = document.getElementById("bidding")
             bidding.style.display="flex";
-            demo = document.getElementById("demo2")
-            demo.innerHTML="Auction No : "+dataid+"";
+            ano = document.getElementById("demo2")
+            ccprice = document.getElementById("cprice")
+            ssprice = document.getElementById("sprice")
+            ano.innerHTML="Auction No : "+dataid+"";
+            ccprice.innerHTML="Current Price : " +cprice+"";
+            ssprice.innerHTML="Starting Price : "+sprice+""
+            ano=document.getElementById("getbid")
+            ano.setAttribute("data-ano" ,dataid)
 
         
         })
@@ -283,11 +293,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 })
 
+
 function back5(){
             blur = document.getElementById("blur")
             blur.style.display="none";
             bidding = document.getElementById("bidding")
             bidding.style.display="none";
+            document.getElementById("getbidammount").value="";
+
 
 }
 
@@ -313,10 +326,15 @@ function create(){
 document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("getbid").addEventListener("click" , function() {
+        ammount=document.getElementById("getbidammount")
+        amount=ammount.value
+        auction=document.getElementById("getbid")
+        ano = auction.getAttribute("data-ano")
+        
 
         fetch("/bid",{
                 method:"POST",
-                body:'{"ammount":25}'
+                body:JSON.stringify({"ammount":amount,"ano": ano})
         })
         .then(res=>{
             if (!res.ok){
@@ -329,7 +347,44 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     
         .then(data=>{
-            console.log(data)
+            data3=JSON.parse(data)
+            console.log(data3)
+            console.log(data3["result"])
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    
+    })
+})
+
+      // getting the bidding amount from full details
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("getbid2").addEventListener("click" , function() {
+        ammount=document.getElementById("getbidammount")
+        amount=ammount.value
+        auction=document.getElementById("getbid")
+        ano = auction.getAttribute("data-ano")
+        
+
+        fetch("/bid",{
+                method:"POST",
+                body:JSON.stringify({"ammount":amount,"ano": ano})
+        })
+        .then(res=>{
+            if (!res.ok){
+                throw "Error Acuquired"
+            }
+            else{
+                return res.text()
+            }
+    
+        })
+    
+        .then(data=>{
+            data3=JSON.parse(data)
+            console.log(data3)
+            console.log(data3["result"])
         })
         .catch(error=>{
             console.log(error)
@@ -341,14 +396,110 @@ document.addEventListener("DOMContentLoaded", function() {
         // creating new auction
 
 document.addEventListener("DOMContentLoaded" ,function(){
+    
     document.getElementById("createform").addEventListener("submit" , function(event){
-        console.log("success")
+        createform=document.getElementById("createform")
         event.preventDefault()
-        data= new FormData(this)
-        console.log(data)
+        data= new FormData(createform)
+
+        fetch("/createauction",{
+            method:"post",
+            body:data
+        })
+        .then((res)=>{
+            console.log(res)
+            if(res.ok){
+                return res.text()
+            }
+            else{
+                return  "failure"
+            }
+            
+
+        })
+        .then((data)=>{
+            console.log(data)
+            
+        })
+    })
+        
+
+})
+
+        // getting full detail of an auction
+
+document.addEventListener("DOMContentLoaded", function(){
+    detail=document.querySelectorAll(".more")
+
+    detail.forEach(item=>{
+        item.addEventListener("click", function(event){
+            blur = document.getElementById("blur")
+            blur.style.display="flex";
+            main=document.getElementById("details")
+            main.style.display="flex";
 
 
+            element=event.target
+            anum=element.getAttribute("data-ano")
+
+            fetch("/getfulldetail",{
+                method:"POST",
+                body:JSON.stringify({"ano":anum})
+
+            })
+            .then(res=>{
+                if(!res.ok){
+                    throw "Something Went Wrong can't able to fetch the data"
+
+                }
+                else{
+                    return res.text()
+                }
+            })
+            .then(data=>{
+                console.log(data)
+                jdata=JSON.parse(data)
+                console.log(jdata)
+
+            })
+            .catch(error=>{
+                console.log(error)
+            })
+            
+        })
 
     })
 
 })
+        // removing the full detail popup and  also blur div
+function back7(){
+    blur = document.getElementById("blur")
+    blur.style.display="none";
+    main=document.getElementById("details")
+    main.style.display="none"
+
+}
+
+
+
+
+
+function myfun10(){
+        main=document.getElementById("details")
+        main.style.zIndex=1
+        bidding = document.getElementById("biddingg")
+        bidding.style.display="flex";
+
+}
+
+function back9(){
+        bidding = document.getElementById("biddingg")
+        bidding.style.display="none";
+        main=document.getElementById("details")
+        main.style.zIndex=6
+
+}
+
+
+
+

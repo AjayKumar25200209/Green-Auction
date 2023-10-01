@@ -483,6 +483,46 @@ ul a{
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
 }
+.type3{
+    
+    text-align: center;
+    border: 1px solid rgb(0, 0, 0);
+    min-width: 309px;
+    height: 100px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+
+.type2{
+    
+    border: 0px solid rgb(255, 0, 0);
+    width: 309px;
+    height: auto;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+
+.type4{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0px solid rgb(89, 0, 255);
+    width: 309px;
+    height: auto;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+}
+
+.type5{
+    background-color:rgb(94,93,240);
+    text-align: center;
+    border: 0px solid green;
+    width: 390px;
+    height: 40px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    padding-top: 9px;
+}
 
 textarea{
     border: 1px solid rgb(0, 0, 0);

@@ -23,6 +23,15 @@
 
 <style>
 
+    .sp{
+        width: 300px;
+        background-color: aqua;
+    }
+    .cli{
+        position: relative;
+        top: 20px;
+    }
+
     .hh{
         font-size: 22px;
     }
@@ -77,6 +86,11 @@
         width: 50%;
 
     }
+    .vis{
+        display: none;
+    }
+
+    
     
 </style>
 <body>
@@ -304,9 +318,12 @@
                     <option value="Viluppuram">Viluppuram</option>
                 </select>
             </div>
-            <div>
+            <div  class="type2">
                 <p>Upload a sample image</p>
-                <input type="file" src="" alt="">
+                <div class="type4">
+                     <label for="img2" class="type5"> Click to upload</label>
+                </div>
+                <input type="file" src="" alt="" id="img2" class=" vis" multiple>
             </div>
 
             <div>

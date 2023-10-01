@@ -1,63 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Search Filter Example</title>
-    <style>
-        /* Style the search filter input for visual clarity */
-        .search-filter {
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: 300px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
+<style>
+    /* Style the file input container (usually a div or a label) */
+.file-input-container {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+/* Style the actual file input element */
+.file-input-container input[type="file"] {
+    position: absolute;
+    font-size: 100px; /* Adjust this value to make the button larger or smaller */
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+/* Style the button that replaces the default one */
+.custom-file-button {
+    background-color: #00254d; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 10px 20px; /* Button padding */
+    border: none; /* Remove border */
+    cursor: pointer;
+}
+
+</style>
 <body>
-    <!-- Search filter input -->
-    <input type="text" id="searchInput" class="search-filter" placeholder="Search...">
 
-    <!-- Content to be searched -->
-    <ul id="contentList">
-        <li>Apple</li>
-        <li>Banana</li>
-        <li>Cherry</li>
-        <li>Date</li>
-        <li>Fig</li>
-        <li>Grape</li>
-        <li>Kiwi</li>
-        <li>Lemon</li>
-        <li>Mango</li>
-        <li>Orange</li>
-        <li>Peach</li>
-        <li>Pear</li>
-        <li>Pineapple</li>
-        <li>Strawberry</li>
-    </ul>
+    <div class="file-input-container">
+        <label class="custom-file-button" for="fileInput">Choose File</label>
+        <input type="file" id="fileInput" name="fileInput">
+    </div>
+    
 
-    <script>
-        // Get the search input element
-        var searchInput = document.getElementById("searchInput");
-
-        // Get the content list
-        var contentList = document.getElementById("contentList");
-
-        // Add an input event listener to the search input
-        searchInput.addEventListener("input", function () {
-            var search = searchInput.value.toLowerCase(); // Convert input to lowercase
-            var items = contentList.getElementsByTagName("li");
-
-            // Loop through all list items
-            for (var i = 0; i < items.length; i++) {
-                var item = items[i];
-                var text = item.textContent || item.innerText;
-
-                // Check if the item's text contains the search text
-                if (text.toLowerCase().indexOf(search) > -1) {
-                    item.style.display = ""; // Show the item
-                } else {
-                    item.style.display = "none"; // Hide the item
-                }
-            }
-        });
-    </script>
+    
 </body>
 </html>

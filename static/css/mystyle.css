@@ -414,10 +414,13 @@ ul a{
     transform: translate(-50%,-50%);
     display:none;
     width: 25%;
-    height:40%;
+    height:auto;
+    padding-bottom: 30px;
     z-index: 6;
     flex-direction: column;
     align-items: center;
+    box-shadow: 3px 3px  20px rgb(0, 0, 0);
+
 
 }
 
@@ -548,6 +551,7 @@ textarea{
     z-index: 6;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 50px;
 
 }
 
@@ -557,6 +561,7 @@ textarea{
     height: 100%;
     font-family:  'Poppins', sans-serif;
     padding-left: 70px;
+    padding-bottom: 20px;
 
 }
 

@@ -26,11 +26,9 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor(dictionary=True)
 
 
-@app.route('/test',methods=['GET', 'POST'])
-def test():
-    if request.method == "GET":
 
-        return render_template("test.html")
+
+
 
 
 @app.route('/dashboard',methods=['GET', 'POST'])
@@ -41,15 +39,34 @@ def dashboard():
             
             try:
                 mycursor.execute("select * from auctioninfo")
-                result=mycursor.fetchall()
+
+                result = mycursor.fetchall()
+                
+                random.shuffle(result)
+                
+                session["array"]=[]
+                array=session["array"]
+                for x in result:
+                    
+                    data=x["ano"]
+                    array.append(data)
+                print(array)
+                return render_template("dashboard.html",result=result) 
+                
             except Exception as e:
-                msg="Sorry Something went wrong"
+                print("error : ",e)
+                msg="Sorry Something went wrong please try again later"
                 return render_template("dashboard.html",msg=msg)
-            print(type(result[0]))
-            return render_template("dashboard.html",result=result) 
         else :
             
             return redirect(url_for("sessioncheck"))
+        
+@app.route('/test',methods=['GET', 'POST'])
+def test():
+    if request.method == "GET":
+        print(session["array"])
+
+        return "success"
         
         
     
@@ -71,6 +88,8 @@ def sessioncheck():
 def myauction():
     if request.method=="GET":
         if session.get('uemail')  is not None:
+            
+            
             return render_template("myauction.html")
         else:
             return redirect(url_for("sessioncheck"))
@@ -237,7 +256,24 @@ def createauction():
         
 @app.route( '/getfulldetail', methods=["GET",  "POST"] )
 def getfulldetail():
-    return "super"
+    if request.method=="POST":
+        
+        data=request.data.decode("UTF-8")
+        ano=json.loads(data)
+        
+        value=ano["ano"]
+        print(value)
+        try:
+    
+           mycursor.execute("select * from auctioninfo where ano=%s ",(value,))
+           result1 = mycursor.fetchone()
+           result=json.dumps(result1)
+        except Exception as e:
+           return e
+        return result
+
+    else:
+        return redirect(url_for("sessioncheck"))
         
 
 

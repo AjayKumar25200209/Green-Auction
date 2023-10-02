@@ -105,32 +105,36 @@
 
         <br>
         <div>
-            <h2>Auction No : </h2>
+            <h2>Auction No : <span id="ano"></span></h2>
         </div><br>
         <div class="full">
             <div class="col">
-                <p>Auction Owner : Sample </p>
-                <p>Starting Price : Sample </p>
-                <p>current Highest Bidder</p>
-                <p>Farm Location : Sample ejdh ewuih efuhjwe ijqwe</p>
-                <p>District : Sample</p>
-                <p>Auction Starting Time : Sample</p>
-                <p>date : Sample</p>
+                <p>Auction Owner :  <span id="aowner"></span></p>
+                <p>Starting Price : <span id="sprice"></span> </p>                
+                <p>Current Price : <span id="cprice"></span></p>
+
+                <p>Farm Location : <span id="flocation"></span></p>
+                <p>District : <span id="district"></span></p>
+                <p>Auction Starting Time : <span id="stime"></span></p>
+                <p>Auction Ending Time: <span id="etime"></span></p>
+
                 
             </div>
             <div class="col2">
-                <p>Product : Sample</p>
-                <p>Current Price : Sample</p>
-                <p>Quantity : Sample</p>
-                <p>Time Duration : Sample</p>
-                <p>Status : Sample</p>
-                <p>Auction Ending Time: Sample</p>
+                <p>Product : <span id="product"></span></p>
+                <p>current Highest Bidder : <span id="chbidder"></span></p>
+
+                <p>Quantity : <span id="quantity"></span></p>
+                <p>Time Duration : <span id="time"></span></p>
+                <p>Status : <Span id="status"></Span></p>
+                <p>date : <span id="date"></span></p>
+
                 <a href="/static/images/img1.jpg" download >Download Sample Photos</a>
 
             </div>
 
         </div>
-        <button id="bidbutton2" id="biddd" class="bidbutton3 special" onclick="myfun10()">Bid Now</button>
+        <button id="bidbutton2" id="biddd"  class="bidbutton3 special" onclick="myfun10()">Bid Now</button>
 
 
     </div>
@@ -143,17 +147,17 @@
         <p id="cprice" class="pp"></p>
         <p id="sprice" class="pp"></p>
         <center><p class="pp">Enter the Bidding Ammount in rupees per kg</p></center>
-        <input type="text"  class="ausearch2" id="getbidammount" placeholder="Example: 100">
+        <input type="number"  class="ausearch2" id="getbidammount"  pattern=[0-9]+ title="only numbers" placeholder="Example: 100">
         <button class="bidbutton2" data-ano="" id="getbid" type="submit">Bid</button>
     </div>
         <!-- getting bidding ammount from full details -->
     <div class="biddingc" id="biddingg">
         <span class="material-symbols-outlined close2" onclick="back9()" >close</span>
 
-        <h2 style="margin-top: 30px;" id="demo2" ></h2>
+        <h2 style="margin-top: 30px;" id="demo3" ></h2>
         <p id="cprice" class="pp"></p>
         <p id="sprice" class="pp"></p>
-        <center><p class="pp">Enter the Bidding Ammount in rupees per kg</p></center>
+        <center><p class="pp">Enter the Bidding Ammount in Rupees per kg</p></center>
         <input type="text"  class="ausearch2" id="getbidammount" placeholder="Example: 100">
         <button class="bidbutton2" data-ano="" id="getbid2" type="submit">Bid</button>
     </div>
@@ -207,6 +211,7 @@
                             <p class="pp">Quantity       : {{x["quantity"]}}</p>
                             <p class="pp">Current Price  : {{x["cprice"]}}</p>
                             <p class="pp">Starting Price : {{x["sprice"]}} </p>
+                            <p class="pp">District : {{x["district"]}} </p>
                             
                             <button id="bidbutton" data-id= {{x.ano}} data-sprice={{x.sprice}} data-cprice={{x.cprice}} class="bidbutton">Bid Now</button>
                             
@@ -215,6 +220,9 @@
 
             </div>
             {% endfor %}
+        {% endif %}
+        {% if msg %} 
+            <p>{{msg}}</p>
         {% endif %}
 
 
@@ -233,7 +241,7 @@
             </div>
             <div>
                 <p>Quantity in Kg</p>
-                <input type="number" class="type1" name="quantity" id="" placeholder="Eg : 100">
+                <input type="number" class="type1" name="quantity" id="" pattern="[0-9]+" title="Enter the Numer Only" placeholder="Eg : 100">
             </div>
             <div>
                 <p>Loction of the Agricultural Farm</p>

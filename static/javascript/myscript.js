@@ -459,7 +459,25 @@ document.addEventListener("DOMContentLoaded", function(){
             .then(data=>{
                 console.log(data)
                 jdata=JSON.parse(data)
-                console.log(jdata)
+                btt=document.getElementById("getbid2")
+                btt.setAttribute("data-ano" , jdata["ano"])
+                document.getElementById("demo3").innerHTML="Auction No : "+jdata["ano"]+"";
+                document.getElementById("ano").innerHTML=jdata["ano"]
+                document.getElementById("aowner").innerHTML=jdata["aowner"]
+                document.getElementById("product").innerHTML=jdata["pname"]
+                document.getElementById("sprice").innerHTML=jdata["sprice"]
+                document.getElementById("cprice").innerHTML=jdata["cprice"]
+                document.getElementById("stime").innerHTML=jdata["stime"]
+                document.getElementById("etime").innerHTML=jdata["etime"]
+                document.getElementById("district").innerHTML=jdata["district"]
+                document.getElementById("flocation").innerHTML=jdata["flocation"]
+                document.getElementById("time").innerHTML=""+jdata["time"]+"Hours"
+                document.getElementById("date").innerHTML=jdata["date"]
+                document.getElementById("status").innerHTML=jdata["status"]
+                document.getElementById("quantity").innerHTML=jdata["quantity"]
+
+
+
 
             })
             .catch(error=>{

@@ -148,6 +148,7 @@
         <p id="sprice" class="pp"></p>
         <center><p class="pp">Enter the Bidding Ammount in rupees per kg</p></center>
         <input type="number"  class="ausearch2" id="getbidammount"  pattern=[0-9]+ title="only numbers" placeholder="Example: 100">
+        <p id="alert"></p>
         <button class="bidbutton2" data-ano="" id="getbid" type="submit">Bid</button>
     </div>
         <!-- getting bidding ammount from full details -->
@@ -158,7 +159,8 @@
         <p id="cprice" class="pp"></p>
         <p id="sprice" class="pp"></p>
         <center><p class="pp">Enter the Bidding Ammount in Rupees per kg</p></center>
-        <input type="text"  class="ausearch2" id="getbidammount" placeholder="Example: 100">
+        <input type="number"  class="ausearch2"  id="getbidammount2" placeholder="Example: 100">
+        <p id="alert"></p>
         <button class="bidbutton2" data-ano="" id="getbid2" type="submit">Bid</button>
     </div>
 
@@ -170,7 +172,7 @@
             <ul >
                 <a href="{{ url_for('dashboard') }}"><li>Dashboard</li></a>
                 <a href="{{ url_for('myauction') }}"><li>My Auctions</li></a>
-                <a href=""><li>My Biddings</li></a>
+                <a href="{{ url_for('mybidding') }}"><li>My Biddings</li></a>
 
                 <a href=""><li>Profile</li></a>
                 <a href=""><li>About</li></a>

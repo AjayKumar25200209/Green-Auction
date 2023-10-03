@@ -330,69 +330,96 @@ document.addEventListener("DOMContentLoaded", function() {
         amount=ammount.value
         auction=document.getElementById("getbid")
         ano = auction.getAttribute("data-ano")
-        
 
-        fetch("/bid",{
+        if (amount==""){
+            alert("Enter the ammount and then click")
+        }
+        else{
+
+            fetch("/bid",{
                 method:"POST",
                 body:JSON.stringify({"ammount":amount,"ano": ano})
-        })
-        .then(res=>{
-            if (!res.ok){
-                throw "Error Acuquired"
-            }
-            else{
-                return res.text()
-            }
-    
-        })
-    
-        .then(data=>{
-            data3=JSON.parse(data)
-            console.log(data3)
-            console.log(data3["result"])
-        })
-        .catch(error=>{
-            console.log(error)
-        })
+            })
+            .then(res=>{
+                if (!res.ok){
+                    throw "Error Acuquired"
+                }
+                else{
+                    return res.text()
+                }
+            
+            })
+        
+            .then(data=>{
+                if (data=="ok"){
+                    console.log(data)
+                }
+                else{
+                    console.log(data)
+                }
+
+            })
+            .catch(error=>{
+                console.log(error)
+            })
+
+        }
+        
+
+        
     
     })
 })
 
-      // getting the bidding amount from full details
+  // getting the bidding amount from full details
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("getbid2").addEventListener("click" , function() {
-        ammount=document.getElementById("getbidammount")
+        ammount=document.getElementById("getbidammount2")
         amount=ammount.value
-        auction=document.getElementById("getbid")
+        auction=document.getElementById("getbid2")
         ano = auction.getAttribute("data-ano")
-        
 
-        fetch("/bid",{
+        if (amount==""){
+            console.log(ammount)
+            alert("Enter the ammount and then click")
+        }
+        
+        else{
+
+            fetch("/bid",{
                 method:"POST",
                 body:JSON.stringify({"ammount":amount,"ano": ano})
-        })
-        .then(res=>{
-            if (!res.ok){
-                throw "Error Acuquired"
-            }
-            else{
-                return res.text()
-            }
-    
-        })
-    
-        .then(data=>{
-            data3=JSON.parse(data)
-            console.log(data3)
-            console.log(data3["result"])
-        })
-        .catch(error=>{
-            console.log(error)
-        })
+            })
+            .then(res=>{
+                if (!res.ok){
+                    throw "Error Acuquired"
+                }
+                else{
+                    return res.text()
+                }
+            
+            })
+        
+            .then(data=>{
+                if (data=="ok"){
+                    console.log(data)
+                }
+                else{
+                    console.log(data)
+                }
+
+            })
+            .catch(error=>{
+                console.log(error)
+            })
+
+        }
+        
+
+        
     
     })
 })
-
         // creating new auction
 
 document.addEventListener("DOMContentLoaded" ,function(){
@@ -515,6 +542,7 @@ function back9(){
         bidding.style.display="none";
         main=document.getElementById("details")
         main.style.zIndex=6
+        document.getElementById("getbidammount2").value="";
 
 }
 

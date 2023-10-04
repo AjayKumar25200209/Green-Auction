@@ -611,3 +611,42 @@ textarea{
     
 }
 
+.track{
+    text-decoration: underline;
+    cursor: pointer;
+    color: rgb(7, 7, 158);
+}
+
+.trackdetail{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 0px solid red;
+    height: 50%;
+    width: 50%;
+    z-index: 9;
+    background-color: white;
+    box-shadow: 3px 3px  20px rgb(0, 0, 0);
+    border-radius: 10px;
+
+}
+
+.overtrack{
+    border-radius: 10px;
+
+    border: 0px solid rgb(40, 20, 188);
+    height: 100%;
+    width: 100%;
+    z-index: 9;
+    background-color: white;
+    overflow: auto;
+    word-wrap: break-word;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+
+
+}

@@ -484,7 +484,6 @@ document.addEventListener("DOMContentLoaded", function(){
                 }
             })
             .then(data=>{
-                console.log(data)
                 jdata=JSON.parse(data)
                 btt=document.getElementById("getbid2")
                 btt.setAttribute("data-ano" , jdata["ano"])
@@ -502,6 +501,8 @@ document.addEventListener("DOMContentLoaded", function(){
                 document.getElementById("date").innerHTML=jdata["date"]
                 document.getElementById("status").innerHTML=jdata["status"]
                 document.getElementById("quantity").innerHTML=jdata["quantity"]
+                track2=document.getElementById("track")
+                track2.setAttribute("data-ano" , jdata["ano"])
 
 
 
@@ -633,6 +634,68 @@ document.addEventListener("DOMContentLoaded", function(){
     })
 })
 
+            // tracking the bidder details
+document.addEventListener("DOMContentLoaded", function(){
+    document.getElementById("track").addEventListener("click", function(){
+        track3=document.getElementById("track")
+        actionnum=track3.getAttribute("data-ano")
 
+        
+        fetch("/track",{
+            method:"POST",
+            body:JSON.stringify({"ano":actionnum})
+        })
+        .then(res=>{
+            if(res.ok){
+                console.log("status ok")
+                return res.text()
+            }
+            else{
+                throw "Status not ok and can't get the data of this auction"
+            }
+        })
+        .then(data=>{
+            
+            
+            jdata=JSON.parse(data)
+            var parent=document.getElementById("parent")
+            pelement=document.createElement("h3")
+            pelement.innerHTML="Track of Bidding"
+            parent.appendChild(pelement)
+            ii=jdata["nbid"]
+            for (i=1 ; i<=ii; i++){
+                biddetail=jdata["biddetail"]
+                jjdata=JSON.parse(biddetail)
+                console.log(jjdata)
+                bidnum="bidno"+i+"";
+                console.log(bidnum)
+
+
+                numm=jjdata.bidding[bidnum];
+                console.log(numm)
+                bidnoo=document.createElement("p")
+                bidnoo.innerHTML="Bid Number : "+numm.bidnum;
+                parent.appendChild(bidnoo)
+            }
+
+        })
+            
+            document.getElementById("trackk").style.display="block"
+            document.getElementById("blur").style.zIndex=8
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+    })
+
+
+function back0(){
+    document.getElementById("trackk").style.display="none"
+    document.getElementById("blur").style.zIndex=5
+    parent=document.getElementById("parent")
+    parent.removeChild(pelement)
+    console.log("okok da venna")
+
+}
 
 

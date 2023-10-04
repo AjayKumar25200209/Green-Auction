@@ -13,6 +13,79 @@
     <script src="/static/javascript/myscript.js"></script>
 
 </head>
+
+<style>
+
+    .sp{
+        width: 300px;
+        background-color: aqua;
+    }
+    .cli{
+        position: relative;
+        top: 20px;
+    }
+
+    .hh{
+        font-size: 22px;
+    }
+    .ddiv{
+        margin: auto;
+        border: 0px solid rgb(255, 255, 255);
+    }
+
+    .submit2{
+        margin: auto;
+        height: 40px;
+        border: 0;
+        color: aliceblue;
+        background-color:rgb(94,93,240);
+        font-family: 'Poppins', sans-serif;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 15px;
+        width: 150px;
+        text-align: center;
+    }
+
+    .head2{
+        font-size: 22px;
+        margin-top: 25px;
+    }
+
+    .pp{
+        font-family:'Poppins', sans-serif ;
+        font-size: 15px;
+
+    }
+
+    .col{
+        float: left;
+        border: 0px solid red;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 50%;
+
+    }
+    .col2{
+       
+        float: right;
+        border: 0px solid rgb(13, 255, 0);
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 50%;
+
+    }
+    .vis{
+        display: none;
+    }
+
+    
+    
+</style>
 <body>
             <!-- blur the background -->
     
@@ -37,6 +110,8 @@
                         <p>District : <span id="district"></span></p>
                         <p>Auction Starting Time : <span id="stime"></span></p>
                         <p>Auction Ending Time: <span id="etime"></span></p>
+                        <p class="track" id="track" data-ano="">Track My Bidding Details</p>
+                        
         
                         
                     </div>
@@ -54,6 +129,7 @@
                     </div>
         
                 </div>
+                
                 <button id="bidbutton2" id="biddd"  class="bidbutton3 special" onclick="myfun10()">Bid Now</button>
         
         
@@ -102,14 +178,32 @@
         </nav>
     </div>
 
+    <div class="trackdetail" id="trackk">
+        <div class="overtrack">
+            <span class="material-symbols-outlined close2" onclick="back0()" >close</span>
+            <h2 style="margin-top: 20px;">Bidding Details</h2>
+            <div>
+                <p>Auction No:</p>
+                <p>Bidder Name :</p>
+                 <div class="parent" id="parent">
+
+                 </div>
+
+            </div>
+            
+
+        </div>
+
+
+    </div>
 
         
 
             <!-- display my auction details -->
 
     <div class="content">
-        {% if result %}
-            {% for x in result %}
+        {% if array2 %}
+            {% for x in array2 %}
             <div class="product"  data-id="ajay1">
                         <h2 class="hh"><span style="color: rgb(35, 180, 35);">Auction</span> No : {{x["ano"]}}</h2><br>
                         <img src="/static/images/tomato.jpg" alt="tomoto image" class="pimage"><br>

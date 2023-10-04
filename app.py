@@ -351,7 +351,6 @@ def getfulldetail():
         ano=json.loads(data)
         
         value=ano["ano"]
-        print(value)
         try:
     
            mycursor.execute("select * from auctioninfo where ano=%s ",(value,))
@@ -368,36 +367,85 @@ def getfulldetail():
 def mybidding():
     if request.method=="GET":
         if session.get('uemail') is not None:
-            datee=date.today()
-
-            
-            
-            
+            #datee=date.today()
+            session["array2"]=[]
+            array2=session["array2"]
+            try:
+                mycursor.execute("select * from mybiddinginfo where bidderemail=%s ",( session["uemail"] ,) )
+                result1=mycursor.fetchall()
+                for x in result1:
+                    mycursor.execute("select * from auctioninfo where ano=%s",(x["ano"],))
+                    result2=mycursor.fetchone()
+                    array2.append(result2)
+                    array2.reverse()
+                return render_template("mybidding.html",array2=array2)
+                
+            except Exception as e:
+                msg=f"Error {e}"
+                
+                return render_template("mybidding.html",msg=msg)
+        else:
             msg="Sorry Something went Wrong Please try again later"
-            return render_template("mybidding.html",msg=msg)
+            return redirect(url_for("sessioncheck"))
 @app.route( '/Profile', methods=["GET",  "POST"] )
 def profile():
-    return render_template("profile.html")
+    if session.get('uemail') is not None:
+        return render_template("profile.html")
+    else:
+        return redirect(url_for("sessioncheck"))
+
+        
 
 @app.route( '/About', methods=["GET",  "POST"] )
 def about():
-    return render_template("about.html")
+    if session.get('uemail') is not None:
+        return render_template("about.html")
+    else:
+        return redirect(url_for("sessioncheck"))
 
+        
+
+
+    # seaching specific auction details
 @app.route( '/auctiondetail', methods=["GET",  "POST"] )
 def auctiondetail():
-    data=request.form.get("formsearch")
-    try:
-        mycursor.execute("select * from auctioninfo where ano=%s",(data,))
-        result=mycursor.fetchone()
-        if result:
-            print(type(result))
-            return result
-        else:
-            print("no data")
-            return "No Data in This Auction Number"
+    if request.method=="POST":
         
-    except Exception as e:
-        return "Please try again later"
+        data=request.form.get("formsearch")
+        try:
+            mycursor.execute("select * from auctioninfo where ano=%s",(data,))
+            result=mycursor.fetchone()
+            if result:
+                print(type(result))
+                return result
+            else:
+                print("no data")
+                return "No Data in This Auction Number"
+            
+        except Exception as e:
+            return "Please try again later"
+    else:
+        return redirect(url_for("sessioncheck"))
+    
+@app.route( '/track', methods=["GET",  "POST"] )
+def track():
+    if request.method=="POST":
+        ano=request.data.decode("UTF-8")
+        ano=json.loads(ano)
+        print(ano["ano"])
+        try:
+            mycursor.execute("select * from mybiddinginfo where ano=%s and bidderemail=%s" ,(ano["ano"],session["uemail"]))
+            result=mycursor.fetchone()
+            if result:
+                print(result)
+                
+                
+                return result
+            else:
+                return " can't able to fetch the data"
+            
+        except Exception as e:
+            return f"Error happend so please try again later {e} "
         
 
 

@@ -375,6 +375,29 @@ def mybidding():
             
             msg="Sorry Something went Wrong Please try again later"
             return render_template("mybidding.html",msg=msg)
+@app.route( '/Profile', methods=["GET",  "POST"] )
+def profile():
+    return render_template("profile.html")
+
+@app.route( '/About', methods=["GET",  "POST"] )
+def about():
+    return render_template("about.html")
+
+@app.route( '/auctiondetail', methods=["GET",  "POST"] )
+def auctiondetail():
+    data=request.form.get("formsearch")
+    try:
+        mycursor.execute("select * from auctioninfo where ano=%s",(data,))
+        result=mycursor.fetchone()
+        if result:
+            print(type(result))
+            return result
+        else:
+            print("no data")
+            return "No Data in This Auction Number"
+        
+    except Exception as e:
+        return "Please try again later"
         
 
 

@@ -522,6 +522,7 @@ function back7(){
     blur.style.display="none";
     main=document.getElementById("details")
     main.style.display="none"
+    document.getElementById("searchform").value=""
 
 }
 
@@ -545,6 +546,92 @@ function back9(){
         document.getElementById("getbidammount2").value="";
 
 }
+
+
+            // getting the specific auction details
+document.addEventListener("DOMContentLoaded" ,function(){
+    document.getElementById("search").addEventListener("submit" , function(event){
+        event.preventDefault();
+        formdetail=document.getElementById("search")
+        sform=document.getElementById("searchform").value
+        fetch("/auctiondetail",{
+            method:"POST",
+            body : new FormData(formdetail)
+        })
+        .then(res=>{
+            if (res.ok){
+                console.log(" status ok")
+                return res.text()
+            }
+            else{
+                throw "Error can't fetch the data response status is not ok"
+            }
+        })
+        .then(data=>{
+            if (data=="No Data in This Auction Number"){
+
+                blur = document.getElementById("blur")
+                blur.style.display="flex";
+                document.getElementById("message").innerHTML=data;
+                document.getElementById("mssg").style.display="block"
+
+            }
+            else if (data=="Please try again later"){
+                blur = document.getElementById("blur")
+                blur.style.display="flex";
+                document.getElementById("message").innerHTML=data;
+                document.getElementById("mssg").style.display="block"
+
+            }
+            else{
+                jdata=JSON.parse(data)
+                blur = document.getElementById("blur")
+                blur.style.display="flex";
+                main=document.getElementById("details")
+                main.style.display="flex";
+                document.getElementById("demo3").innerHTML="Auction No : "+jdata["ano"]+"";
+                document.getElementById("ano").innerHTML=jdata["ano"]
+                document.getElementById("aowner").innerHTML=jdata["aowner"]
+                document.getElementById("product").innerHTML=jdata["pname"]
+                document.getElementById("sprice").innerHTML=jdata["sprice"]
+                document.getElementById("cprice").innerHTML=jdata["cprice"]
+                document.getElementById("stime").innerHTML=jdata["stime"]
+                document.getElementById("etime").innerHTML=jdata["etime"]
+                document.getElementById("district").innerHTML=jdata["district"]
+                document.getElementById("flocation").innerHTML=jdata["flocation"]
+                document.getElementById("time").innerHTML=""+jdata["time"]+"Hours"
+                document.getElementById("date").innerHTML=jdata["date"]
+                document.getElementById("status").innerHTML=jdata["status"]
+                document.getElementById("quantity").innerHTML=jdata["quantity"]
+                document.getElementById("chbidder").innerHTML=jdata["chbidder"]
+
+
+            }
+            
+        })
+        .catch(error=>{
+            document.getElementById("message").innerHTML=error;
+            document.getElementById("mssg").style.display="block"
+        })
+        
+    })
+})
+
+            // for ok button of message div
+document.addEventListener("DOMContentLoaded", function(){
+
+
+    document.getElementById("okok").addEventListener("click", function(){
+        blur = document.getElementById("blur")
+        blur.style.display="none";
+        document.getElementById("mssg").style.display="none"
+        document.getElementById("searchform").value=""
+
+
+
+
+    })
+})
 
 
 

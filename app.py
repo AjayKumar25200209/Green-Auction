@@ -283,7 +283,7 @@ def bid():
                             
                             # jodata=json.loads(odata)
                             bdetail2={bidname:{"bidnum":nbid,"ano":ano,"bammount":data2["ammount"]}}
-                            odata.update(bdetail2)
+                            odata["bidding"].update(bdetail2)
                             jbdetail1=json.dumps(odata)
                            
                             print(jbdetail1)
@@ -356,6 +356,7 @@ def getfulldetail():
            mycursor.execute("select * from auctioninfo where ano=%s ",(value,))
            result1 = mycursor.fetchone()
            result=json.dumps(result1)
+           return result
         except Exception as e:
            return e
         return result
@@ -437,14 +438,18 @@ def track():
             mycursor.execute("select * from mybiddinginfo where ano=%s and bidderemail=%s" ,(ano["ano"],session["uemail"]))
             result=mycursor.fetchone()
             if result:
-                print(result)
+                result2=json.loads(result["biddetail"])
+                result3=result2["bidding"]
+                print(result2)
+                i=1
                 
                 
-                return result
+                return render_template("track.html" , result=result ,result3=result3,i=i)
             else:
                 return " can't able to fetch the data"
             
         except Exception as e:
+            print(e)
             return f"Error happend so please try again later {e} "
         
 

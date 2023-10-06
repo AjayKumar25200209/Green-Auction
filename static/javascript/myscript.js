@@ -453,17 +453,43 @@ document.addEventListener("DOMContentLoaded" ,function(){
 
 })
 
-        // getting full detail of an auction
+
+        // normal loading animation for every page
+window.addEventListener("load", function(){
+
+    setInterval(() => {
+        document.querySelector(".blur2").classList.add("remove")
+        document.querySelector(".blur2").addEventListener("transioned",function(){
+            
+        })
+        
+
+        
+    }, 1000);
+})
+
+        // getting full detail of an auction dashboard
 
 document.addEventListener("DOMContentLoaded", function(){
     detail=document.querySelectorAll(".more")
 
     detail.forEach(item=>{
         item.addEventListener("click", function(event){
+            // setInterval(() => {
+            //     document.querySelector(".blur2").classList.add("remove")
+            //     document.querySelector(".blur2").addEventListener("transioned",function(){
+            //         document.querySelector(".remove").style.display="none"
+            //     })
+                
+        
+                
+            // }, 1000);
+            main=document.getElementById("details")
+            
             blur = document.getElementById("blur")
             blur.style.display="flex";
-            main=document.getElementById("details")
-            main.style.display="flex";
+            
+            
 
 
             element=event.target
@@ -504,6 +530,11 @@ document.addEventListener("DOMContentLoaded", function(){
                 track2=document.getElementById("track")
                 track2.setAttribute("data-ano" , jdata["ano"])
 
+                
+                
+               
+                
+
 
 
 
@@ -511,12 +542,21 @@ document.addEventListener("DOMContentLoaded", function(){
             .catch(error=>{
                 console.log(error)
             })
+
+
             
+
+            main.style.display="flex"
+           
+            
+
         })
 
     })
 
 })
+
+
         // removing the full detail popup and  also blur div
 function back7(){
     blur = document.getElementById("blur")
@@ -655,37 +695,20 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         })
         .then(data=>{
-            
-            
-            jdata=JSON.parse(data)
-            var parent=document.getElementById("parent")
-            pelement=document.createElement("h3")
-            pelement.innerHTML="Track of Bidding"
-            parent.appendChild(pelement)
-            ii=jdata["nbid"]
-            for (i=1 ; i<=ii; i++){
-                biddetail=jdata["biddetail"]
-                jjdata=JSON.parse(biddetail)
-                console.log(jjdata)
-                bidnum="bidno"+i+"";
-                console.log(bidnum)
-
-
-                numm=jjdata.bidding[bidnum];
-                console.log(numm)
-                bidnoo=document.createElement("p")
-                bidnoo.innerHTML="Bid Number : "+numm.bidnum;
-                parent.appendChild(bidnoo)
-            }
+            document.getElementById("trackk").innerHTML=data
 
         })
+        .catch(errorr=>{
+            console.log(errorr)
+        })
+        document.getElementById("trackk").style.display="block"
+        document.getElementById("blur").style.zIndex=8
+       
+
             
-            document.getElementById("trackk").style.display="block"
-            document.getElementById("blur").style.zIndex=8
+            
         })
-        .catch(error=>{
-            console.log(error)
-        })
+        
     })
 
 

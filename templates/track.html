@@ -1,0 +1,34 @@
+<span class="material-symbols-outlined close2" style="z-index: 8;" onclick="back0()" >close</span>
+
+<div class="overtrack">
+    <h2 style="margin-top: 20px;">Bidding Details</h2>
+    <div>
+        {% if result %}
+        <h3>Auction No: {{ result["ano"] }}</h3>
+        <h3 style="margin-top: 3px;">Bidder Name : {{result["biddername"]}}</h3>
+        <h3>Total No Bids : {{result["nbid"]}}</h3>
+         <div class="parent" style="margin-top: 10px;" id="parent">
+            
+            
+            
+                <div >
+                    
+                    {% for  k in range(1,result["nbid"]+1) %}
+                        {% set bid="bidno" ~ k %}
+                        <h3>Bid Number : {{ k }}</h3>
+                        <p>Ammount: {{ result3[bid]["bammount"]}} </p>
+                        <p>Number {{ result3[bid]["bidnum"]}} Bidder </p>
+                    {% endfor %}
+                </div>
+
+            
+            
+            
+           
+        </div>
+        {% endif %}
+
+    </div>
+    
+
+</div>

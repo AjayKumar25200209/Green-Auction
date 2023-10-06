@@ -618,14 +618,14 @@ textarea{
 }
 
 .trackdetail{
-    display: none;
+    display: flex;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     border: 0px solid red;
-    height: 50%;
-    width: 50%;
+    height: 40%;
+    width: 35%;
     z-index: 9;
     background-color: white;
     box-shadow: 3px 3px  20px rgb(0, 0, 0);
@@ -635,18 +635,76 @@ textarea{
 
 .overtrack{
     border-radius: 10px;
-
-    border: 0px solid rgb(40, 20, 188);
+    display: flex;
+    border: 1px solid rgb(40, 20, 188);
     height: 100%;
     width: 100%;
-    z-index: 9;
+    z-index: 7;
     background-color: white;
     overflow: auto;
     word-wrap: break-word;
-    display: flex;
     align-items: center;
     flex-direction: column;
     gap: 20px;
+    
 
 
 }
+
+.parent{
+    border: 0px solid red;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+
+    
+}
+
+
+
+
+
+
+/* .blur2{
+    display: flex;
+    position: fixed;
+    background-color: rgba(179, 179, 179, 0.258);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s, visibility 0.5s;
+
+
+}
+.blur2::after{
+    content: "";
+    border: 10px solid red;
+    background-color:rgba(179, 179, 179, 0.258) ;
+    height: 75px;
+    width: 75px;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: loader 0.75s ease infinite ;
+    
+
+}
+
+@keyframes loader{
+    from{transform: rotate(0turn)}
+
+    to{transform: rotate(1turn)}
+    
+}
+
+.remove{
+    opacity: 0;
+    visibility: hidden;
+    
+    
+} */
+
+

@@ -351,15 +351,30 @@ document.addEventListener("DOMContentLoaded", function() {
             })
         
             .then(data=>{
-                if (data=="ok"){
+                if (data=="data stored"){
+                    blur = document.getElementById("blur")
+                    blur.style.zIndex="7"
+            
+                    document.getElementById("message").innerHTML=data;
+                    document.getElementById("mssg").style.display="block"
                     console.log(data)
                 }
                 else{
+                    blur = document.getElementById("blur")
+                    blur.style.zIndex="7"
+            
+                    document.getElementById("message").innerHTML=data;
+                    document.getElementById("mssg").style.display="block"
                     console.log(data)
                 }
 
             })
             .catch(error=>{
+                blur = document.getElementById("blur")
+                blur.style.zIndex="7"
+        
+                document.getElementById("message").innerHTML=error;
+                document.getElementById("mssg").style.display="block"
                 console.log(error)
             })
 
@@ -401,16 +416,28 @@ document.addEventListener("DOMContentLoaded", function() {
             })
         
             .then(data=>{
-                if (data=="ok"){
+                if (data=="data stored"){
+                    blur = document.getElementById("blur")
+                    blur.style.zIndex="7"
+            
+                    document.getElementById("message").innerHTML=data;
+                    document.getElementById("mssg").style.display="block"
                     console.log(data)
                 }
                 else{
-                    console.log(data)
+                    blur = document.getElementById("blur")
+                    blur.style.zIndex="7"
+                    document.getElementById("message").innerHTML=data;
+                    document.getElementById("mssg").style.display="block"
                 }
 
             })
             .catch(error=>{
-                console.log(error)
+                    blur = document.getElementById("blur")
+                    blur.style.zIndex="7"
+                    document.getElementById("message").innerHTML=error;
+                    document.getElementById("mssg").style.display="block"
+                
             })
 
         }
@@ -425,6 +452,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded" ,function(){
     
     document.getElementById("createform").addEventListener("submit" , function(event){
+
         createform=document.getElementById("createform")
         event.preventDefault()
         data= new FormData(createform)
@@ -510,25 +538,45 @@ document.addEventListener("DOMContentLoaded", function(){
                 }
             })
             .then(data=>{
-                jdata=JSON.parse(data)
-                btt=document.getElementById("getbid2")
-                btt.setAttribute("data-ano" , jdata["ano"])
-                document.getElementById("demo3").innerHTML="Auction No : "+jdata["ano"]+"";
-                document.getElementById("ano").innerHTML=jdata["ano"]
-                document.getElementById("aowner").innerHTML=jdata["aowner"]
-                document.getElementById("product").innerHTML=jdata["pname"]
-                document.getElementById("sprice").innerHTML=jdata["sprice"]
-                document.getElementById("cprice").innerHTML=jdata["cprice"]
-                document.getElementById("stime").innerHTML=jdata["stime"]
-                document.getElementById("etime").innerHTML=jdata["etime"]
-                document.getElementById("district").innerHTML=jdata["district"]
-                document.getElementById("flocation").innerHTML=jdata["flocation"]
-                document.getElementById("time").innerHTML=""+jdata["time"]+"Hours"
-                document.getElementById("date").innerHTML=jdata["date"]
-                document.getElementById("status").innerHTML=jdata["status"]
-                document.getElementById("quantity").innerHTML=jdata["quantity"]
-                track2=document.getElementById("track")
-                track2.setAttribute("data-ano" , jdata["ano"])
+                if(data!=="error"){
+
+                
+                    jdata=JSON.parse(data)
+                    btt=document.getElementById("getbid2")
+                    btt.setAttribute("data-ano" , jdata["ano"])
+                    document.getElementById("demo3").innerHTML="Auction No : "+jdata["ano"]+"";
+                    document.getElementById("ano").innerHTML=jdata["ano"]
+                    document.getElementById("aowner").innerHTML=jdata["aowner"]
+                    document.getElementById("product").innerHTML=jdata["pname"]
+                    document.getElementById("sprice").innerHTML=jdata["sprice"]
+                    document.getElementById("cprice").innerHTML=jdata["cprice"]
+                    document.getElementById("stime").innerHTML=jdata["stime"]
+                    document.getElementById("etime").innerHTML=jdata["etime"]
+                    document.getElementById("district").innerHTML=jdata["district"]
+                    document.getElementById("flocation").innerHTML=jdata["flocation"]
+                    document.getElementById("time").innerHTML=""+jdata["time"]+"Hours"
+                    document.getElementById("date").innerHTML=jdata["date"]
+                    document.getElementById("status").innerHTML=jdata["status"]
+                    document.getElementById("quantity").innerHTML=jdata["quantity"]
+                    document.getElementById("chbidder").innerHTML=jdata["chbidder"]
+                    main.style.display="flex"
+                    try{
+                        track2=document.getElementById("track")
+                        track2.setAttribute("data-ano" , jdata["ano"])
+                        
+
+                    }
+                    catch(error){
+                        
+                        
+
+                    }
+                    
+                }
+                else{
+                    throw "cannot able to fetch the full details please try again later"
+
+                }
 
                 
                 
@@ -540,13 +588,15 @@ document.addEventListener("DOMContentLoaded", function(){
 
             })
             .catch(error=>{
-                console.log(error)
+                document.getElementById("message").innerHTML=error;
+                document.getElementById("mssg").style.display="block"
+                
             })
 
 
             
 
-            main.style.display="flex"
+           
            
             
 
@@ -612,14 +662,14 @@ document.addEventListener("DOMContentLoaded" ,function(){
             if (data=="No Data in This Auction Number"){
 
                 blur = document.getElementById("blur")
-                blur.style.display="flex";
+                blur.style.zIndex="7"
                 document.getElementById("message").innerHTML=data;
                 document.getElementById("mssg").style.display="block"
 
             }
             else if (data=="Please try again later"){
                 blur = document.getElementById("blur")
-                blur.style.display="flex";
+                blur.style.zIndex="7"
                 document.getElementById("message").innerHTML=data;
                 document.getElementById("mssg").style.display="block"
 
@@ -628,8 +678,7 @@ document.addEventListener("DOMContentLoaded" ,function(){
                 jdata=JSON.parse(data)
                 blur = document.getElementById("blur")
                 blur.style.display="flex";
-                main=document.getElementById("details")
-                main.style.display="flex";
+                
                 document.getElementById("demo3").innerHTML="Auction No : "+jdata["ano"]+"";
                 document.getElementById("ano").innerHTML=jdata["ano"]
                 document.getElementById("aowner").innerHTML=jdata["aowner"]
@@ -645,12 +694,17 @@ document.addEventListener("DOMContentLoaded" ,function(){
                 document.getElementById("status").innerHTML=jdata["status"]
                 document.getElementById("quantity").innerHTML=jdata["quantity"]
                 document.getElementById("chbidder").innerHTML=jdata["chbidder"]
+                document.getElementById("getbid2").setAttribute("data-ano" , jdata["ano"])
+                main=document.getElementById("details")
+                main.style.display="flex";
 
 
             }
             
         })
         .catch(error=>{
+            blur = document.getElementById("blur")
+            blur.style.zIndex="7"
             document.getElementById("message").innerHTML=error;
             document.getElementById("mssg").style.display="block"
         })
@@ -664,7 +718,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     document.getElementById("okok").addEventListener("click", function(){
         blur = document.getElementById("blur")
-        blur.style.display="none";
+        blur.style.zIndex="5"
         document.getElementById("mssg").style.display="none"
         document.getElementById("searchform").value=""
 
@@ -701,7 +755,7 @@ document.addEventListener("DOMContentLoaded", function(){
         .catch(errorr=>{
             console.log(errorr)
         })
-        document.getElementById("trackk").style.display="block"
+        document.getElementById("trackk").style.display="flex"
         document.getElementById("blur").style.zIndex=8
        
 
@@ -720,5 +774,88 @@ function back0(){
     console.log("okok da venna")
 
 }
+
+        // completed button addEventListener in mybidding.html
+document.addEventListener("DOMContentLoaded", function(){
+    document.querySelector(".completed").addEventListener("click", function(){
+        document.querySelector(".completed").style.backgroundColor="rgb(94,93,240)";
+        document.querySelector(".active").style.backgroundColor="rgb(156, 156, 156)";
+
+
+    })
+})
+
+        //  active button addEventListener in mybidding.html
+document.addEventListener("DOMContentLoaded", function(){
+    document.querySelector(".active").addEventListener("click", function(){
+        document.querySelector(".active").style.backgroundColor="rgb(94,93,240)";
+        document.querySelector(".completed").style.backgroundColor="rgb(156, 156, 156)";
+
+
+    })
+})
+
+
+            //    completed button addEventListener in myauction.html
+document.addEventListener("DOMContentLoaded", function(){
+    document.querySelector(".macompleted").addEventListener("click", function(){
+        document.querySelector(".macompleted").style.backgroundColor="rgb(94,93,240)";
+        document.querySelector(".maactive").style.backgroundColor="rgb(156, 156, 156)";
+        fetch("/completedmyauction",{
+            method:"POST"       
+        })
+        .then(res=>{
+            if(res.ok){
+                return res.text()
+            }
+            else{
+                throw "Can't able to Fetch the data"
+            }
+        })
+        .then(data=>{
+            document.querySelector(".act").remove();
+            document.querySelector(".content").innerHTML=data
+        })
+        .catch(error=>{
+            blur = document.getElementById("blur")
+            blur.style.zIndex="7"
+            document.getElementById("message").innerHTML=error;
+            document.getElementById("mssg").style.display="block"         
+        
+        })
+    })
+})
+
+        //  active button addEventListener in myauction.html
+document.addEventListener("DOMContentLoaded", function(){
+    document.querySelector(".maactive").addEventListener("click", function(){
+        document.querySelector(".maactive").style.backgroundColor="rgb(94,93,240)";
+        document.querySelector(".macompleted").style.backgroundColor="rgb(156, 156, 156)";
+        fetch("/activemyauction",{
+            method:"POST"       
+        })
+        .then(res=>{
+            if(res.ok){
+                return res.text()
+            }
+            else{
+                throw "Can't able to Fetch the data"
+            }
+        })
+        .then(data=>{
+            document.querySelector(".act").remove();
+            document.querySelector(".content").innerHTML=data
+        })
+        .catch(error=>{
+            blur = document.getElementById("blur")
+            blur.style.zIndex="7"
+            document.getElementById("message").innerHTML=error;
+            document.getElementById("mssg").style.display="block"         
+        
+        })
+
+
+    })
+})
 
 

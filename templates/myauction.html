@@ -175,37 +175,54 @@
         </nav>
     </div>
 
+    <div class="cate">
+        <button class="maactive"> Active</button>
+        <button class="macompleted">Completed</button>
+
+    </div>
+    <div class="msg" id="mssg" >
+        <div class="actmsg">
+            <p id="message"></p>
+            <button class="bidbutton4" id="okok" >ok</button>
+        </div>
+
+    </div>
+
 
 
             <!-- display my auction details -->
 
-    <div class="content" style="margin-top: 50px;">
-        {% if result %}
-            {% for x in result %}
-            <div class="product"  data-id="ajay1">
-                        <h2 class="hh"><span style="color: rgb(35, 180, 35);">Auction</span> No : {{x["ano"]}}</h2><br>
-                        <img src="/static/images/tomato.jpg" alt="tomoto image" class="pimage"><br>
+    <div class="content">
+        <div class="act" >
 
-                        <div class="product1">
-                            <p class="pp">Product Name   : {{x["pname"]}} </p>
-                            <p class="pp">Quantity       : {{x["quantity"]}}</p>
-                            <p class="pp">Current Price  : {{x["cprice"]}}</p>
-                            <p class="pp">Starting Price : {{x["sprice"]}} </p>
-                            <p class="pp">District : {{x["district"]}} </p>
-                            
-                            <button id="bidbutton" data-id= {{x.ano}} data-sprice={{x.sprice}} data-cprice={{x.cprice}} class="bidbutton">Bid Now</button>
-                            
-                        </div><br>
-                         <p class="more"  data-ano= {{x.ano}}  id="detail" >For More Details</p>                    
+            {% if result %}
+                {% for x in result %}
+                <div class="product"  data-id="ajay1">
+                            <h2 class="hh"><span style="color: rgb(35, 180, 35);">Auction</span> No : {{x["ano"]}}</h2><br>
+                            <img src="/static/images/{{x.pname}}.jpg" alt="{{x.pname}}" class="pimage"><br>
 
-            </div>
-            {% endfor %}
-        {% endif %}
+                            <div class="product1">
+                                <p class="pp">Product Name   : {{x["pname"]}} </p>
+                                <p class="pp">Quantity       : {{x["quantity"]}}</p>
+                                <p class="pp">Current Price  : {{x["cprice"]}}</p>
+                                <p class="pp">Starting Price : {{x["sprice"]}} </p>
+                                <p class="pp">District : {{x["district"]}} </p>
+                                
+                                <button id="bidbutton" data-id= {{x.ano}} data-sprice={{x.sprice}} data-cprice={{x.cprice}} class="bidbutton">Bid Now</button>
+                                
+                            </div><br>
+                            <p class="more"  data-ano= {{x.ano}}  id="detail" >For More Details</p>                    
 
-        {% if msg %}
-                <p>{{msg}}</p>
+                </div>
+                {% endfor %}
+            {% endif %}
 
-        {% endif %}
+            {% if msg %}
+                    <p>{{msg}}</p>
+
+            {% endif %}
+        </div>
+
     </div>
 
 

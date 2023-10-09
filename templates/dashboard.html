@@ -220,7 +220,7 @@
             {% for x in result %}
             <div class="product"  data-id="ajay1">
                         <h2 class="hh"><span style="color: rgb(35, 180, 35);">Auction</span> No : {{x["ano"]}}</h2><br>
-                        <img src="/static/images/tomato.jpg" alt="tomoto image" class="pimage"><br>
+                        <img src="/static/images/{{x.pname}}.jpg" alt="{{x.pname}} image" class="pimage"><br>
 
                         <div class="product1">
                             <p class="pp">Product Name   : {{x["pname"]}} </p>
@@ -253,8 +253,21 @@
 
             <div>
                 <p>Enter the Product Name</p>
-                <input type="text" name="productname" id="" class="type1" placeholder="Eg : Potato">
+                <input type="text" name="productname"   autocomplete="off" id="ppname" class="type1" list="productname" placeholder="Eg : Potato">
             </div>
+                <datalist id="productname">
+                    <option value="Apple">Apple</option>
+                    <option value="Potato">Potato</option>
+                    <option value="Banana Flower">Banana Flower</option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    <option value=""></option>
+                    
+                </datalist>            
             <div>
                 <p>Quantity in Kg</p>
                 <input type="number" class="type1" name="quantity" id="" pattern="[0-9]+" title="Enter the Numer Only" placeholder="Eg : 100">
@@ -271,6 +284,7 @@
                 <p>Time Duration</p>
                 <select name="time" id="time"  class="type1">
                     <option value="">Select Duration</option>
+                    <option value="5min">5 Minutes For Testing</option>
                     <option value="1">1 Hour</option>
                     <option value="2">2 Hour</option>
                     <option value="3">3 Hour</option>

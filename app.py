@@ -3,7 +3,10 @@ import mysql.connector
 import json
 import random
 from datetime import datetime,timedelta,date
-
+from apscheduler.schedulers.background import BackgroundScheduler
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 app = Flask(__name__)
 
 days=3
@@ -20,13 +23,78 @@ mydb = mysql.connector.connect(
         host="localhost",
   	    username="root",
   	    password="Ajay@2002",
-        database="mylearn"
+        database="greenauction"
 )
 
 mycursor = mydb.cursor(dictionary=True)
 
 
 
+
+def test():
+    try:
+        time=datetime.now().replace(microsecond=0,second=0)
+        timee=time.time()
+        mycursor.execute("select * from auctioninfo where etime<=%s and status='active' " ,(timee,))
+        result=mycursor.fetchall()
+        if result:
+            for x in result:
+                
+                sender_email="ajayjeyapal@gmail.com"
+                recever_email=x["aoemail"]
+                subject="Green Auction"
+                s_password="vxclabpkwfwwjhma"
+                
+                nb=x["nbid"]
+                print(nb)
+                if nb :
+                    data=json.loads(x["biddings"]) 
+                    bidno=f'bidno{x["nbid"]}'
+                    html_content=  f"""
+                                    
+                                    
+                                    <h1>Hi {x["aowner"]} </h1>
+                                    <h3>Auction Number : {x["ano"]}</h3>
+                                    <p>Your Auction was Successfully Completed </p>
+                                    <h3>Auction Winner Contact Details are below</h3>
+                                    <p>Name : {x["chbidder"]} <br>Email Id : {data["bidding"][bidno]["bidderemail"]} <br>Mobile Number : {data["bidding"][bidno]["biddernumber"]}</p>
+                                    <p ></p>"""
+                else:
+                    html_content=  f"""
+                                    
+                                    
+                                    <h1>Hi {x["aowner"]} </h1>
+                                    <h3>Auction Number : {x["ano"]}</h3>
+                                    <p>No One Bidded For Your Auction <br>Dont't Worry Create An another auction and I Hope For The best And thanks for using Our Website   </p>"""
+                                    
+                            
+                
+
+                message=MIMEMultipart()
+                message["from"]=sender_email
+                message["to"]=recever_email
+                message["subject"]=subject
+                message.attach(MIMEText(html_content,"html"))
+
+                smtp_server="smtp.gmail.com"
+                port = 587
+
+                server=smtplib.SMTP(smtp_server,port)
+                server.starttls()
+                server.login(sender_email,s_password)
+                server.sendmail(sender_email,recever_email,message.as_string())
+                server.quit()
+                print("its working")
+                mycursor.execute("update auctioninfo set status='completed' where ano=%s" ,(x["ano"],))
+                mydb.commit()
+        else:
+                print("There is no auction to send email in this minute" ,timee)
+    except Exception as e:
+        print(e)
+    
+sched=BackgroundScheduler()
+job=sched.add_job(test,"interval",minutes=1)
+sched.start()
 
 
 
@@ -38,7 +106,7 @@ def dashboard():
         if session.get('uemail') is not None :
             
             try:
-                mycursor.execute("select * from auctioninfo")
+                mycursor.execute("select * from auctioninfo where status='active' " )
 
                 result = mycursor.fetchall()
                 
@@ -84,17 +152,23 @@ def sessioncheck():
     elif request.method=="POST":
         return "eppadi da panna itha ethuku da unnaku intha polapuu "
     
-    
+            # my auction active status route
 @app.route('/My_Auction',methods=['GET', 'POST'] )
 def myauction():
     if request.method=="GET":
         if session.get('uemail')  is not None:
             try:
-                mycursor.execute("select * from auctioninfo where aoemail=%s ", (session["uemail"],))
+                mycursor.execute("select * from auctioninfo where status='active'and aoemail=%s ", (session["uemail"],))
 
                 result = mycursor.fetchall()
                 result.reverse()
-                return render_template("myauction.html",result=result) 
+                if result:
+                    return render_template("myauction.html",result=result) 
+                else:
+                    msg="No auction is Currently Active"
+                    return render_template("myauction.html",msg=msg)
+
+                    
                 
             except Exception as e:
                 print("error : ",e)
@@ -106,7 +180,64 @@ def myauction():
             return redirect(url_for("sessioncheck"))
         
     else:
-        return "uui"
+        return redirect(url_for("sessioncheck"))
+    
+@app.route('/activemyauction',methods=['GET', 'POST'] )
+def activemyauction():
+    if request.method=="POST":
+        if session.get('uemail')  is not None:
+            try:
+                mycursor.execute("select * from auctioninfo where  aoemail=%s and status='active' ", (session["uemail"],))
+
+                result = mycursor.fetchall()
+                result.reverse()
+                if result:
+                    return render_template("activemyauction.html",result=result) 
+                else:
+                    msg="No auction is Currently active"
+                    return render_template("activemyauction.html",msg=msg)
+                
+                
+            except Exception as e:
+                print("error : ",e)
+                msg=f"Sorry Something went wrong please try again later : {e}"
+                return render_template("activemyauction.html",msg=msg)
+            
+            
+        else:
+            return redirect(url_for("sessioncheck"))
+        
+    else:
+        return redirect(url_for("sessioncheck"))
+    
+    
+@app.route('/completedmyauction',methods=['GET', 'POST'] )
+def completedmyauction():
+    if request.method=="POST":
+        if session.get('uemail')  is not None:
+            try:
+                mycursor.execute("select * from auctioninfo where  aoemail=%s and status='completed' ", (session["uemail"],))
+
+                result = mycursor.fetchall()
+                result.reverse()
+                if result:
+                    return render_template("completedmyauction.html",result=result) 
+                else:
+                    msg="No auction is Currently Active"
+                    return render_template("completedmyauction.html",msg=msg)
+                
+                
+            except Exception as e:
+                print("error : ",e)
+                msg=f"Sorry Something went wrong please try again later : {e}"
+                return render_template("completedmyauction.html",msg=msg)
+            
+            
+        else:
+            return redirect(url_for("sessioncheck"))
+        
+    else:
+        return redirect(url_for("sessioncheck"))
     
 @app.route('/logout',methods=['GET', 'POST'] )
 def logout():
@@ -137,6 +268,7 @@ def get():
         useremail = request.form.get('uemail')
         usernumber = request.form.get('unumber')
         userpassword = request.form.get('upass')
+        
         if useremail and username and usernumber and userpassword:
             
                 # storing in session
@@ -189,8 +321,8 @@ def get():
 @app.route( '/login', methods=["GET",  "POST"] )
 def login():
     if request.method == "POST":
-        useremail = request.form.get('lemail')
-        userpassword = request.form.get('lpass')
+        useremail = request.form.get('lemail').strip()
+        userpassword = request.form.get('lpass').strip()
         if useremail and userpassword:
             mycursor.execute("select * from userinfo where email=%s" ,(useremail,))
             result1 = mycursor.fetchone()
@@ -219,6 +351,7 @@ def login():
 @app.route( '/bid', methods=["GET",  "POST"] )
 def bid():
     if request.method=="POST":
+        
         data = request.data.decode("utf-8")
         
         
@@ -231,113 +364,147 @@ def bid():
             print("no value")
             return "Can't get the auction Number "
         else:
+            
+            
             ano=data2["ano"]
+            cprice=data2["ammount"]
             mycursor.execute("select * from auctioninfo where ano=%s",(ano,))
             result = mycursor.fetchone()
+            if result["aoemail"]==session["uemail"]:
+                return "you cannot bid for your own auction"
+            elif result["chbidder"]==session["username"]:
+                return "Already You are the highest bidder for this auction"
+            
+                
+            else:
             
            
 
-            nnbid=result["nbid"]
-            try:
-                if nnbid is None:
-                        mycursor.execute("update auctioninfo set nbid=1  where ano=%s", (ano,))
-                        mydb.commit()
-                        bid_data={"bidno1":{"bidderemail":session["uemail"],"biddername":session["username"],"bidammount":data2["ammount"],"nobid":1}}
-                        bid={"bidding":bid_data}
-                        jbid=json.dumps(bid)
-                        chbidder=session["username"]
-                        mycursor.execute(" update auctioninfo set biddings=%s , chbidder=%s where ano=%s",(jbid,chbidder,ano))
-                        mydb.commit()
-                        bdetail={"bidding":{"bidno1":{"bidnum":1,"ano":ano,"bammount":data2["ammount"]}}}
-                        jbdetail=json.dumps(bdetail)
-                        datee=date.today()
-                        value=(ano,session["username"],session["uemail"],jbdetail,datee,1)
-                        
-                        mycursor.execute("insert into mybiddinginfo (ano,biddername,bidderemail,biddetail,date,nbid) values(%s,%s,%s,%s,%s,%s)",(value))
-                        mydb.commit()
-                        return "data stored"                        
-                else:
-                        nbid=nnbid+1
-                        mycursor.execute("update auctioninfo set nbid=%s  where ano=%s", (nbid,ano,))
-                        mydb.commit()
-                        olddata=json.loads(result["biddings"])
-                        bidd=f"bidno{nbid}"
+                nnbid=result["nbid"]
+                try:
+                    if nnbid is None:
+                            if int(result["sprice"])  >= int(data2["ammount"]):
+                                return "your Bidding ammount is less than the starting price of this auction "
+                            else:
+                                mycursor.execute("update auctioninfo set nbid=1  where ano=%s", (ano,))
+                                mydb.commit()
+                                bid_data={"bidno1":{"bidderemail":session["uemail"],"biddername":session["username"],"biddernumber":session["unumber"],"bidammount":data2["ammount"],"nobid":1}}
+                                bid={"bidding":bid_data}
+                                jbid=json.dumps(bid)
+                                
+                                chbidder=session["username"]
+                                mycursor.execute(" update auctioninfo set biddings=%s , chbidder=%s ,cprice=%s where ano=%s",(jbid,chbidder,cprice,ano))
+                                mydb.commit()
+                                bdetail={"bidding":{"bidno1":{"bidnum":1,"ano":ano,"bammount":data2["ammount"]}}}
+                                jbdetail=json.dumps(bdetail)
+                                datee=date.today()
+                                value=(ano,session["username"],session["uemail"],jbdetail,datee,1)
+                                
+                                mycursor.execute("insert into mybiddinginfo (ano,biddername,bidderemail,biddetail,date,nbid) values(%s,%s,%s,%s,%s,%s)",(value))
+                                mydb.commit()
+                                return "data stored"                        
+                    else:
+                            if int(result["cprice"])  >= int(data2["ammount"]):
+                                return "your Bidding ammount is less than the current price of this auction "
+                            else:
+                                nbid=nnbid+1
+                                mycursor.execute("update auctioninfo set nbid=%s  where ano=%s", (nbid,ano,))
+                                olddata=json.loads(result["biddings"])
+                                bidd=f"bidno{nbid}"
 
-                        
-                        newdata = {bidd:{"bidderemail":session["uemail"],"biddername":session["username"],"bidammount":data2["ammount"],"nobid":nbid}}
-                        
-                        olddata.update(newdata)
-                        jdata=json.dumps(olddata)
-                        mycursor.execute(" update auctioninfo set biddings=%s , chbidder=%s where ano=%s",(jdata,session["username"],ano))
-                        mydb.commit()
-                        print("ithu varaikum okl")
-                        mycursor.execute("select * from mybiddinginfo where bidderemail=%s and ano=%s ", (session["uemail"],ano))
-                        mybid=mycursor.fetchone()
-                        if mybid is not None:
-                            nobid=mybid["nbid"]+1
-                            jstr=mybid["biddetail"]
-                            odata=json.loads(jstr)
-                            print(jstr)
-                            bidname=f"bidno{nobid}"
+                                
+                                newdata = {bidd:{"bidderemail":session["uemail"],"biddername":session["username"],"biddernumber":session["unumber"],"bidammount":data2["ammount"],"nobid":nbid}}
+                                
+                                olddata["bidding"].update(newdata)
+                                jdata=json.dumps(olddata)
+                                mycursor.execute(" update auctioninfo set biddings=%s , chbidder=%s ,cprice=%s where ano=%s",(jdata,session["username"],cprice,ano))
+                                print("ithu varaikum okl")
+                                mycursor.execute("select * from mybiddinginfo where bidderemail=%s and ano=%s ", (session["uemail"],ano))
+                                mybid=mycursor.fetchone()
+                                if mybid is not None:
+                                    nobid=mybid["nbid"]+1
+                                    jstr=mybid["biddetail"]
+                                    odata=json.loads(jstr)
+                                    print(jstr)
+                                    bidname=f"bidno{nobid}"
+                                    
+                                    
+                                    # jodata=json.loads(odata)
+                                    bdetail2={bidname:{"bidnum":nbid,"ano":ano,"bammount":data2["ammount"]}}
+                                    odata["bidding"].update(bdetail2)
+                                    jbdetail1=json.dumps(odata)
+                                
+                                    print(jbdetail1)
+                                    
+                                    mycursor.execute("update mybiddinginfo set biddetail=%s , nbid=%s where bidderemail=%s and ano=%s ",(jbdetail1,nobid,mybid["bidderemail"],ano))
+                                    mydb.commit()
+                                    print("already bidded")
+                                    return "data stored" 
+                                else:
+                                    datee=date.today()
+                                    
+                                    bdetail={"bidding":{"bidno1":{"bidnum":nbid,"ano":ano,"bammount":data2["ammount"]}}}
+                                    jbdetail=json.dumps(bdetail)
+                                    value=(ano,session["username"],session["uemail"],jbdetail,datee,1)
+                                    mycursor.execute("insert into mybiddinginfo (ano,biddername,bidderemail,biddetail,date,nbid) values(%s,%s,%s,%s,%s,%s)",(value))
+                                    mydb.commit()
+                                    print("not already bidded")
+                                    return "data stored" 
                             
                             
-                            # jodata=json.loads(odata)
-                            bdetail2={bidname:{"bidnum":nbid,"ano":ano,"bammount":data2["ammount"]}}
-                            odata["bidding"].update(bdetail2)
-                            jbdetail1=json.dumps(odata)
-                           
-                            print(jbdetail1)
-                            
-                            mycursor.execute("update mybiddinginfo set biddetail=%s , nbid=%s where bidderemail=%s and ano=%s ",(jbdetail1,nobid,mybid["bidderemail"],ano))
-                            mydb.commit()
-                            print("already bidded")
-                        else:
-                            datee=date.today()
-                            
-                            bdetail={"bidding":{"bidno1":{"bidnum":nbid,"ano":ano,"bammount":data2["ammount"]}}}
-                            jbdetail=json.dumps(bdetail)
-                            value=(ano,session["username"],session["uemail"],jbdetail,datee,1)
-                            mycursor.execute("insert into mybiddinginfo (ano,biddername,bidderemail,biddetail,date,nbid) values(%s,%s,%s,%s,%s,%s)",(value))
-                            mydb.commit()
-                            print("not already bidded")
                         
+                except Exception as e:
+                        mydb.rollback()
                         
-                        return "data stored" 
-                    
-            except Exception as e:
-                    mycursor.execute("update auctioninfo set nbid=%s  where ano=%s", (nnbid,ano,))
-                    mydb.commit()
-                    
-                    return f"Error in storing the data and reset action no : {e}"
+                        return f"Error in storing the data and reset action no : {e}"
     else:
         return "error"
     
 @app.route( '/createauction', methods=["GET",  "POST"] )
 def createauction():
     if request.method=="POST":
-        productname =request.form.get("productname")
-        quantity =request.form.get("quantity")
-        place =request.form.get("place")
-        price =request.form.get("price")
+        productname =request.form.get("productname").lower().strip()
+        print("product nname: ",productname)
+        quantity =request.form.get("quantity").strip()
+        place =request.form.get("place").strip()
+        price =request.form.get("price").strip()
         time =request.form.get("time")
         district = request.form.get("district")
         description =request.form.get("description")
         print(district,productname,quantity,place,price,time,description)
         try:
-            time2=int(time)
-            namee=session.get("username")
-            email=session.get("uemail")
-            datee=date.today()
-            ctime=datetime.now().replace(microsecond=0,second=0)
-            stime=ctime.time()
-            hour=timedelta(hours=time2)
-            etime=(ctime+hour).time()
-            print(etime)
-            status="active"
-            values=(namee,productname,price,quantity,place,time,district,description,stime,etime,datee,status,email)
-            mycursor.execute("insert into auctioninfo (aowner,pname,sprice,quantity,flocation,time,district,description,stime,etime,date,status,aoemail) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" ,(values))
-            mydb.commit()
-            return "ok ok"
+            if time=="5min":
+                time4=time.strip("min")
+                print("time4" ,time4)
+                time3=int(time4)
+                namee=session.get("username")
+                email=session.get("uemail")
+                datee=date.today()
+                ctime=datetime.now().replace(microsecond=0,second=0)
+                stime=ctime.time()
+                hour=timedelta(minutes=time3)
+                etime=(ctime+hour).time()
+                print(etime)
+                status="active"
+                values=(namee,productname,price,quantity,place,time4,district,description,stime,etime,datee,status,email)
+                mycursor.execute("insert into auctioninfo (aowner,pname,sprice,quantity,flocation,time,district,description,stime,etime,date,status,aoemail) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" ,(values))
+                mydb.commit()
+                return "ok ok"
+            else:
+                time2=int(time)
+                namee=session.get("username")
+                email=session.get("uemail")
+                datee=date.today()
+                ctime=datetime.now().replace(microsecond=0,second=0)
+                stime=ctime.time()
+                hour=timedelta(hours=time2)
+                etime=(ctime+hour).time()
+                print(etime)
+                status="active"
+                values=(namee,productname,price,quantity,place,time,district,description,stime,etime,datee,status,email)
+                mycursor.execute("insert into auctioninfo (aowner,pname,sprice,quantity,flocation,time,district,description,stime,etime,date,status,aoemail) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" ,(values))
+                mydb.commit()
+                return "ok ok"
             
         except Exception as e:
             return f"sorry {e}"
@@ -358,8 +525,8 @@ def getfulldetail():
            result=json.dumps(result1)
            return result
         except Exception as e:
-           return e
-        return result
+           return "error"
+        
 
     else:
         return redirect(url_for("sessioncheck"))
@@ -378,7 +545,7 @@ def mybidding():
                     mycursor.execute("select * from auctioninfo where ano=%s",(x["ano"],))
                     result2=mycursor.fetchone()
                     array2.append(result2)
-                    array2.reverse()
+                array2.reverse()
                 return render_template("mybidding.html",array2=array2)
                 
             except Exception as e:
@@ -391,7 +558,11 @@ def mybidding():
 @app.route( '/Profile', methods=["GET",  "POST"] )
 def profile():
     if session.get('uemail') is not None:
-        return render_template("profile.html")
+        try:
+            result={"name":session["username"],"email":session["uemail"],"number":session["unumber"]}
+            return render_template("profile.html" , result=result)
+        except Exception as e:
+            return redirect(url_for("sessioncheck"))
     else:
         return redirect(url_for("sessioncheck"))
 

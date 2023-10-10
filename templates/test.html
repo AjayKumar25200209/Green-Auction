@@ -1,47 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Apply basic styles to the navbar */
+    .navbar {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      float: right; /* Apply float to align to the right */
+    }
+
+    /* Style the navigation list */
+    .navbar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .navbar li {
+      display: inline;
+      margin-right: 20px;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    /* Content styling */
+    .content {
+      padding: 20px;
+      /* Add some content to see the effect of sticky navigation */
+      height: 800px;
+      background-color: #f4f4f4;
+    }
+  </style>
 </head>
-<style>
-    /* Style the file input container (usually a div or a label) */
-.file-input-container {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-}
-
-/* Style the actual file input element */
-.file-input-container input[type="file"] {
-    position: absolute;
-    font-size: 100px; /* Adjust this value to make the button larger or smaller */
-    opacity: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-}
-
-/* Style the button that replaces the default one */
-.custom-file-button {
-    background-color: #00254d; /* Button background color */
-    color: #fff; /* Button text color */
-    padding: 10px 20px; /* Button padding */
-    border: none; /* Remove border */
-    cursor: pointer;
-}
-
-</style>
 <body>
-
-    <div class="file-input-container">
-        <label class="custom-file-button" for="fileInput">Choose File</label>
-        <input type="file" id="fileInput" name="fileInput">
-    </div>
-    
-
-    
+  <div class="navbar">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+  <div class="content">
+    <!-- Your content goes here -->
+  </div>
 </body>
 </html>

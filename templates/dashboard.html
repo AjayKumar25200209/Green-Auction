@@ -172,9 +172,10 @@
 
             <!-- nav bar  -->
     <div class="nav">
+        
         <h2 class="green"><span style="color: rgb(35, 180, 35);">Green</span>  Auction</h2>
-
         <nav>
+            
             <ul >
                 <a href="{{ url_for('dashboard') }}"><li>Dashboard</li></a>
                 <a href="{{ url_for('myauction') }}"><li>My Auctions</li></a>
@@ -215,7 +216,7 @@
 
 
             <!-- display of each auction -->
-    <div class="content">
+    <div class="content" id="contentt">
         {% if result %}
             {% for x in result %}
             <div class="product"  data-id="ajay1">
@@ -238,7 +239,7 @@
             {% endfor %}
         {% endif %}
         {% if msg %} 
-            <p>{{msg}}</p>
+            <h2>{{msg}}</h2>
         {% endif %}
 
 

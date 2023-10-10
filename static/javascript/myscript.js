@@ -499,19 +499,13 @@ window.addEventListener("load", function(){
         // getting full detail of an auction dashboard
 
 document.addEventListener("DOMContentLoaded", function(){
-    detail=document.querySelectorAll(".more")
-
-    detail.forEach(item=>{
-        item.addEventListener("click", function(event){
-            // setInterval(() => {
-            //     document.querySelector(".blur2").classList.add("remove")
-            //     document.querySelector(".blur2").addEventListener("transioned",function(){
-            //         document.querySelector(".remove").style.display="none"
-            //     })
-                
+    document.getElementById("contentt").addEventListener("click", function(event){
         
-                
-            // }, 1000);
+
+    
+    
+           if(event.target.classList.contains('more')){
+
             main=document.getElementById("details")
             
             blur = document.getElementById("blur")
@@ -538,11 +532,34 @@ document.addEventListener("DOMContentLoaded", function(){
                 }
             })
             .then(data=>{
+                
                 if(data!=="error"){
 
-                
-                    jdata=JSON.parse(data)
                     btt=document.getElementById("getbid2")
+                    jdata=JSON.parse(data)
+                    
+                    if(jdata["status"]=="completed"){
+                        try{
+                            document.querySelector(".ttrack").style.display="block"
+
+                        }
+                        catch{
+
+                        }
+                        document.querySelector(".special").style.display="none"
+                        
+                    }
+                    else if (jdata["status"]=="active"){
+                        try{
+
+                            document.querySelector(".ttrack").style.display="none"
+                        }
+                        catch{
+                            
+                        }
+                        document.querySelector(".special").style.display="block"
+                    }
+                    
                     btt.setAttribute("data-ano" , jdata["ano"])
                     document.getElementById("demo3").innerHTML="Auction No : "+jdata["ano"]+"";
                     document.getElementById("ano").innerHTML=jdata["ano"]
@@ -560,6 +577,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     document.getElementById("quantity").innerHTML=jdata["quantity"]
                     document.getElementById("chbidder").innerHTML=jdata["chbidder"]
                     main.style.display="flex"
+
                     try{
                         track2=document.getElementById("track")
                         track2.setAttribute("data-ano" , jdata["ano"])
@@ -578,14 +596,6 @@ document.addEventListener("DOMContentLoaded", function(){
 
                 }
 
-                
-                
-               
-                
-
-
-
-
             })
             .catch(error=>{
                 document.getElementById("message").innerHTML=error;
@@ -595,16 +605,16 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
             
-
-           
+        }
+    })
            
             
 
-        })
-
-    })
+        
 
 })
+
+
 
 
         // removing the full detail popup and  also blur div
@@ -678,7 +688,12 @@ document.addEventListener("DOMContentLoaded" ,function(){
                 jdata=JSON.parse(data)
                 blur = document.getElementById("blur")
                 blur.style.display="flex";
-                
+                if(jdata["status"]=="completed"){
+                    document.querySelector(".special").style.display="none"
+                }
+                else if (jdata["status"]=="active"){
+                    document.querySelector(".special").style.display="block"
+                }
                 document.getElementById("demo3").innerHTML="Auction No : "+jdata["ano"]+"";
                 document.getElementById("ano").innerHTML=jdata["ano"]
                 document.getElementById("aowner").innerHTML=jdata["aowner"]
@@ -780,6 +795,28 @@ document.addEventListener("DOMContentLoaded", function(){
     document.querySelector(".completed").addEventListener("click", function(){
         document.querySelector(".completed").style.backgroundColor="rgb(94,93,240)";
         document.querySelector(".active").style.backgroundColor="rgb(156, 156, 156)";
+        fetch("/completedmybidding" ,{
+            method:"POST",
+        })
+        .then(res=>{
+            if(res.ok){
+                return res.text()
+            }
+            else{
+                throw "Cannot Able to Fetch the data"
+            }
+        })
+        .then(data=>{
+            document.querySelector(".act").remove();
+            document.querySelector(".content").innerHTML=data
+            
+        })
+        .catch(error=>{
+            blur = document.getElementById("blur")
+            blur.style.zIndex="7"
+            document.getElementById("message").innerHTML=error;
+            document.getElementById("mssg").style.display="block" 
+        })
 
 
     })
@@ -790,6 +827,29 @@ document.addEventListener("DOMContentLoaded", function(){
     document.querySelector(".active").addEventListener("click", function(){
         document.querySelector(".active").style.backgroundColor="rgb(94,93,240)";
         document.querySelector(".completed").style.backgroundColor="rgb(156, 156, 156)";
+        fetch("/activemybidding" ,{
+            method:"POST",
+        })
+        .then(res=>{
+            if(res.ok){
+                return res.text()
+            }
+            else{
+                throw "Cannot Able to Fetch the data"
+            }
+        })
+        .then(data=>{
+            document.querySelector(".act").remove();
+            document.querySelector(".content").innerHTML=data
+            
+        })
+        .catch(error=>{
+            blur = document.getElementById("blur")
+            blur.style.zIndex="7"
+            document.getElementById("message").innerHTML=error;
+            document.getElementById("mssg").style.display="block" 
+        })
+
 
 
     })

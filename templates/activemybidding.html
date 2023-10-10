@@ -12,9 +12,8 @@
                         <p class="pp">Current Price  : {{x["cprice"]}}</p>
                         <p class="pp">Starting Price : {{x["sprice"]}} </p>
                         <p class="pp">District : {{x["district"]}} </p>
-                        <p  style="color: rgb(5, 91, 5); font-size:18px; font-family:Poppins; "   ><b> Status : {{x["status"]}}</b> </p>
                         
-                        
+                        <button id="bidbutton" data-id= {{x.ano}} data-sprice={{x.sprice}} data-cprice={{x.cprice}} class="bidbutton">Bid Now</button>
                         
                     </div><br>
                     <p class="more"  data-ano= {{x.ano}}  id="detail" >For More Details</p>                    
@@ -24,7 +23,7 @@
     {% endif %}
 
     {% if msg %}
-            <p>{{msg}}</p>
+            <h2>{{msg}}</h2>
 
     {% endif %}
 </div>

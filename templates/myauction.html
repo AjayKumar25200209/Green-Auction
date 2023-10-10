@@ -111,6 +111,7 @@
                         <p>District : <span id="district"></span></p>
                         <p>Auction Starting Time : <span id="stime"></span></p>
                         <p>Auction Ending Time: <span id="etime"></span></p>
+                        <p class="ttrack">Track All Bidding</p>
         
                         
                     </div>
@@ -192,7 +193,7 @@
 
             <!-- display my auction details -->
 
-    <div class="content">
+    <div class="content" id="contentt">
         <div class="act" >
 
             {% if result %}
@@ -218,7 +219,7 @@
             {% endif %}
 
             {% if msg %}
-                    <p>{{msg}}</p>
+                    <h2>{{msg}}</h2>
 
             {% endif %}
         </div>

@@ -3,10 +3,7 @@ import mysql.connector
 import json
 import random
 from datetime import datetime,timedelta,date
-from apscheduler.schedulers.background import BackgroundScheduler
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+
 app = Flask(__name__)
 
 days=3
@@ -23,78 +20,17 @@ mydb = mysql.connector.connect(
         host="localhost",
   	    username="root",
   	    password="Ajay@2002",
-        database="greenauction"
-)
+        database="greenauction",
+        pool_name=None,
+        pool_reset_session=None
+    )
 
 mycursor = mydb.cursor(dictionary=True)
 
 
 
 
-def test():
-    try:
-        time=datetime.now().replace(microsecond=0,second=0)
-        timee=time.time()
-        mycursor.execute("select * from auctioninfo where etime<=%s and status='active' " ,(timee,))
-        result=mycursor.fetchall()
-        if result:
-            for x in result:
-                
-                sender_email="ajayjeyapal@gmail.com"
-                recever_email=x["aoemail"]
-                subject="Green Auction"
-                s_password="vxclabpkwfwwjhma"
-                
-                nb=x["nbid"]
-                print(nb)
-                if nb :
-                    data=json.loads(x["biddings"]) 
-                    bidno=f'bidno{x["nbid"]}'
-                    html_content=  f"""
-                                    
-                                    
-                                    <h1>Hi {x["aowner"]} </h1>
-                                    <h3>Auction Number : {x["ano"]}</h3>
-                                    <p>Your Auction was Successfully Completed </p>
-                                    <h3>Auction Winner Contact Details are below</h3>
-                                    <p>Name : {x["chbidder"]} <br>Email Id : {data["bidding"][bidno]["bidderemail"]} <br>Mobile Number : {data["bidding"][bidno]["biddernumber"]}</p>
-                                    <p ></p>"""
-                else:
-                    html_content=  f"""
-                                    
-                                    
-                                    <h1>Hi {x["aowner"]} </h1>
-                                    <h3>Auction Number : {x["ano"]}</h3>
-                                    <p>No One Bidded For Your Auction <br>Dont't Worry Create An another auction and I Hope For The best And thanks for using Our Website   </p>"""
-                                    
-                            
-                
 
-                message=MIMEMultipart()
-                message["from"]=sender_email
-                message["to"]=recever_email
-                message["subject"]=subject
-                message.attach(MIMEText(html_content,"html"))
-
-                smtp_server="smtp.gmail.com"
-                port = 587
-
-                server=smtplib.SMTP(smtp_server,port)
-                server.starttls()
-                server.login(sender_email,s_password)
-                server.sendmail(sender_email,recever_email,message.as_string())
-                server.quit()
-                print("its working")
-                mycursor.execute("update auctioninfo set status='completed' where ano=%s" ,(x["ano"],))
-                mydb.commit()
-        else:
-                print("There is no auction to send email in this minute" ,timee)
-    except Exception as e:
-        print(e)
-    
-sched=BackgroundScheduler()
-job=sched.add_job(test,"interval",minutes=1)
-sched.start()
 
 
 
@@ -106,7 +42,9 @@ def dashboard():
         if session.get('uemail') is not None :
             
             try:
-                mycursor.execute("select * from auctioninfo where status='active' " )
+                mycursor.execute("SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED")
+
+                mycursor.execute("select * from auctioninfo where status='active'; " )
 
                 result = mycursor.fetchall()
                 
@@ -119,8 +57,15 @@ def dashboard():
                     data=x["ano"]
                     array.append(data)
                 
+                msg="No auction is Currently Active"
+                if result:
+                    return render_template("dashboard.html",result=result)
+                else:
+                    return render_template("dashboard.html",result=result ,msg=msg) 
+                     
+                    
+
                 
-                return render_template("dashboard.html",result=result) 
                 
             except Exception as e:
                 print("error : ",e)
@@ -223,7 +168,7 @@ def completedmyauction():
                 if result:
                     return render_template("completedmyauction.html",result=result) 
                 else:
-                    msg="No auction is Currently Active"
+                    msg="No auction is Currently Completed"
                     return render_template("completedmyauction.html",msg=msg)
                 
                 
@@ -531,6 +476,8 @@ def getfulldetail():
     else:
         return redirect(url_for("sessioncheck"))
     
+    
+    # getting the bidded auction info 
 @app.route( '/My_Bidding', methods=["GET",  "POST"] )
 def mybidding():
     if request.method=="GET":
@@ -538,15 +485,26 @@ def mybidding():
             #datee=date.today()
             session["array2"]=[]
             array2=session["array2"]
+            session["array4"]=[]
+            array4=session["array4"]
             try:
-                mycursor.execute("select * from mybiddinginfo where bidderemail=%s ",( session["uemail"] ,) )
+                mycursor.execute("select * from mybiddinginfo where bidderemail=%s",( session["uemail"] ,) )
                 result1=mycursor.fetchall()
                 for x in result1:
-                    mycursor.execute("select * from auctioninfo where ano=%s",(x["ano"],))
+                    mycursor.execute("select * from auctioninfo where ano=%s and status='active' ",(x["ano"],))
                     result2=mycursor.fetchone()
-                    array2.append(result2)
+                    if result2:
+                        array2.append(result2)
+                    else:
+                        array4.append(result2)
                 array2.reverse()
-                return render_template("mybidding.html",array2=array2)
+                
+                if array2:
+                    return render_template("mybidding.html",array2=array2)
+                else:
+                    msg="No action is Currently Active that you have Bidded"
+                    return render_template("mybidding.html" ,msg=msg)
+                    
                 
             except Exception as e:
                 msg=f"Error {e}"
@@ -555,6 +513,79 @@ def mybidding():
         else:
             msg="Sorry Something went Wrong Please try again later"
             return redirect(url_for("sessioncheck"))
+        
+@app.route( '/completedmybidding', methods=["GET",  "POST"] )
+def completedmybidding():
+    if request.method=="POST":
+        if session.get('uemail') is not None:
+            #datee=date.today()
+            session["array2"]=[]
+            array2=session["array2"]
+            session["array4"]=[]
+            array4=session["array4"]
+            try:
+                mycursor.execute("select * from mybiddinginfo where bidderemail=%s",( session["uemail"] ,) )
+                result1=mycursor.fetchall()
+                for x in result1:
+                    mycursor.execute("select * from auctioninfo where ano=%s and status='completed' ",(x["ano"],))
+                    result2=mycursor.fetchone()
+                    if result2:
+                        array2.append(result2)
+                    else:
+                        array4.append(result2)
+                array2.reverse()
+                
+                if array2:
+                    return render_template("completedmybidding.html",array2=array2)
+                else:
+                    msg="No action is Currently Completed that you have Bidded"
+                    return render_template("completedmybidding.html" ,msg=msg)
+                    
+                
+            except Exception as e:
+                msg=f"Error {e}"
+                
+                return render_template("completedmybidding.html",msg=msg)
+        else:
+            msg="Sorry Something went Wrong Please try again later"
+            return redirect(url_for("sessioncheck"))
+        
+@app.route( '/activemybidding', methods=["GET",  "POST"] )
+def activemybidding():
+    if request.method=="POST":
+        if session.get('uemail') is not None:
+            #datee=date.today()
+            session["array2"]=[]
+            array2=session["array2"]
+            session["array4"]=[]
+            array4=session["array4"]
+            try:
+                mycursor.execute("select * from mybiddinginfo where bidderemail=%s",( session["uemail"] ,) )
+                result1=mycursor.fetchall()
+                for x in result1:
+                    mycursor.execute("select * from auctioninfo where ano=%s and status='active' ",(x["ano"],))
+                    result2=mycursor.fetchone()
+                    if result2:
+                        array2.append(result2)
+                    else:
+                        array4.append(result2)
+                array2.reverse()
+                
+                if array2:
+                    return render_template("activemybidding.html",array2=array2)
+                else:
+                    msg="No action is Currently Active that you have Bidded"
+                    return render_template("activemybidding.html" ,msg=msg)
+                    
+                
+            except Exception as e:
+                msg=f"Error {e}"
+                
+                return render_template("activemybidding.html",msg=msg)
+        else:
+            msg="Sorry Something went Wrong Please try again later"
+            return redirect(url_for("sessioncheck"))
+        
 @app.route( '/Profile', methods=["GET",  "POST"] )
 def profile():
     if session.get('uemail') is not None:

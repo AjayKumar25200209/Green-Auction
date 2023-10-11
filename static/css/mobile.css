@@ -1,16 +1,11 @@
+@media only screen and (max-width: 600px) {
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-@media only screen and (min-width:992px){
-
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
     
-
-
-    
-
     .image1{
         position: absolute;
         border: 1px solid rgb(255, 255, 255) ;
@@ -18,48 +13,84 @@
         padding: 20px;
         width: 50%;
         right: 0;
+    
+    
+        
+        
+        
+        
+    }
 
+    
 
+    .uul{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        margin-top: 30px;
+    }
+    .navbar{
+        display: block;
+        width: 200px;
+        height: 100%;
+        background-color: rgb(127, 167, 255);
+        position: fixed;
+        left: -200px;
+        z-index: 2;
+        top: 0;
+        list-style: none;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        transition:left 0.75s ease;
+        
+    }
+    
+    .menu{
+        position: absolute;
+        top: 5px;
+        z-index: 1;
+        left: 5px;
 
-
+    }
+    .menu:hover + .navbar , .navbar:hover{
+        left: 0px;
 
 
     }
+    .hide{
+        display: none;
+    }
+  
+    
 
-    img{
 
+    
+    
+    .img{
+        
         border: 1px solid rgb(255, 255, 255);
         height: 500px;
         width: 100%;
         height: 100%;
         z-index: 0;
     }
-
+    
     .container1{
         flex-direction: column;
         display: flex;
         margin-top: 30vh;
-
+        
         position: absolute;
         left: 5%;
         border: 0px solid black;
         width: 50%;
         height: auto;
+       
     
-
     }
-    .navbar{
-        display: none;
-    }
-    .menu{
-        display: none;
-    }
-
-    .hide1{
-        display: none;
-    }
-
-
+    
+    
     .register{
         border: 0px solid black;
         height: 40px;
@@ -71,15 +102,15 @@
         border-radius: 20px;
         cursor: pointer;
         font-size: 15px;
-
-
+    
+    
     }
-
+    
     .register1{
         border-radius: 15px;
         flex-direction: column;
         flex-wrap: wrap;
-
+        
         left:50%;
         right:50%;
         transform: translate(-50%);
@@ -100,28 +131,28 @@
         overflow:auto;
         padding: 10px;
         padding-bottom: 20px;
-
-
-
-
+        
+        
+        
+    
     }
-
+    
     .register2{
-
+        
         position: fixed;
         align-items: center;
         justify-content: center;
         display: none;
-
+        
         width: 100%;
-
+        
         height: 100%;
         background-color: rgba(179, 179, 179, 0.421);
         z-index: 2;
-
+    
     }
-
-
+    
+    
     .login{
         border-radius: 15px;
         flex-direction: column;
@@ -142,11 +173,11 @@
         z-index: 3;
         min-width: 300px;
         overflow:auto
-
-
-
+        
+        
+    
     }
-
+    
     .loading{
         position: absolute;
         top: 50%;
@@ -154,36 +185,37 @@
         transform: translate(-50%,-50%);
         border: 0px;
         border-radius: 10px;
-
+    
         display: none;
         max-width: 400px;
         width: 40%;
         height: auto;
         z-index: 5;
     }
-
+    
     .load{
         border: 0px;
         border-radius: 10px;
     }
-
-
-
+    
+    
+    
     .nav{
-
+    
         top: -1px;
         border: 0px solid red;
         position: sticky;
         background-color: white;
         z-index: 3;
         height:50px;
-
-
+        display: none;
+        
+        
     }
-
-
-
-    ul {
+    
+    
+    
+    .ul {
         flex-wrap: wrap;
         width: auto;
         display: flex;
@@ -194,9 +226,9 @@
         position: absolute;
         right: 30px;
         top: 0px;
-
-
-
+    
+    
+    
     }
     ul a{
         font-size: 17px;
@@ -206,19 +238,24 @@
         font-family: 'DM Sans', sans-serif;
         font-family: 'Poppins', sans-serif;
     }
-
-    .green{
-        margin-top: 30px;
-        justify-content: flex-start;
-        margin-left: 20px; 
-
+    
+    .mgreen{
+        margin-top: 5px;
+        margin-left: 60px; 
+        font-size: 20px;
+        min-width: 70px;
+        max-width: 200px;
+        border: 0px solid red;
+        z-index: -1;
+        
+        
     }
-
-
+    
+    
     .search{
-
+        
         position: relative;
-        margin-top: 0px;
+        margin-top: 100px;
         border: 0px solid rgb(255, 255, 255);
         width: auto;
         min-height: 100px;
@@ -232,8 +269,8 @@
         font-family: 'Poppins', sans-serif;
         font-size: 15px;
         margin-left: 20px;
-
-
+    
+    
     }
     .ausearch2{
         text-align: center;
@@ -243,20 +280,20 @@
         height: 40px;
         font-family: 'Poppins', sans-serif;
         font-size: 15px;
-
-
+    
+    
     }
-
+    
     .sl{
         font-family: 'Poppins', sans-serif;
         font-weight: 500;
-
+    
         margin-left: 20px;
         margin-top: 10px;
-
+    
     }
-
-    .addauc{
+    
+    .addauc {
         top: 29px;
         right: 20px;
         position: absolute;
@@ -270,9 +307,31 @@
         font-size: 15px;
         width: 150px;
         text-align: center;
-
+        display: none;
+    
     }
+    .addu{
+        top: 29px;
+        right: 20px;
+        position: absolute;
+        border: 0px;
+        height: 40px;
 
+        cursor: pointer;
+        width: 50px;
+        display: block;
+    
+    }
+    .mbar{
+        position: absolute;
+        top: 5px;
+        display: flex;
+        flex-direction: row;
+        border: 0px solid red;
+        right: 10px;
+        gap: 10px;
+    }
+    
     .sbut{
         height: 40px;
         border: 0;
@@ -285,7 +344,7 @@
         width: 150px;
         text-align: center;
     }
-
+    
     .filter1{
         position: absolute;
         top: 30px;
@@ -296,30 +355,14 @@
         height: 40px;
         font-family: 'Poppins', sans-serif;
         font-size: 15px;
-
+    
     }
-
-    .filter{
-        position: absolute;
-        top: 29px;
-        right: 200px;
-        text-align: center;
-        min-width: 50px;
-        width: 150px;
-        height: 40px;
-        font-family: 'Poppins', sans-serif;
-        font-size: 15px;
-        border: 0;
-        color: aliceblue;
-        background-color:rgb(94,93,240);
-        font-family: 'Poppins', sans-serif;
-        border-radius: 20px;
-
-    }
-
+    
+    
+    
     .product{
         box-shadow: 1px 1px  6px rgb(0, 0, 0);
-
+    
         position: relative;
         align-items: center;
         justify-content: center;
@@ -327,15 +370,15 @@
         display: flex;
         margin-top: 20px;
         border: 0px solid black;
-        min-width: 300px;
-        width: 20%;
+        min-width: 250px;
+        width: 300px;
         height: auto;
         padding: 10px;
         border-radius: 10px;
-
-
+        
+        
     }
-
+    
     .product1{
         align-items: center;
         flex-direction: column;
@@ -346,11 +389,11 @@
         height: auto;
         border-radius: 10px;
         gap: 7px;
-
-
+        
+        
     }
     .content{
-
+        
         justify-content: center;
         gap: 20px;
         display: flex;
@@ -360,10 +403,10 @@
         border: 0px solid black;
         width: 100%;
         min-height: auto;
-
+        
     }
     .act{
-
+        
         padding: 20px;
         justify-content: center;
         gap: 20px;
@@ -374,8 +417,8 @@
         width: 100%;
         min-height: auto;
     }
-
-
+    
+    
     .pimage{
         border: 0px solid red;
         width: 80%;
@@ -383,7 +426,7 @@
         border-radius: 10px;
         min-height: 150px;
     }
-
+    
     .bidbutton{
         height: 40px;
         border: 0;
@@ -395,9 +438,9 @@
         font-size: 15px;
         width: 100px;
         text-align: center;
-
+    
     }
-
+    
     .bidbutton3{
         height: 40px;
         border: 0;
@@ -409,7 +452,7 @@
         font-size: 15px;
         width: 100px;
         text-align: center;
-
+    
     }
     .bidbutton4{
         height: 40px;
@@ -422,9 +465,9 @@
         font-size: 15px;
         width: 100px;
         text-align: center;
-
+    
     }
-
+    
     .bidbutton5{
         height: 40px;
         border: 0;
@@ -436,9 +479,9 @@
         font-size: 15px;
         width: 100px;
         text-align: center;
-
+    
     }
-
+    
     .bidbutton2{
         height: 40px;
         border: 0;
@@ -450,9 +493,9 @@
         font-size: 18px;
         width: 90px;
         text-align: center;
-
+    
     }
-
+    
     .blur{
         display: none;
         position: fixed;
@@ -464,7 +507,7 @@
         left: 0;
         z-index: 5;
     }
-
+    
     .biddingc{
         border: 0px solid white;
         gap: 10px;
@@ -483,15 +526,15 @@
         flex-direction: column;
         align-items: center;
         box-shadow: 3px 3px  20px rgb(0, 0, 0);
-
-
+    
+    
     }
-
+    
     .filter3{
         border: 0px solid red;
         display: none;
-        width: 25vw;
-        min-width: 350px;
+        width: 25%;
+        min-width: 300px;
         background-color: white;
         position: fixed;
         left: 50%;
@@ -504,11 +547,11 @@
         padding-top: 20px;
         padding-bottom: 20px;
         z-index: 5;
-
+    
     }
-
+    
     .filterform{
-
+        
         border: 0px solid blue;
         width: 70%;
         display: flex;
@@ -516,29 +559,34 @@
         flex-direction: column;
         gap: 10px;
     }
-
+    
     .more{
-        margin-right: 70px;
+        position: absolute;
         cursor: pointer;
         color: blue;
         width: 200px;
+        bottom: 10px;
+        left: 10px;
     }
-
+    
     .close2{
         position: absolute;
-        right: 4%;
+        right: 3%;
         top: 1%;
         cursor: pointer;
     }
-
+    .close12{
+        position: absolute;
+        right: 2%;
+        top: 1%;
+        cursor: pointer;
+    }
+    
     .createauction{
-
-         border: 0px solid rgb(0, 0, 0);
          box-shadow: 3px 3px  20px rgb(0, 0, 0);
 
+         border: 0px solid rgb(0, 0, 0);
          gap: 10px;
-         padding-left: 50px;
-         padding-right: 50px;
          padding-bottom: 20px;
          background-color: rgb(255, 255, 255);
          border-radius: 10px;
@@ -547,37 +595,41 @@
          left: 50%;
          transform: translate(-50%,-50%);
          display:none;
-         min-width: 25%;
+         width:90%;
+         max-width: 400px;
          z-index: 6;
          flex-direction: column;
          align-items: center;
-         margin-top: 20px;
-
-
-
-
+         margin-top: 0px;
+        
+        
+    
     }
     ::placeholder{
         font-family: 'Poppins', sans-serif;
-
-
+    
+    
     }
-
+    
     .cform{
         font-family: 'Poppins', sans-serif;
-
+    
         border: 0px solid red;
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 100%;
+        width: 80%;
+        min-width:200px;
+        max-width: 300px;
         gap: 10px;
     }
+    
+  
 
-    .type1{
+    .mtype1{
         text-align: center;
         border: 1px solid rgb(0, 0, 0);
-        width: 309px;
+        width: 100%;
         height: 40px;
         font-family: 'Poppins', sans-serif;
         font-size: 15px;
@@ -599,7 +651,7 @@
         font-size: 15px;
     }
     .type3{
-
+        
         text-align: center;
         border: 1px solid rgb(0, 0, 0);
         min-width: 309px;
@@ -607,17 +659,17 @@
         font-family: 'Poppins', sans-serif;
         font-size: 15px;
     }
-
-    .type2{
-
+    
+    /* .type2{
+        
         border: 0px solid rgb(255, 0, 0);
-        width: 309px;
+        width: 100%;
         height: auto;
         font-family: 'Poppins', sans-serif;
-        font-size: 15px;
-    }
-
-    .type4{
+        font-size: 17px;
+    } */
+    
+    /* .type4{
         display: flex;
         align-items: center;
         justify-content: center;
@@ -626,13 +678,24 @@
         height: auto;
         font-family: 'Poppins', sans-serif;
         font-size: 15px;
-    }
-
+    } */
+    
     .type5{
         background-color:rgb(94,93,240);
         text-align: center;
         border: 0px solid green;
-        width: 390px;
+        width: 50%;
+        height: 40px;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+        padding-top: 9px;
+    }
+
+    .mtype5{
+        background-color:rgb(94,93,240);
+        text-align: center;
+        border: 0px solid green;
+        width: 100%;
         height: 40px;
         color: rgb(255, 255, 255);
         cursor: pointer;
@@ -647,17 +710,17 @@
         color: rgb(255, 255, 255);
         cursor: pointer;
         font-family: 'Poppins', 'sans-serif';
-
+        
         font-size: 16px;
     }
-
+    
     textarea{
         border: 1px solid rgb(0, 0, 0);
-
-
+    
+    
     }
-
-
+    
+    
     .detail{
         border: 0px solid rgb(255, 0, 251);
         gap: 10px;
@@ -676,9 +739,9 @@
         flex-direction: column;
         align-items: center;
         padding-bottom: 50px;
-
+    
     }
-
+    
     .full{
         border: 0px solid rgb(0, 7, 107);
         width: 100%;
@@ -686,9 +749,9 @@
         font-family:  'Poppins', sans-serif;
         padding-left: 70px;
         padding-bottom: 20px;
-
+    
     }
-
+    
     .msg{
         left: 50%;
         top: 50%;
@@ -706,13 +769,13 @@
         padding-right: 30px;
         font-family:  'Poppins', sans-serif;
         box-shadow: 3px 3px  20px rgb(0, 0, 0);
-
-
-
+    
+    
+    
     }
     .mssg{
         box-shadow: 3px 3px  20px rgb(0, 0, 0);
-
+    
         left: 50%;
         top: 50%;
         transform: translate(-50%,-50%);
@@ -728,10 +791,10 @@
         padding-left: 30px;
         padding-right: 30px;
         font-family:  'Poppins', sans-serif;
-
-
+    
+    
     }
-
+    
     .actmsg{
         width: 100%;
         height: 100%;
@@ -742,21 +805,21 @@
         border: 0px solid black;
         gap: 10px;
         text-align: center;
-
+        
     }
-
+    
     .track{
         text-decoration: underline;
         cursor: pointer;
         color: rgb(7, 7, 158);
     }
-
+    
     .ttrack{
         text-decoration: underline;
         cursor: pointer;
         color: rgb(7, 7, 158);
     }
-
+    
     .trackdetail{
         display: none;
         position: fixed;
@@ -770,9 +833,9 @@
         background-color: white;
         box-shadow: 3px 3px  20px rgb(0, 0, 0);
         border-radius: 10px;
-
+    
     }
-
+    
     .overtrack{
         border-radius: 10px;
         display: flex;
@@ -786,11 +849,11 @@
         align-items: center;
         flex-direction: column;
         gap: 20px;
-
-
-
+        
+    
+    
     }
-
+    
     .parent{
         width: 100%;
         border: 0px solid red;
@@ -801,10 +864,10 @@
         padding: 0 10px;
         flex-wrap: wrap;
         justify-content: center;
-
-
+    
+        
     }
-
+    
     .cate{
         border: 0px solid red;
         width: 100%;
@@ -815,7 +878,7 @@
         justify-content: center;
         align-items: center;
     }
-
+    
     .active{
         height: 40px;
         border: 0;
@@ -827,9 +890,9 @@
         font-size: 15px;
         width: 100px;
         text-align: center;
-
+    
     }
-
+    
     .completed{
         height: 40px;
         border: 0;
@@ -842,8 +905,8 @@
         width: 100px;
         text-align: center;
     }
-
-
+    
+    
     .maactive{
         height: 40px;
         border: 0;
@@ -855,9 +918,9 @@
         font-size: 15px;
         width: 100px;
         text-align: center;
-
+    
     }
-
+    
     .macompleted{
         height: 40px;
         border: 0;
@@ -870,7 +933,7 @@
         width: 100px;
         text-align: center;
     }
-
+    
     .profile{
         border: 0px solid red;
         width: 100%;
@@ -881,9 +944,9 @@
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-
+    
     }
-
+    
     .ppro{
         display: flex;
         flex-wrap: wrap;
@@ -895,16 +958,16 @@
         word-wrap: break-word;
         border: 0px solid black;
         word-break: break-all;
+       
     
-
-
+    
     }
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
     /* .blur2{
         display: flex;
         position: fixed;
@@ -917,8 +980,8 @@
         align-items: center;
         justify-content: center;
         transition: opacity 0.5s, visibility 0.5s;
-
-
+    
+    
     }
     .blur2::after{
         content: "";
@@ -929,24 +992,26 @@
         border-top-color: transparent;
         border-radius: 50%;
         animation: loader 0.75s ease infinite ;
-
-
+        
+    
     }
-
+    
     @keyframes loader{
         from{transform: rotate(0turn)}
-
+    
         to{transform: rotate(1turn)}
-
+        
     }
-
+    
     .remove{
         opacity: 0;
         visibility: hidden;
-
-
+        
+        
     } */
+    
+    
+    
 
+    
 }
-
-

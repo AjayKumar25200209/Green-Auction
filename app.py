@@ -654,9 +654,165 @@ def track():
             print(e)
             return f"Error happend so please try again later {e} "
         
-
+        # filter the data 
+@app.route( '/filter', methods=["GET",  "POST"] )
+def filter():
+    if request.method=="POST":
+        try:
+            product=request.form.get("productname")
+            quantity=request.form.get("quantity")
+            disrict=request.form.get("district")
+            qfilter=request.form.get("qfilter")
+            if not qfilter and not quantity and not product and not disrict:
+                print(disrict)
+                return "Please Enter Any Detail"
+            elif qfilter and quantity :
+                
+                if  product  and disrict:
+                    if qfilter=="less":
+                        mycursor.execute("select * from auctioninfo where pname=%s and district=%s and quantity<%s and status='active' " , (product,disrict,quantity))
+                        result=mycursor.fetchall()
+                        if result:
+                            return render_template("filter.html",result=result)
+                        else:
+                            msg="No Auction is Currently Active With The Given Filter"
+                            return render_template("filter.html",result=result ,msg=msg)
+                    elif qfilter=="greater":
+                        mycursor.execute("select * from auctioninfo where pname=%s and district=%s and quantity>%s and status='active' " , (product,disrict,quantity))
+                        result=mycursor.fetchall()
+                        if result:
+                            return render_template("filter.html",result=result)
+                        else:
+                            msg="No Auction is Currently Active With The Given Filter"
+                            return render_template("filter.html",result=result ,msg=msg)
+                    elif qfilter=="equal":
+                        mycursor.execute("select * from auctioninfo where pname=%s and district=%s and quantity=%s and status='active' " , (product,disrict,quantity))
+                        result=mycursor.fetchall()
+                        if result:
+                            return render_template("filter.html",result=result)
+                        else:
+                            msg="No Auction is Currently Active With The Given Filter"
+                            return render_template("filter.html",result=result ,msg=msg)
+                elif not product and not disrict:
+                    if qfilter=="less":
+                        mycursor.execute("select * from auctioninfo where  quantity<%s and status='active' " , (quantity,))
+                        result=mycursor.fetchall()
+                        if result:
+                            return render_template("filter.html",result=result)
+                        else:
+                            msg="No Auction is Currently Active With The Given Filter"
+                            return render_template("filter.html",result=result ,msg=msg)
+                    elif qfilter=="greater":
+                        mycursor.execute("select * from auctioninfo where  quantity>%s  and status='active' " , (quantity,))
+                        result=mycursor.fetchall()
+                        if result:
+                            return render_template("filter.html",result=result)
+                        else:
+                            msg="No Auction is Currently Active With The Given Filter"
+                            return render_template("filter.html",result=result ,msg=msg)
+                    elif qfilter=="equal":
+                        mycursor.execute("select * from auctioninfo where  quantity=%s  and status='active'" , (quantity,))
+                        result=mycursor.fetchall()
+                        if result:
+                            return render_template("filter.html",result=result)
+                        else:
+                            msg="No Auction is Currently Active With The Given Filter"
+                            return render_template("filter.html",result=result ,msg=msg)
+                elif  product and not disrict:
+                    if qfilter=="less":
+                        mycursor.execute("select * from auctioninfo where pname=%s and quantity<%s and status='active' " , (product,quantity))
+                        result=mycursor.fetchall()
+                        if result:
+                            return render_template("filter.html",result=result)
+                        else:
+                            msg="No Auction is Currently Active With The Given Filter"
+                            return render_template("filter.html",result=result ,msg=msg)
+                    elif qfilter=="greater":
+                        mycursor.execute("select * from auctioninfo where pname=%s and quantity>%s and status='active' " , (product,quantity))
+                        result=mycursor.fetchall()
+                        if result:
+                            return render_template("filter.html",result=result)
+                        else:
+                            msg="No Auction is Currently Active With The Given Filter"
+                            return render_template("filter.html",result=result ,msg=msg)
+                    elif qfilter=="equal":
+                        mycursor.execute("select * from auctioninfo where pname=%s and  quantity=%s and status='active' " , (product,quantity))
+                        result=mycursor.fetchall()
+                        if result:
+                            return render_template("filter.html",result=result)
+                        else:
+                            msg="No Auction is Currently Active With The Given Filter"
+                            return render_template("filter.html",result=result ,msg=msg)
+                elif  not product  and disrict:
+                    
+                    if qfilter=="less":
+                        mycursor.execute("select * from auctioninfo where  district=%s and quantity<%s and status='active' " , (disrict,quantity))
+                        result=mycursor.fetchall()
+                        if result:
+                            return render_template("filter.html",result=result)
+                        else:
+                            msg="No Auction is Currently Active With The Given Filter"
+                            return render_template("filter.html",result=result ,msg=msg)
+                    elif qfilter=="greater":
+                        mycursor.execute("select * from auctioninfo where  district=%s and quantity>%s  and status='active'" , (disrict,quantity))
+                        result=mycursor.fetchall()
+                        if result:
+                            return render_template("filter.html",result=result)
+                        else:
+                            msg="No Auction is Currently Active With The Given Filter"
+                            return render_template("filter.html",result=result ,msg=msg)
+                    elif qfilter=="equal":
+                        mycursor.execute("select * from auctioninfo where  district=%s and quantity=%s and status='active' " , (disrict,quantity))
+                        result=mycursor.fetchall()
+                        if result:
+                            return render_template("filter.html",result=result)
+                        else:
+                            msg="No Auction is Currently Active With The Given Filter"
+                            return render_template("filter.html",result=result ,msg=msg)
+                     
+            
+            elif not qfilter and not quantity:
+                if product and disrict:
+                    mycursor.execute("select * from auctioninfo where  district=%s and pname=%s and status='active' " , (disrict,product))
+                    result=mycursor.fetchall()
+                    if result:
+                        return render_template("filter.html",result=result)
+                    else:
+                        msg="No Auction is Currently Active With The Given Filter"
+                        return render_template("filter.html",result=result ,msg=msg)
+                    
+               
+                elif  product and not disrict:
+                    mycursor.execute("select * from auctioninfo where pname=%s and status='active' " , (product,))
+                    result=mycursor.fetchall()
+                    if result:
+                        return render_template("filter.html",result=result)
+                    else:
+                        msg="No Auction is Currently Active With The Given Filter"
+                        return render_template("filter.html",result=result ,msg=msg)
+                        
+                elif not product and  disrict:
+                    mycursor.execute("select * from auctioninfo where  district=%s and status='active' " , (disrict,))
+                    result=mycursor.fetchall()
+                    if result:
+                        return render_template("filter.html",result=result)
+                    else:
+                        msg="No Auction is Currently Active With The Given Filter"
+                        return render_template("filter.html",result=result ,msg=msg)
+            elif not qfilter and quantity:
+                return "select quantity Filter"    
+            elif qfilter and not quantity:
+                return " Enter the quantity Details"       
+                
+            
+                
+        except Exception as e:
+            print(e)
+            return "error"
+    else:
+        return redirect(url_for("sessioncheck"))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True ,host="0.0.0.0" )
     
     

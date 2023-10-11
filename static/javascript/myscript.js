@@ -9,7 +9,7 @@ function myfun(){
 }
 
 
-function login2() {
+function login2(){
     
 
 
@@ -648,6 +648,23 @@ function back9(){
 
 }
 
+    //  filter addEventListener button
+document.addEventListener("DOMContentLoaded", function(){
+    document.querySelector(".filter").addEventListener("click" , function(){
+        document.querySelector(".filter3").style.display="flex"
+
+        console.log("okokopkl")
+    })
+})
+
+    //  filter addEventListener button for mobile
+    document.addEventListener("DOMContentLoaded", function(){
+        document.querySelector(".mfilter").addEventListener("click" , function(){
+            document.querySelector(".filter3").style.display="flex"
+    
+            console.log("okokopkl")
+        })
+    })
 
             // getting the specific auction details
 document.addEventListener("DOMContentLoaded" ,function(){
@@ -671,17 +688,17 @@ document.addEventListener("DOMContentLoaded" ,function(){
         .then(data=>{
             if (data=="No Data in This Auction Number"){
 
-                blur = document.getElementById("blur")
-                blur.style.zIndex="7"
-                document.getElementById("message").innerHTML=data;
-                document.getElementById("mssg").style.display="block"
+                blur = document.getElementById("blur9")
+                blur.style.display="flex";
+                document.getElementById("messsage").innerHTML=data;
+                document.getElementById("msssg").style.display="block"
 
             }
             else if (data=="Please try again later"){
-                blur = document.getElementById("blur")
-                blur.style.zIndex="7"
-                document.getElementById("message").innerHTML=data;
-                document.getElementById("mssg").style.display="block"
+                blur = document.getElementById("blur9")
+                blur.style.display="flex";
+                document.getElementById("messsage").innerHTML=data;
+                document.getElementById("msssg").style.display="block"
 
             }
             else{
@@ -718,10 +735,10 @@ document.addEventListener("DOMContentLoaded" ,function(){
             
         })
         .catch(error=>{
-            blur = document.getElementById("blur")
+            blur = document.getElementById("blur9")
             blur.style.zIndex="7"
-            document.getElementById("message").innerHTML=error;
-            document.getElementById("mssg").style.display="block"
+            document.getElementById("messsage").innerHTML=error;
+            document.getElementById("msssg").style.display="block"
         })
         
     })
@@ -735,6 +752,21 @@ document.addEventListener("DOMContentLoaded", function(){
         blur = document.getElementById("blur")
         blur.style.zIndex="5"
         document.getElementById("mssg").style.display="none"
+        document.getElementById("searchform").value=""
+
+
+
+
+    })
+})
+    //    message from search an auction
+document.addEventListener("DOMContentLoaded", function(){
+
+
+    document.getElementById("ookok").addEventListener("click", function(){
+        blur9 = document.getElementById("blur9")
+        blur9.style.display="none"
+        document.getElementById("msssg").style.display="none"
         document.getElementById("searchform").value=""
 
 
@@ -786,8 +818,11 @@ function back0(){
     document.getElementById("blur").style.zIndex=5
     parent=document.getElementById("parent")
     parent.removeChild(pelement)
-    console.log("okok da venna")
 
+}
+
+function back11(){
+    document.querySelector(".filter3").style.display="none"
 }
 
         // completed button addEventListener in mybidding.html
@@ -854,6 +889,52 @@ document.addEventListener("DOMContentLoaded", function(){
 
     })
 })
+            // filter and load the content in dashboard
+document.addEventListener("DOMContentLoaded", function(){
+    document.querySelector(".filterform").addEventListener("submit", function(event){
+        event.preventDefault();
+        filterform = document.querySelector(".filterform")
+        fetch("/filter" , {
+            method:"POST",
+            body: new FormData(filterform)
+        })
+        .then(res=>{
+            if(res.ok){
+                return res.text()
+            }
+            else{
+                throw "cannot able to filter "
+            }
+        })
+        .then(data=>{
+            if(data=="Please Enter Any Detail"){
+                document.getElementById("fill").innerHTML=data
+            }
+            else if(data=="Enter the quantity Details"){
+                document.getElementById("fill").innerHTML=data
+            }
+            else if(data=="select quantity Filter"){
+                document.getElementById("fill").innerHTML=data
+            }
+            else if(data=="error"){
+                document.getElementById("fill").innerHTML="something Went Wrong Please Try Again"
+            }
+            
+            else{
+                document.querySelector(".filter3").style.display="none"
+                document.querySelector(".type7").value=""
+                document.querySelector(".act").remove()
+                document.getElementById("contentt").innerHTML=data
+
+            }
+        })
+        .catch(error=>{
+            document.getElementById("fill").innerHTML=error
+
+        })
+
+    })
+})
 
 
             //    completed button addEventListener in myauction.html
@@ -915,6 +996,14 @@ document.addEventListener("DOMContentLoaded", function(){
         })
 
 
+    })
+})
+
+
+// nav 
+document.addEventListener("DOMContentLoaded" ,function(){
+    document.querySelector(".close7").addEventListener("click", function(){
+        document.querySelector(".navbar").style.left="-200px"
     })
 })
 

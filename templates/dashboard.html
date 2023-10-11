@@ -6,6 +6,8 @@
     <title>Green Auction</title>
     <link rel="icon" href="/static/images/sprout.png" type="icon">
     <link rel="stylesheet" href="/static/css/mystyle.css">
+    <link rel="stylesheet" href="/static/css/mobile.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
@@ -99,6 +101,9 @@
     <div class="blur" id="blur">
 
     </div>
+    <div class="blur" id="blur9">
+
+    </div>
     <div class=" blur2">
 
     </div>
@@ -147,7 +152,7 @@
 
             <!-- getting the bidding ammount  -->
     <div class="biddingc" id="bidding">
-        <span class="material-symbols-outlined close2" onclick="back5()" >close</span>
+        <span class="material-symbols-outlined close7" onclick="back5()" >close</span>
 
         <h2 style="margin-top: 30px;" id="demo2" ></h2>
         <p id="cprice" class="pp"></p>
@@ -170,13 +175,39 @@
         <button class="bidbutton2" data-ano="" id="getbid2" type="submit">Bid</button>
     </div>
 
+
+        <!-- mobile nav bar -->
+        <div class="menu"> 
+            <span><img src="/static/images/menu.svg"   width="40px" alt=""></span>
+        </div>
+        
+        
+
+        <div class="navbar">
+            
+
+            <ul class="uul" type="none" >
+                <h3>Menu</h3>
+                <a href="{{ url_for('dashboard') }}"><li>Dashboard</li></a>
+                <a href="{{ url_for('myauction') }}"><li>My Auctions</li></a>
+                <a href="{{ url_for('mybidding') }}"><li>My Biddings</li></a>
+
+                <a href="{{url_for('profile')}}"><li>Profile</li></a>
+                <a href="{{url_for('about')}}"><li>About</li></a>
+                <a href="{{ url_for('logout') }}"><li>Logout</li></a>
+            </ul>
+
+
+        </div>
+
+
             <!-- nav bar  -->
     <div class="nav">
         
         <h2 class="green"><span style="color: rgb(35, 180, 35);">Green</span>  Auction</h2>
         <nav>
             
-            <ul >
+            <ul class="ul" >
                 <a href="{{ url_for('dashboard') }}"><li>Dashboard</li></a>
                 <a href="{{ url_for('myauction') }}"><li>My Auctions</li></a>
                 <a href="{{ url_for('mybidding') }}"><li>My Biddings</li></a>
@@ -188,7 +219,7 @@
         </nav>
     </div>
             <!-- auction search section -->
-    <div class="search">
+    <div class="search hide" >
         <form id="search">
             <p class="sl"> <span style="color: rgb(35, 180, 35);">Search</span> Auction</p>
             <input type="number" class="ausearch" name="formsearch" id="searchform">
@@ -203,9 +234,103 @@
             <option value="Banana"></option>
 
         </datalist>
-        <button class="addauc" onclick="create()">Create Auction</button>
+        <button class="addauc hide"  onclick="create()">Create Auction</button>
+        
     </div>
 
+    <!-- mobile top bar -->
+    <div class="mbar hide1">
+        <h2 class=" mgreen hide1"><span style="color: rgb(35, 180, 35);">Green</span>  Auction</h2>
+        <span class="mfilter" style="margin-top: 3px;"><img src="/static/images/filter.svg" width="32px" alt=""></span>
+        <span class="" onclick="create()"><img src="/static/images/add.svg" width="40px" alt=""></span>
+
+    </div>
+    
+
+
+    <!-- filter div -->
+
+    <div class="filter3">
+        <span class="material-symbols-outlined close2" onclick="back11()" >close</span>
+        <form  class="filterform">
+            <h2>Enter your preference</h2>
+            <div style="width: 100%; border:0px solid red;     font-family: 'Poppins', sans-serif;">
+                <p>Product Name</p>
+                <input type="text" name="productname"   autocomplete="off" id="ppname" class="type7" list="productname" placeholder="Eg : Potato">
+            </div>
+            <div style="width: 100%; font-family: 'Poppins', sans-serif;">
+                <p>Quantity</p>
+                <input type="number" class="type7" name="quantity" id="" pattern="[0-9]+" title="Enter the Numer Only" placeholder="Eg : 100">
+            </div>
+            <div style="width: 100%; font-family: 'Poppins', sans-serif;">
+                <p>Quantity Filter</p>
+                <select name="qfilter" class="type7" id="">
+                    <option value="">Select</option>
+                    <option value="less">Less than</option>
+                    <option value="greater">Greater than</option>
+                    <option value="equal">Equal to</option>
+                </select>
+            </div>
+            
+            <div style="width: 100%; font-family: 'Poppins', sans-serif; ">
+                
+
+                    <p>District</p>
+                    <select name="district" id="district" class="type7">
+                    <option value="">Select District</option>
+                    <option value="Ariyalur">Ariyalur</option>
+                    <option value="Chengalpattu">Chengalpattu</option>
+                    <option value="Chennai">Chennai</option>
+                    <option value="Coimbatore">Coimbatore</option>
+                    <option value="Cuddalore">Cuddalore</option>
+                    <option value="Dharmapuri">Dharmapuri</option>
+                    <option value="Dindigul">Dindigul</option>
+                    <option value="Erode">Erode</option>
+                    <option value="Kallakurichi">Kallakurichi</option>
+                    <option value="Kancheepuram">Kancheepuram</option>
+                    <option value="Karur">Karur</option>
+                    <option value="Krishnagiri">Krishnagiri</option>
+                    <option value="Madurai">Madurai</option>
+                    <option value="Mayiladuthurai">Mayiladuthurai</option>
+                    <option value="Nagapattinam">Nagapattinam</option>
+                    <option value="Kanniyakumari">Kanniyakumari</option>
+                    <option value="Namakkal">Namakkal</option>
+                    <option value="Perambalur">Perambalur</option>
+                    <option value="Pudukottai">Pudukottai</option>
+                    <option value="Ramanathapuram">Ramanathapuram</option>
+                    <option value="Ranipet">Ranipet</option>
+                    <option value="Salem">Salem</option>
+                    <option value="Sivagangai">Sivagangai</option>
+                    <option value="Tenkasi">Tenkasi</option>
+                    <option value="Thanjavur">Thanjavur</option>
+                    <option value="Theni">Theni</option>
+                    <option value="Thiruvallur">Thiruvallur</option>
+                    <option value="Thiruvarur">Thiruvarur</option>
+                    <option value="Thoothukudi">Thoothukudi</option>
+                    <option value="Trichirappalli">Trichirappalli</option>
+                    <option value="Thirunelveli">Thirunelveli</option>
+                    <option value="Tirupathur">Tirupathur</option>
+                    <option value="Tiruppur">Tiruppur</option>
+                    <option value="Tiruvannamalai">Tiruvannamalai</option>
+                    <option value="Nilgiris">Nilgiris</option>
+                    <option value="Vellore">Vellore</option>
+                    <option value="Viluppuram">Viluppuram</option>
+                    <option value=""></option>
+                    <option value="Viluppuram">Viluppuram</option>
+                </select>
+
+            </div>
+            
+
+            
+            <button type="submit" class="type6">Submit</button>
+            <p id="fill"></p>
+        </form>
+        
+
+    </div>
+
+      <!-- msg div for showing any message -->
     <div class="msg" id="mssg" >
         <div class="actmsg">
             <p id="message"></p>
@@ -214,34 +339,45 @@
 
     </div>
 
+     <!-- msg div for showing any message -->
+     <div class="mssg" id="msssg" >
+        <div class="actmsg">
+            <p id="messsage"></p>
+            <button class="bidbutton4" id="ookok" >ok</button>
+        </div>
+
+    </div>
+
 
             <!-- display of each auction -->
     <div class="content" id="contentt">
-        {% if result %}
-            {% for x in result %}
-            <div class="product"  data-id="ajay1">
-                        <h2 class="hh"><span style="color: rgb(35, 180, 35);">Auction</span> No : {{x["ano"]}}</h2><br>
-                        <img src="/static/images/{{x.pname}}.jpg" alt="{{x.pname}} image" class="pimage"><br>
+        <div class="act" >
+            {% if result %}
+                {% for x in result %}
+                <div class="product"  data-id="ajay1">
+                            <h2 class="hh"><span style="color: rgb(35, 180, 35);">Auction</span> No : {{x["ano"]}}</h2><br>
+                            <img src="/static/images/{{x.pname}}.jpg" alt="{{x.pname}} image" class="pimage"><br>
 
-                        <div class="product1">
-                            <p class="pp">Product Name   : {{x["pname"]}} </p>
-                            <p class="pp">Quantity       : {{x["quantity"]}}</p>
-                            <p class="pp">Current Price  : {{x["cprice"]}}</p>
-                            <p class="pp">Starting Price : {{x["sprice"]}} </p>
-                            <p class="pp">District : {{x["district"]}} </p>
-                            
-                            <button id="bidbutton" data-id= {{x.ano}} data-sprice={{x.sprice}} data-cprice={{x.cprice}} class="bidbutton">Bid Now</button>
-                            
-                        </div><br>
-                         <p class="more"  data-ano= {{x.ano}}  id="detail" >For More Details</p>                    
+                            <div class="product1">
+                                <p class="pp">Product Name   : {{x["pname"]}} </p>
+                                <p class="pp">Quantity       : {{x["quantity"]}}</p>
+                                <p class="pp">Current Price  : {{x["cprice"]}}</p>
+                                <p class="pp">Starting Price : {{x["sprice"]}} </p>
+                                <p class="pp">District : {{x["district"]}} </p>
+                                
+                                <button id="bidbutton" data-id= {{x.ano}} data-sprice={{x.sprice}} data-cprice={{x.cprice}} class="bidbutton">Bid Now</button>
+                                
+                            </div><br><br class="hide1">
+                            <p class="more"  data-ano= {{x.ano}}  id="detail" >For More Details</p>                    
 
-            </div>
-            {% endfor %}
-        {% endif %}
-        {% if msg %} 
-            <h2>{{msg}}</h2>
-        {% endif %}
+                </div>
+                {% endfor %}
+            {% endif %}
 
+            {% if msg %} 
+                <h2>{{msg}}</h2>
+            {% endif %}
+        </div>
 
     </div>
             <!-- creating auction  -->
@@ -252,9 +388,9 @@
         <h3 class="head2">Create your <span style="color: rgb(35, 180, 35);">Own</span> Auction</h3>
         <form id="createform" class="cform">
 
-            <div>
+            <div style="width: 100%;" >
                 <p>Enter the Product Name</p>
-                <input type="text" name="productname"   autocomplete="off" id="ppname" class="type1" list="productname" placeholder="Eg : Potato">
+                <input type="text" name="productname"   autocomplete="off" id="ppname" class="type1 mtype1 " list="productname" placeholder="Eg : Potato">
             </div>
                 <datalist id="productname">
                     <option value="Apple">Apple</option>
@@ -269,21 +405,21 @@
                     <option value=""></option>
                     
                 </datalist>            
-            <div>
+            <div style="width: 100%;">
                 <p>Quantity in Kg</p>
-                <input type="number" class="type1" name="quantity" id="" pattern="[0-9]+" title="Enter the Numer Only" placeholder="Eg : 100">
+                <input type="number" class="type1 mtype1" name="quantity" id="" pattern="[0-9]+" title="Enter the Numer Only" placeholder="Eg : 100">
             </div>
-            <div>
+            <div style="width: 100%;">
                 <p>Loction of the Agricultural Farm</p>
-                <input type="text" name="place" class="type1" id="" placeholder="Eg : Eral,Thoothukudi">
+                <input type="text" name="place" class="type1 mtype1" id="" placeholder="Eg : Eral,Thoothukudi">
             </div>
-            <div>
+            <div style="width: 100%;">
                 <p>Starting Price Per Kg</p>
-                <input type="number" name="price" class="type1" id="" placeholder="Eg : 25">
+                <input type="number" name="price" class="type1 mtype1" id="" placeholder="Eg : 25">
             </div>
-            <div>
+            <div style="width: 100%;">
                 <p>Time Duration</p>
-                <select name="time" id="time"  class="type1">
+                <select name="time" id="time"  class="type1 mtype1">
                     <option value="">Select Duration</option>
                     <option value="5min">5 Minutes For Testing</option>
                     <option value="1">1 Hour</option>
@@ -312,9 +448,9 @@
                     <option value="24">24 Hour</option>
                 </select>
             </div>
-            <div>
+            <div style="width: 100%;">
                 <p>Select District</p>
-                <select name="district" id="district" class="type1">
+                <select name="district" id="district" class="type1 mtype1">
                     <option value="not selected">Select District</option>
                     <option value="Ariyalur">Ariyalur</option>
                     <option value="Chengalpattu">Chengalpattu</option>
@@ -357,18 +493,15 @@
                     <option value="Viluppuram">Viluppuram</option>
                 </select>
             </div>
-            <div  class="type2">
+            <div  style="width: 100%;">
                 <p>Upload a sample image</p>
-                <div class="type4">
-                     <label for="img2" class="type5"> Click to upload</label>
+                <div class="type4 mtype5">
+                     <label for="img2" class="type5 "> Click to upload</label>
                 </div>
                 <input type="file" src="" alt="" id="img2" class=" vis" multiple>
             </div>
 
-            <div>
-                <p>Describe About Your Product</p>
-                <textarea name="description" id="" cols="40" rows="10"></textarea>
-            </div>
+            
             
             <div class="ddiv">
                 <button  class="submit2" id="createauc" type="submit">Create</button>

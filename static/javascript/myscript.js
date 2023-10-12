@@ -467,15 +467,26 @@ document.addEventListener("DOMContentLoaded" ,function(){
                 return res.text()
             }
             else{
-                return  "failure"
+                throw  "cannot able to Create"
             }
             
 
         })
         .then((data)=>{
-            console.log(data)
+            blur = document.getElementById("blur")
+            blur.style.zIndex="7"
+            document.getElementById("message").innerHTML=data;
+            document.getElementById("mssg").style.display="block"  
             
         })
+
+        .catch(error=>{
+            blur = document.getElementById("blur")
+            blur.style.zIndex="7"
+            document.getElementById("message").innerHTML=error;
+            document.getElementById("mssg").style.display="block"  
+        })
+
     })
         
 
@@ -487,9 +498,7 @@ window.addEventListener("load", function(){
 
     setInterval(() => {
         document.querySelector(".blur2").classList.add("remove")
-        document.querySelector(".blur2").addEventListener("transioned",function(){
-            
-        })
+        
         
 
         
@@ -968,6 +977,7 @@ function back11(){
         // completed button addEventListener in mybidding.html
 document.addEventListener("DOMContentLoaded", function(){
     document.querySelector(".completed").addEventListener("click", function(){
+
         document.querySelector(".completed").style.backgroundColor="rgb(94,93,240)";
         document.querySelector(".active").style.backgroundColor="rgb(156, 156, 156)";
         fetch("/completedmybidding" ,{
@@ -982,8 +992,11 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         })
         .then(data=>{
+        
             document.querySelector(".act").remove();
             document.querySelector(".content").innerHTML=data
+            
+
             
         })
         .catch(error=>{
@@ -1137,6 +1150,44 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
     })
+})
+
+
+document.addEventListener("DOMContentLoaded", function(){
+    document.getElementById("feed").addEventListener("submit", function(event){
+        event.preventDefault();
+        feed=document.getElementById("feed")
+        fetch("/feed", {
+            method:"POST",
+            body: new FormData(feed)
+        })
+
+        .then(res=>{
+            if(res.ok){
+                return res.text()
+            }
+            else{
+                throw "cannot able to submit"
+            }
+        })
+        .then(data=>{
+            blur = document.getElementById("blur")
+            blur.style.zIndex="7"
+            document.getElementById("message").innerHTML=data;
+            document.getElementById("mssg").style.display="block"  
+
+        })
+        .catch(error=>{
+            blur = document.getElementById("blur")
+            blur.style.zIndex="7"
+            document.getElementById("message").innerHTML=error;
+            document.getElementById("mssg").style.display="block"  
+        })
+
+
+    })
+
+
 })
 
 

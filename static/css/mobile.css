@@ -1062,7 +1062,7 @@
     
     
     
-    /* .blur2{
+    .blur2{
         display: flex;
         position: fixed;
         background-color: rgba(179, 179, 179, 0.258);
@@ -1102,7 +1102,7 @@
         visibility: hidden;
         
         
-    } */
+    } 
     
     
     

@@ -417,6 +417,18 @@ def createauction():
         district = request.form.get("district")
         description =request.form.get("description")
         print(district,productname,quantity,place,price,time,description)
+        if not productname:
+            return "Please Enter the Product Name"
+        elif not quantity:
+            return "Please Enter the quantity "
+        elif not place:
+            return "Please Enter the place of Farm "
+        elif not time:
+            return "Please Enter the Time Duration "
+        elif not district:
+            return "Please Enter the district "
+        elif not price:
+            return "Please Enter the Starting price "
         try:
             if time=="5min":
                 time4=time.strip("min")
@@ -434,7 +446,7 @@ def createauction():
                 values=(namee,productname,price,quantity,place,time4,district,description,stime,etime,datee,status,email)
                 mycursor.execute("insert into auctioninfo (aowner,pname,sprice,quantity,flocation,time,district,description,stime,etime,date,status,aoemail) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" ,(values))
                 mydb.commit()
-                return "ok ok"
+                return "Auction Successfully Created"
             else:
                 time2=int(time)
                 namee=session.get("username")
@@ -449,10 +461,10 @@ def createauction():
                 values=(namee,productname,price,quantity,place,time,district,description,stime,etime,datee,status,email)
                 mycursor.execute("insert into auctioninfo (aowner,pname,sprice,quantity,flocation,time,district,description,stime,etime,date,status,aoemail) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)" ,(values))
                 mydb.commit()
-                return "ok ok"
+                return "Auction Successfully Created"
             
         except Exception as e:
-            return f"sorry {e}"
+            return f"Something Went Wrong"
         
         
 @app.route( '/getfulldetail', methods=["GET",  "POST"] )
@@ -842,8 +854,21 @@ def filter():
             return "error"
     else:
         return redirect(url_for("sessioncheck"))
+    
+@app.route( '/feed', methods=["GET",  "POST"] )
+def feed():
+    if request.method=="POST":
+        try:
+            feed=request.form.get("ffeed")
+            mycursor.execute("insert into feedback (username , emailid ,feed) values(%s,%s,%s) " ,(session["username"] ,session["uemail"],feed))
+            mydb.commit()
+            return "Your Feed back Has been Submitted"
+        except Exception as e:
+            return "Something Went Wrong Please Try Again later"
+    else:
+        return redirect(url_for("sessioncheck"))
 
 if __name__ == '__main__':
-    app.run(debug=True ,host="0.0.0.0" )
+    app.run(debug=True )
     
     

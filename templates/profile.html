@@ -29,6 +29,14 @@
             <div class="blur" id="blur">
 
             </div>
+                  <!-- msg div for showing any message -->
+    <div class="msg" id="mssg" >
+        <div class="actmsg">
+            <p id="message"></p>
+            <button class="bidbutton4" id="okok" >ok</button>
+        </div>
+
+    </div>
 
                 <!-- mobile nav bar -->
                 <div class=" mgreen hide1">
@@ -95,9 +103,9 @@
                 <p>Email : {{result["email"]}} </p>
                 <p>Mobile Number : {{result["number"] }} </p>
             {% endif %}
-            <form action="">
+            <form id="feed">
                 <p>For Any Feedback </p>
-                <textarea name="" id="" cols="20" rows="10" class="textarea" placeholder="Write Something"></textarea><br>
+                <textarea name="ffeed" id="" cols="20" rows="10" class="textarea" placeholder="Write Something"></textarea><br>
                 <button class="bidbutton5" type="submit">Submit</button>
 
             </form>

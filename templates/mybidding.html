@@ -18,72 +18,9 @@
 
 <style>
 
-    .sp{
-        width: 300px;
-        background-color: aqua;
-    }
-    .cli{
-        position: relative;
-        top: 20px;
-    }
+    
 
-    .hh{
-        font-size: 22px;
-    }
-    .ddiv{
-        margin: auto;
-        border: 0px solid rgb(255, 255, 255);
-    }
 
-    .submit2{
-        margin: auto;
-        height: 40px;
-        border: 0;
-        color: aliceblue;
-        background-color:rgb(94,93,240);
-        font-family: 'Poppins', sans-serif;
-        border-radius: 20px;
-        cursor: pointer;
-        font-size: 15px;
-        width: 150px;
-        text-align: center;
-    }
-
-    .head2{
-        font-size: 22px;
-        margin-top: 25px;
-    }
-
-    .pp{
-        font-family:'Poppins', sans-serif ;
-        font-size: 15px;
-
-    }
-
-    .col{
-        float: left;
-        border: 0px solid red;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        gap: 10px;
-        width: 50%;
-
-    }
-    .col2{
-       
-        float: right;
-        border: 0px solid rgb(13, 255, 0);
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        gap: 10px;
-        width: 50%;
-
-    }
-    .vis{
-        display: none;
-    }
 
     
     
@@ -107,8 +44,8 @@
                 <div>
                     <h2>Auction No : <span id="ano"></span></h2>
                 </div><br>
-                <div class="full">
-                    <div class="col">
+                <div class="full full2">
+                    <div class="col mcol">
                         <p>Auction Owner :  <span id="aowner"></span></p>
                         <p>Starting Price : <span id="sprice"></span> </p>                
                         <p>Current Price : <span id="cprice"></span></p>
@@ -122,7 +59,7 @@
         
                         
                     </div>
-                    <div class="col2">
+                    <div class=" mcol col2 ">
                         <p>Product : <span id="product"></span></p>
                         <p>current Highest Bidder : <span id="chbidder"></span></p>
         
@@ -190,6 +127,43 @@
 
 
     </div>
+
+
+            <!-- mobile nav bar -->
+            <div class=" mgreen hide1">
+                <h2 style="margin-top: 10px;"><span style="color: rgb(35, 180, 35);">Green</span>  Auction</h2>
+            </div>
+            
+            <div class="toppp">
+                <div class="menu" > 
+                    <img   src="/static/images/menu.svg"  width="40px" alt="">
+                </div>
+                <div class="navbar">
+                
+    
+                    <ul class="uul" type="none" >
+                        <h3>Menu</h3>
+                        <a href="{{ url_for('dashboard') }}"><li>Dashboard</li></a>
+                        <a href="{{ url_for('myauction') }}"><li>My Auctions</li></a>
+                        <a href="{{ url_for('mybidding') }}"><li>My Biddings</li></a>
+        
+                        <a href="{{url_for('profile')}}"><li>Profile</li></a>
+                        <a href="{{url_for('about')}}"><li>About</li></a>
+                        <a href="{{ url_for('logout') }}"><li>Logout</li></a>
+                    </ul>
+        
+        
+                </div>
+                
+    
+            </div>
+            <div class="page hide1">
+                <p>
+                    My Bidding
+                </p>
+            </div>
+            <hr class="hide1" style="margin-top: 60px;">
+            
     <div class="msg" id="mssg" >
         <div class="actmsg">
             <p id="message"></p>

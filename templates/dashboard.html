@@ -67,27 +67,8 @@
 
     }
 
-    .col{
-        float: left;
-        border: 0px solid red;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        gap: 10px;
-        width: 50%;
-
-    }
-    .col2{
-       
-        float: right;
-        border: 0px solid rgb(13, 255, 0);
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        gap: 10px;
-        width: 50%;
-
-    }
+  
+    
     .vis{
         display: none;
     }
@@ -118,8 +99,8 @@
         <div>
             <h2>Auction No : <span id="ano"></span></h2>
         </div><br>
-        <div class="full">
-            <div class="col">
+        <div class="full full2">
+            <div class="col mcol">
                 <p>Auction Owner :  <span id="aowner"></span></p>
                 <p>Starting Price : <span id="sprice"></span> </p>                
                 <p>Current Price : <span id="cprice"></span></p>
@@ -131,7 +112,7 @@
 
                 
             </div>
-            <div class="col2">
+            <div class="col2 mcol">
                 <p>Product : <span id="product"></span></p>
                 <p>current Highest Bidder : <span id="chbidder"></span></p>
 
@@ -152,7 +133,7 @@
 
             <!-- getting the bidding ammount  -->
     <div class="biddingc" id="bidding">
-        <span class="material-symbols-outlined close7" onclick="back5()" >close</span>
+        <span class="material-symbols-outlined close2" onclick="back5()" >close</span>
 
         <h2 style="margin-top: 30px;" id="demo2" ></h2>
         <p id="cprice" class="pp"></p>
@@ -177,28 +158,49 @@
 
 
         <!-- mobile nav bar -->
-        <div class="menu"> 
-            <span><img src="/static/images/menu.svg"   width="40px" alt=""></span>
+        <div class=" mgreen hide1">
+            <h2 style="margin-top: 10px;"><span style="color: rgb(35, 180, 35);">Green</span>  Auction</h2>
         </div>
         
-        
-
-        <div class="navbar">
+        <div class="toppp">
+            <div class="menu" > 
+                <img   src="/static/images/menu.svg"  width="40px" alt="">
+            </div>
+            <div class="navbar">
             
 
-            <ul class="uul" type="none" >
-                <h3>Menu</h3>
-                <a href="{{ url_for('dashboard') }}"><li>Dashboard</li></a>
-                <a href="{{ url_for('myauction') }}"><li>My Auctions</li></a>
-                <a href="{{ url_for('mybidding') }}"><li>My Biddings</li></a>
-
-                <a href="{{url_for('profile')}}"><li>Profile</li></a>
-                <a href="{{url_for('about')}}"><li>About</li></a>
-                <a href="{{ url_for('logout') }}"><li>Logout</li></a>
-            </ul>
-
+                <ul class="uul" type="none" >
+                    <h3>Menu</h3>
+                    <a href="{{ url_for('dashboard') }}"><li>Dashboard</li></a>
+                    <a href="{{ url_for('myauction') }}"><li>My Auctions</li></a>
+                    <a href="{{ url_for('mybidding') }}"><li>My Biddings</li></a>
+    
+                    <a href="{{url_for('profile')}}"><li>Profile</li></a>
+                    <a href="{{url_for('about')}}"><li>About</li></a>
+                    <a href="{{ url_for('logout') }}"><li>Logout</li></a>
+                </ul>
+    
+    
+            </div>
+            <div class="mbar hide1">
+                
+                <span class="mfilter" style="margin-top: 3px;"><img src="/static/images/filter.svg" width="32px" alt=""></span>
+                <span class="" onclick="create()"><img src="/static/images/add.svg" width="40px" alt=""></span>
+        
+            </div>
 
         </div>
+        <div class="page hide1">
+            <p>
+                Dashboard
+            </p>
+        </div>
+        <hr class="hide1" style="margin-top: 60px;">
+        
+        
+        
+
+        
 
 
             <!-- nav bar  -->
@@ -238,13 +240,7 @@
         
     </div>
 
-    <!-- mobile top bar -->
-    <div class="mbar hide1">
-        <h2 class=" mgreen hide1"><span style="color: rgb(35, 180, 35);">Green</span>  Auction</h2>
-        <span class="mfilter" style="margin-top: 3px;"><img src="/static/images/filter.svg" width="32px" alt=""></span>
-        <span class="" onclick="create()"><img src="/static/images/add.svg" width="40px" alt=""></span>
-
-    </div>
+    
     
 
 
@@ -375,7 +371,7 @@
             {% endif %}
 
             {% if msg %} 
-                <h2>{{msg}}</h2>
+                <h2 >{{msg}}</h2>
             {% endif %}
         </div>
 

@@ -652,7 +652,38 @@ def track():
             
         except Exception as e:
             print(e)
-            return f"Error happend so please try again later {e} "
+            return f"Error happend so please try again later"
+        
+        # myauction track biddings
+        
+@app.route( '/track1', methods=["GET",  "POST"] )
+def track1():
+    if request.method=="POST":
+        ano=request.data.decode("UTF-8")
+        ano=json.loads(ano)
+        print(ano["ano"])
+        try:
+            mycursor.execute("select * from auctioninfo where ano=%s and aoemail=%s" ,(ano["ano"],session["uemail"]))
+            result=mycursor.fetchone()
+            if result:
+                biddings=result["biddings"]
+                if biddings:
+                    result2=json.loads(result["biddings"])
+                    
+                    result3=result2["bidding"]
+                    print(result2)
+                    i=1
+                    
+                    
+                    return render_template("track2.html" , result=result ,result3=result3,i=i)
+                else:
+                    return "no"
+            else:
+                return "can't able to fetch the data"
+            
+        except Exception as e:
+            print(e)
+            return f"Error happend so please try again later"
         
         # filter the data 
 @app.route( '/filter', methods=["GET",  "POST"] )

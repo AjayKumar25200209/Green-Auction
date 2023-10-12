@@ -527,7 +527,7 @@
     .close2{
         position: absolute;
         right: 4%;
-        top: 1%;
+        top: 2%;
         cursor: pointer;
     }
 
@@ -898,6 +898,92 @@
     
 
 
+    }
+
+    .textarea{
+        width: 400px;
+    }
+    .podaa{
+        width: 500px;
+    }
+    .wrapper{
+        border: 0px solid red;
+        width: 80%;
+        margin-left: 100px;
+        margin-top: 50px;
+
+    }
+
+    .wrapper > p {
+        font-family: 'Poppins', sans-serif;
+
+    }
+    .sp{
+        width: 300px;
+        background-color: aqua;
+    }
+    .cli{
+        position: relative;
+        top: 20px;
+    }
+
+    .hh{
+        font-size: 22px;
+    }
+    .ddiv{
+        margin: auto;
+        border: 0px solid rgb(255, 255, 255);
+    }
+
+    .submit2{
+        margin: auto;
+        height: 40px;
+        border: 0;
+        color: aliceblue;
+        background-color:rgb(94,93,240);
+        font-family: 'Poppins', sans-serif;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 15px;
+        width: 150px;
+        text-align: center;
+    }
+
+    .head2{
+        font-size: 22px;
+        margin-top: 25px;
+    }
+
+    .pp{
+        font-family:'Poppins', sans-serif ;
+        font-size: 15px;
+
+    }
+
+    .col{
+        float: left;
+        border: 0px solid red;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 50%;
+
+    }
+    
+    .col2{
+       
+        float: right;
+        border: 0px solid rgb(13, 255, 0);
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 10px;
+        width: 50%;
+
+    }
+    .vis{
+        display: none;
     }
 
 

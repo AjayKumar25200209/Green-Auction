@@ -30,7 +30,41 @@
 
             </div>
 
+                <!-- mobile nav bar -->
+                <div class=" mgreen hide1">
+                    <h2 style="margin-top: 5px;"><span style="color: rgb(35, 180, 35);">Green</span>  Auction</h2>
+                </div>
+                
+                <div class="toppp">
+                    <div class="menu" > 
+                        <img   src="/static/images/menu.svg"  width="40px" alt="">
+                    </div>
+                    <div class="navbar">
+                    
         
+                        <ul class="uul" type="none" >
+                            <h3>Menu</h3>
+                            <a href="{{ url_for('dashboard') }}"><li>Dashboard</li></a>
+                            <a href="{{ url_for('myauction') }}"><li>My Auctions</li></a>
+                            <a href="{{ url_for('mybidding') }}"><li>My Biddings</li></a>
+            
+                            <a href="{{url_for('profile')}}"><li>Profile</li></a>
+                            <a href="{{url_for('about')}}"><li>About</li></a>
+                            <a href="{{ url_for('logout') }}"><li>Logout</li></a>
+                        </ul>
+            
+            
+                    </div>
+                    
+        
+                </div>
+                <div class="page hide1">
+                    <p>
+                        Profile
+                    </p>
+                </div>
+                <hr class="hide1" style="margin-top: 60px;">
+                
 
             <!--  nav bar coding below - -->
     <div class="nav">
@@ -63,12 +97,13 @@
             {% endif %}
             <form action="">
                 <p>For Any Feedback </p>
-                <textarea name="" id="" cols="20" rows="10" style="width: 400px;" placeholder="Write Something"></textarea><br>
+                <textarea name="" id="" cols="20" rows="10" class="textarea" placeholder="Write Something"></textarea><br>
                 <button class="bidbutton5" type="submit">Submit</button>
 
             </form>
         </div>
-        <img class="pro" src="/static/images/pro.jpg" alt="">
+            <img class="podaa" src="/static/images/pro.jpg" alt=" profile image">
+        
 
     </div>
 

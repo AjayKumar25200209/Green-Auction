@@ -541,6 +541,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     if(jdata["status"]=="completed"){
                         try{
                             document.querySelector(".ttrack").style.display="block"
+                            document.querySelector(".ttrack").setAttribute("data-ano" , jdata["ano"])
 
                         }
                         catch{
@@ -582,6 +583,7 @@ document.addEventListener("DOMContentLoaded", function(){
                         track2=document.getElementById("track")
                         track2.setAttribute("data-ano" , jdata["ano"])
                         
+                        
 
                     }
                     catch(error){
@@ -614,6 +616,54 @@ document.addEventListener("DOMContentLoaded", function(){
 
 })
 
+
+        // getting the bidding details for myauctions
+document.addEventListener("DOMContentLoaded", function(){
+    document.querySelector(".ttrack").addEventListener("click" , function(){
+        ano=document.querySelector(".ttrack").getAttribute("data-ano")
+
+        fetch("/track1",{
+            method:"POST",
+            body:JSON.stringify({"ano":ano })
+        })
+        .then(res=>{
+            if(res.ok){
+                return res.text()
+            }
+            else{
+                throw "cannot Able to fetch the data"
+            }
+        })
+        .then(data=>{
+            if (data=="no"){
+                mesg=document.querySelector(".msg")
+                mesg.style.display="block"
+                document.getElementById("message").innerHTML="No One Bidded For this auction"
+            }
+            else if (data=="can't able to fetch the data"){
+                mesg=document.querySelector(".msg")
+                mesg.style.display="block"
+                document.getElementById("message").innerHTML="can't able to fetch the data"
+
+            }
+            else if(data=="Error happend so please try again later"){
+                mesg=document.querySelector(".msg")
+                mesg.style.display="block"
+                document.getElementById("message").innerHTML="Error happend so please try again later"
+            }
+            else{
+                document.getElementById("trackk").innerHTML=data
+                document.getElementById("trackk").style.display="flex"
+                document.getElementById("blur").style.zIndex=8
+
+            }
+        })
+        .catch(error=>{
+            console.log(error)
+        })
+
+    })
+})
 
 
 
@@ -653,7 +703,6 @@ document.addEventListener("DOMContentLoaded", function(){
     document.querySelector(".filter").addEventListener("click" , function(){
         document.querySelector(".filter3").style.display="flex"
 
-        console.log("okokopkl")
     })
 })
 
@@ -1000,11 +1049,6 @@ document.addEventListener("DOMContentLoaded", function(){
 })
 
 
-// nav 
-document.addEventListener("DOMContentLoaded" ,function(){
-    document.querySelector(".close7").addEventListener("click", function(){
-        document.querySelector(".navbar").style.left="-200px"
-    })
-})
+
 
 

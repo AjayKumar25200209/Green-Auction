@@ -7,13 +7,11 @@
     }
     
     .image1{
-        position: absolute;
         border: 1px solid rgb(255, 255, 255) ;
-        top: 10%;
-        padding: 20px;
-        width: 50%;
+        margin-top: 3%;
+        width: 400px;
         right: 0;
-    
+        z-index: -1;
     
         
         
@@ -77,14 +75,14 @@
     }
     
     .container1{
-        flex-direction: column;
+        flex-direction: row;
         display: flex;
-        margin-top: 30vh;
-        
+        margin-top: 20vh;
+        flex-wrap: wrap;
         position: absolute;
         left: 5%;
         border: 0px solid black;
-        width: 50%;
+        width: 90%;
         height: auto;
        
     
@@ -179,25 +177,28 @@
     }
     
     .loading{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
+        
         border: 0px;
         border-radius: 10px;
     
         display: none;
-        max-width: 400px;
         width: 40%;
         height: auto;
         z-index: 5;
     }
     
+    
     .load{
         border: 0px;
         border-radius: 10px;
+        width: 250px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        z-index: 5;
+
     }
-    
     
     
     .nav{
@@ -284,12 +285,11 @@
     .ausearch{
         text-align: center;
         margin-top: 5px;
-        min-width: 250px;
+        min-width: 200px;
         width: 17%;
         height: 40px;
         font-family: 'Poppins', sans-serif;
         font-size: 15px;
-        margin-left: 20px;
     
     
     }
@@ -437,6 +437,30 @@
         border: 0px solid black;
         width: 100%;
         min-height: auto;
+    }
+    .product1 > p{
+        font-family: 'Poppins', sans-serif;
+
+
+    }
+    .msearch{
+        border: 0px solid red;
+        max-width:80%;
+        width: 300px;
+        min-width: 200px;
+        background-color: white;
+        box-shadow: 3px 3px  20px rgb(0, 0, 0);
+        left: 50%;
+        transform: translateX(-50%);
+        position: fixed;
+        height: 200px;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        
+
     }
     
     
@@ -843,6 +867,7 @@
     
     
     }
+    
     
     .actmsg{
         width: 100%;

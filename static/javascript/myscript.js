@@ -715,6 +715,96 @@ document.addEventListener("DOMContentLoaded", function(){
         })
     })
 
+function ssearch(){
+    document.querySelector(".msearch").style.display="flex"
+    
+}
+
+function cssearch(){
+    document.querySelector(".msearch").style.display="none"
+    document.getElementById("msearchform").value=""
+}
+            // getting the specific auction details for mobile
+            document.addEventListener("DOMContentLoaded" ,function(){
+                document.getElementById("msearch").addEventListener("submit" , function(event){
+                    event.preventDefault();
+                    formdetail=document.getElementById("msearch")
+                    sform=document.getElementById("msearchform").value
+                    fetch("/auctiondetail",{
+                        method:"POST",
+                        body : new FormData(formdetail)
+                    })
+                    .then(res=>{
+                        if (res.ok){
+                            console.log(" status ok")
+                            return res.text()
+                        }
+                        else{
+                            throw "Error can't fetch the data response status is not ok"
+                        }
+                    })
+                    .then(data=>{
+                        if (data=="No Data in This Auction Number"){
+            
+                            blur = document.getElementById("blur9")
+                            blur.style.display="flex";
+                            document.getElementById("messsage").innerHTML=data;
+                            document.getElementById("msssg").style.display="block"
+            
+                        }
+                        else if (data=="Please try again later"){
+                            blur = document.getElementById("blur9")
+                            blur.style.display="flex";
+                            document.getElementById("messsage").innerHTML=data;
+                            document.getElementById("msssg").style.display="block"
+            
+                        }
+                        else{
+                            jdata=JSON.parse(data)
+                            blur = document.getElementById("blur")
+                            blur.style.display="flex";
+                            if(jdata["status"]=="completed"){
+                                document.querySelector(".special").style.display="none"
+                            }
+                            else if (jdata["status"]=="active"){
+                                document.querySelector(".special").style.display="block"
+                            }
+                            document.getElementById("demo3").innerHTML="Auction No : "+jdata["ano"]+"";
+                            document.getElementById("ano").innerHTML=jdata["ano"]
+                            document.getElementById("aowner").innerHTML=jdata["aowner"]
+                            document.getElementById("product").innerHTML=jdata["pname"]
+                            document.getElementById("sprice").innerHTML=jdata["sprice"]
+                            document.getElementById("cprice").innerHTML=jdata["cprice"]
+                            document.getElementById("stime").innerHTML=jdata["stime"]
+                            document.getElementById("etime").innerHTML=jdata["etime"]
+                            document.getElementById("district").innerHTML=jdata["district"]
+                            document.getElementById("flocation").innerHTML=jdata["flocation"]
+                            document.getElementById("time").innerHTML=""+jdata["time"]+"Hours"
+                            document.getElementById("date").innerHTML=jdata["date"]
+                            document.getElementById("status").innerHTML=jdata["status"]
+                            document.getElementById("quantity").innerHTML=jdata["quantity"]
+                            document.getElementById("chbidder").innerHTML=jdata["chbidder"]
+                            document.getElementById("getbid2").setAttribute("data-ano" , jdata["ano"])
+                            main=document.getElementById("details")
+                            main.style.display="flex";
+                            document.querySelector(".msearch").style.display="none"
+                            document.getElementById("msearchform").value=""
+
+            
+            
+                        }
+                        
+                    })
+                    .catch(error=>{
+                        blur = document.getElementById("blur9")
+                        blur.style.zIndex="7"
+                        document.getElementById("messsage").innerHTML=error;
+                        document.getElementById("msssg").style.display="block"
+                    })
+                    
+                })
+            })
+
             // getting the specific auction details
 document.addEventListener("DOMContentLoaded" ,function(){
     document.getElementById("search").addEventListener("submit" , function(event){
@@ -817,6 +907,7 @@ document.addEventListener("DOMContentLoaded", function(){
         blur9.style.display="none"
         document.getElementById("msssg").style.display="none"
         document.getElementById("searchform").value=""
+        document.getElementById("msearchform").value=""
 
 
 

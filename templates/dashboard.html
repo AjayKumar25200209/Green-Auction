@@ -72,6 +72,7 @@
     .vis{
         display: none;
     }
+    
 
     
     
@@ -183,7 +184,7 @@
     
             </div>
             <div class="mbar hide1">
-                
+                <span style="margin-top: 3px;" onclick="ssearch()"><img src="/static/images/search.svg" width="33px" alt=""></span>
                 <span class="mfilter" style="margin-top: 3px;"><img src="/static/images/filter.svg" width="32px" alt=""></span>
                 <span class="" onclick="create()"><img src="/static/images/add.svg" width="40px" alt=""></span>
         
@@ -196,6 +197,13 @@
             </p>
         </div>
         <hr class="hide1" style="margin-top: 60px;">
+
+        <form id="msearch " class="msearch hide1">
+            <span class="material-symbols-outlined close2" onclick="cssearch()" >close</span>
+            <h2 > <span style="color: rgb(35, 180, 35);">Search</span> Auction</h2>
+            <input type="number" class="ausearch" name="formsearch" id="msearchform">
+            <button type="submit" id="fsearch" class="sbut">Search</button>
+        </form>
         
         
         

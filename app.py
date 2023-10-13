@@ -43,6 +43,7 @@ def dashboard():
             
             try:
                 mycursor.execute("SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED")
+                mydb.commit()
 
                 mycursor.execute("select * from auctioninfo where status='active'; " )
 

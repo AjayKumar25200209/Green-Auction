@@ -575,13 +575,13 @@ document.addEventListener("DOMContentLoaded", function(){
                     document.getElementById("ano").innerHTML=jdata["ano"]
                     document.getElementById("aowner").innerHTML=jdata["aowner"]
                     document.getElementById("product").innerHTML=jdata["pname"]
-                    document.getElementById("sprice").innerHTML=jdata["sprice"]
-                    document.getElementById("cprice").innerHTML=jdata["cprice"]
+                    document.getElementById("sprice").innerHTML=jdata["sprice"]+" Rs"
+                    document.getElementById("cprice").innerHTML=jdata["cprice"]+" Rs"
                     document.getElementById("stime").innerHTML=jdata["stime"]
                     document.getElementById("etime").innerHTML=jdata["etime"]
                     document.getElementById("district").innerHTML=jdata["district"]
                     document.getElementById("flocation").innerHTML=jdata["flocation"]
-                    document.getElementById("time").innerHTML=""+jdata["time"]+"Hours"
+                    document.getElementById("time").innerHTML=""+jdata["time"]
                     document.getElementById("date").innerHTML=jdata["date"]
                     document.getElementById("status").innerHTML=jdata["status"]
                     document.getElementById("quantity").innerHTML=jdata["quantity"]

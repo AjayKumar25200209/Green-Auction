@@ -46,9 +46,10 @@
     
     .menu{
         border: 0px solid red;
-        width: 40px;
+        width: 30px;
         position: relative;
-        top: 4px;
+        top: 7px;
+        left: 5px;
 
     }
     .menu:hover + .navbar , .navbar:hover{
@@ -215,7 +216,7 @@
     }
     .page{
         background-color: rgb(255, 255, 255);
-        box-shadow: 3px 3px  5px rgb(122, 184, 255);
+        box-shadow: 3px 3px  5px rgb(0, 0, 0);
         color: rgb(0, 0, 0);
         font-size: 17px;
         font-family: 'Poppins', sans-serif;
@@ -619,7 +620,7 @@
         border: 0px solid red;
         height: 50px;
         background-color: rgb(255, 255, 255);
-        box-shadow: 3px 3px  10px rgb(122, 184, 255);
+        box-shadow: 3px 3px  10px rgb(0, 0, 0);
 
         
     }

@@ -37,7 +37,7 @@ def test():
         result=mycursor.fetchall()
         if result:
             for x in result:
-                data=json.loads(x["biddings"]) 
+                
                 
                 sender_email="ajayjeyapal@gmail.com"
                 recever_email=x["aoemail"]
@@ -49,6 +49,7 @@ def test():
                 nb=x["nbid"]
                 print(nb)
                 if nb :
+                    data=json.loads(x["biddings"]) 
                     
                     bidno=f'bidno{x["nbid"]}'
                     recever_email2= data["bidding"][bidno]["bidderemail"]
@@ -72,6 +73,20 @@ def test():
                                     <h3>Auction Owner Contact Details are below</h3>
                                     <p>Name : {x["aowner"]} <br>Email Id : {x["aoemail"]} <br>Mobile Number : {result2["number"]}</p>
                                     <p ></p>"""
+                    message2=MIMEMultipart()                    
+                    message2["from"]=sender_email
+                    message2["to"]=recever_email2
+                    message2["subject"]=subject
+                    message2.attach(MIMEText(html_content2,"html"))
+
+                    smtp_server="smtp.gmail.com"
+                    port = 587
+
+                    server=smtplib.SMTP(smtp_server,port)
+                    server.starttls()
+                    server.login(sender_email,s_password)
+                    server.sendmail(sender_email,recever_email2,message2.as_string())
+
                 else:
                     html_content=  f"""
                                     
@@ -84,24 +99,17 @@ def test():
                 
 
                 message=MIMEMultipart()
-                message2=MIMEMultipart()
+                
                 message["from"]=sender_email
                 message["to"]=recever_email
                 message["subject"]=subject
                 message.attach(MIMEText(html_content,"html"))
-                message2["from"]=sender_email
-                message2["to"]=recever_email2
-                message2["subject"]=subject
-                message2.attach(MIMEText(html_content2,"html"))
-
                 smtp_server="smtp.gmail.com"
                 port = 587
-
                 server=smtplib.SMTP(smtp_server,port)
                 server.starttls()
                 server.login(sender_email,s_password)
                 server.sendmail(sender_email,recever_email,message.as_string())
-                server.sendmail(sender_email,recever_email2,message2.as_string())
 
                 server.quit()
                 
